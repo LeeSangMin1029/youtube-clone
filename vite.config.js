@@ -15,6 +15,10 @@ export default defineConfig({
         find: "@/pages",
         replacement: path.resolve(__dirname, "src/pages"),
       },
+      {
+        find: "@/images",
+        replacement: path.resolve(__dirname, "src/images"),
+      },
     ],
   },
   server: {
