@@ -1,4 +1,6 @@
-import "./styles.js";
+import Home from "@/pages/Home";
 
-const App = () => <div></div>;
+const App = () => {
+  return <Home />;
+};
 export default App;
