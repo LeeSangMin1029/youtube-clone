@@ -7,31 +7,36 @@ import {
   YoutuberData,
   StyledDiv,
 } from "./styles";
-import TestImage from "@/images/imagess.webp";
-import Channel from "@/images/channel.jpg";
+const VideoItem = memo(({ videoData }) => {
+  const {
+    id,
+    snippet,
+    statistics: { viewCount },
+    channel,
+  } = videoData;
+  const { channelId, channelTitle, title, thumbnails: vThumb } = snippet;
+  const channelHref = `https://www.youtube.com/channel/${channelId}`;
+  const { url: channelThumb } = channel.snippet.thumbnails.default;
 
-const VideoItem = memo(() => {
   return (
     <StyledDiv>
       <Thumbnails>
-        <Link to="/watch?id=LV58J54qUFM">
-          <img src={TestImage} alt="test" />
+        <Link to={`/watch?id=${id}`}>
+          <img src={vThumb.high.url} alt="test" />
         </Link>
       </Thumbnails>
       <VideoDetails>
-        <a href={`https://www.youtube.com/@user-os7bc4lb9h`}>
-          <img src={Channel} alt="testI" width="36px" height="36px" />
+        <a href={channelHref}>
+          <img src={channelThumb} alt="testI" width="36px" height="36px" />
         </a>
         <Description>
           <h3>
-            <Link to="/watch?id=LV58J54qUFM">
-              bj빵훈이 - 살기위해서(노을) 2절 레전드
-            </Link>
+            <Link to={`/watch?id=${id}`}>{title}</Link>
           </h3>
           <YoutuberData>
-            <a href="https://www.youtube.com/@user-os7bc4lb9h">유튜버 이름</a>
+            <a href={channelHref}>{channelTitle}</a>
             <div>
-              <span>조회수..회</span>
+              <span>조회수{viewCount}회</span>
               <span>..년전</span>
             </div>
           </YoutuberData>
