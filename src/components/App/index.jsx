@@ -4,9 +4,11 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import { SWRConfig } from "swr";
 import Home from "@/pages/Home";
 import Watch from "@/pages/Watch";
 import BaseTemplates from "@/components/BaseTemplates";
+import { localStorageProvider } from "@/context/LocalStorageProvider";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,7 +20,11 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <SWRConfig value={{ provider: localStorageProvider }}>
+      <RouterProvider router={router} />
+    </SWRConfig>
+  );
 };
 
 export default App;

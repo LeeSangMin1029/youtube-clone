@@ -1,26 +1,33 @@
 import { DisplayGrid, GridRow, MarginContent } from "./styles";
 import VideoItem from "@/components/VideoItem";
-import { useVideos } from "@/hooks/useVideos";
+import { useVideos } from "@/hooks";
 import { divideArrays, randomKey } from "@/utils";
 
+const getChannels = (channels = [], id) => {
+  const result = channels.filter((channel) => channel.id === id)[0];
+  return result;
+};
+
+const getItems = ({ videos = [], channels = [] }) =>
+  videos.map((video) =>
+    Object.assign(
+      {},
+      { channel: getChannels(channels, video.snippet.channelId) },
+      video
+    )
+  );
+
 const VideoList = () => {
-  const { videoList = [], cnthumbList = [], isLoading } = useVideos();
+  const { fetched, isLoading } = useVideos(true);
   if (isLoading) return <div>...Loading</div>;
-  const mapOfList = divideArrays(videoList, 5);
-  cnthumbList.forEach((thumb) => {
-    videoList
-      .filter((vItem) => vItem.snippet.channelId === thumb.id)
-      .map((vItem) => {
-        vItem.channel = thumb;
-      });
-  });
+  const result = divideArrays(getItems(fetched), 5);
   return (
     <MarginContent>
       <DisplayGrid>
-        {mapOfList.map((videoList) => (
+        {result.map((items) => (
           <GridRow key={randomKey()}>
-            {videoList.map((videoData) => (
-              <VideoItem key={randomKey()} videoData={videoData} />
+            {items.map((item) => (
+              <VideoItem key={randomKey()} data={item} />
             ))}
           </GridRow>
         ))}

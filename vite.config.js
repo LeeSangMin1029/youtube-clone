@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-const folders = ["components", "pages", "images", "hooks", "utils"];
+const folders = ["components", "pages", "images", "hooks", "utils", "context"];
 
 const aliasList = () =>
   folders.map((name) => ({

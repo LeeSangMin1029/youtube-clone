@@ -2,17 +2,17 @@ import useSWR from "swr";
 import { generateParams } from "@/utils";
 
 const baseOption = {
-  maxResults: "20",
+  maxResults: "1",
   regionCode: "kr",
 };
 
 const videosOption = {
   part: "snippet,player,statistics",
   chart: "mostPopular",
-  maxWidth: "344",
-  maxHeight: "197",
+  maxWidth: "1280",
+  maxHeight: "714",
   fields:
-    "items(id,snippet(channelId,channelTitle,publishedAt,thumbnails(high),title), statistics(viewCount))",
+    "items(id,snippet(channelId,channelTitle,publishedAt,thumbnails(maxres),title),player,statistics(viewCount))",
 };
 
 const channelsOption = {
@@ -32,12 +32,15 @@ const requestURL = () => {
 const channelIdParams = (items = []) =>
   items.reduce((acc, cur) => acc + cur.snippet.channelId + ",", "");
 
-export const useVideos = () => {
+export const useVideos = (isNotCached = true) => {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const url = requestURL();
-  const { data: video } = useSWR(url("videos", videosOption), fetcher);
+  const { data: video } = useSWR(
+    isNotCached ? url("videos", videosOption) : null,
+    fetcher
+  );
   const { data: cnthumb, isLoading } = useSWR(
-    video
+    isNotCached && video
       ? [
           url("channels", {
             ...channelsOption,
@@ -48,8 +51,7 @@ export const useVideos = () => {
     fetcher
   );
   return {
-    videoList: video?.items,
-    cnthumbList: cnthumb?.items,
+    fetched: { videos: video?.items, channels: cnthumb?.items },
     isLoading,
   };
 };

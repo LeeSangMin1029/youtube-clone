@@ -17,7 +17,6 @@ export const GridRow = styled.div`
   margin: 0 16px;
   > div {
     width: 344px;
-    height: 294px;
     margin: 0 8px;
     margin-bottom: 40px;
   }
