@@ -39,8 +39,17 @@ export const YoutuberData = styled.div`
 
 export const Description = styled.div`
   padding-right: 24px;
+  width: 100%;
+  line-height: 20px;
   h3 {
-    margin: 12px 0 4px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 4.4rem;
+    margin: 12px 0 4px 00;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
   }
 `;
 

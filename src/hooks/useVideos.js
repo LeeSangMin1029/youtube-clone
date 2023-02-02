@@ -9,10 +9,10 @@ const baseOption = {
 const videosOption = {
   part: "snippet,player,statistics",
   chart: "mostPopular",
-  maxWidth: "344",
-  maxHeight: "197",
+  maxWidth: "1280",
+  maxHeight: "714",
   fields:
-    "items(id,snippet(channelId,channelTitle,publishedAt,thumbnails(high),title), statistics(viewCount))",
+    "items(id,snippet(channelId,channelTitle,publishedAt,thumbnails(high),title),player,statistics(viewCount))",
 };
 
 const channelsOption = {
