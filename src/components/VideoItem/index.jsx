@@ -53,7 +53,7 @@ const VideoItem = memo(({ data }) => {
     <StyledDiv>
       <InteractStyled />
       <Thumbnails>
-        <Link to={`/watch?id=${id}`} state={data}>
+        <Link to={`/watch?id=${id}`}>
           <img src={vThumb.maxres.url} alt="test" />
         </Link>
       </Thumbnails>
@@ -63,9 +63,7 @@ const VideoItem = memo(({ data }) => {
         </a>
         <Description>
           <h3>
-            <Link to={`/watch?id=${id}`} state={data}>
-              {title}
-            </Link>
+            <Link to={`/watch?id=${id}`}>{title}</Link>
           </h3>
           <YoutuberData>
             <a href={channelHref}>{channelTitle}</a>
