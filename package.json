@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "html-react-parser": "^3.0.8",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

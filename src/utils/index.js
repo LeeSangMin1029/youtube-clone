@@ -1,5 +1,6 @@
 import crypto from "crypto";
 
+export { envConfig } from "./env";
 export const divideArrays = (arr = [], chunkSize) => {
   const res = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
