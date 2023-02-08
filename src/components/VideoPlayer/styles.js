@@ -18,7 +18,10 @@ export const VideoDetail = styled.div`
   }
 `;
 
-export const PlayerStyled = styled.div``;
+export const PlayerStyled = styled.div`
+  height: ${({ height }) => height + "px"};
+  width: ${({ width }) => width + "px"};
+`;
 
 export const ChannelInfo = styled.div`
   width: 628px;
@@ -45,7 +48,6 @@ export const ChannelInfo = styled.div`
   }
 `;
 
-export const VideoInteraction = styled.div``;
 export const BetweenContent = styled.div`
   width: 100%;
   height: 55px;
