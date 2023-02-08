@@ -23,10 +23,10 @@ const swrConfig = {
 
 // id가 없다면 기본 옵션으로 mostPopular 설정
 export const useFetchVideo = (videoId, width = "", height = "") => {
-  const url = `/api/youtube/v3/videos?key=${envConfig.API_KEY}&id=${videoId}&part=player,snippet&maxWidth=${width}&maxHeight=${height}&fields=items(id,snippet(publishedAt,channelId,title,description),player)`;
-  const { data, error } = useSWR(url, youtubeFetcher, swrConfig);
+  const url = `/api/youtube/v3/videos?key=${envConfig.API_KEY}&id=${videoId}&part=player,snippet&maxWidth=${width}&maxHeight=${height}&fields=items(id,player,snippet(publishedAt,channelId,title,description))`;
+  const { data, isLoading, error } = useSWR(url, youtubeFetcher, swrConfig);
   if (error) {
     console.error(error);
   }
-  return { video: data?.items[0] };
+  return { video: data?.items[0], isLoading };
 };
