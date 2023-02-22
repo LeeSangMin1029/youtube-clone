@@ -3,20 +3,20 @@ import {
   createRoutesFromElements,
   RouterProvider,
   Route,
-} from "react-router-dom";
-import { SWRConfig } from "swr";
-import Home from "@/pages/Home";
-import Watch from "@/pages/Watch";
-import BaseTemplates from "@/components/BaseTemplates";
-import { localStorageProvider } from "@/context/LocalStorageProvider";
+} from 'react-router-dom';
+import { SWRConfig } from 'swr';
+import Home from '@/pages/Home';
+import Watch from '@/pages/Watch';
+import BaseTemplates from '@/components/BaseTemplates';
+import { localStorageProvider } from '@/context/localStorageProvider';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<BaseTemplates />}>
       <Route index element={<Home />} />
       <Route path="/watch" element={<Watch />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 const App = () => {

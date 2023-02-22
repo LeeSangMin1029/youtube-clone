@@ -9,7 +9,7 @@ import {
   PlayerListSaveButton,
   MenuButton,
   OfflineButton,
-} from "./styles";
+} from './styles';
 
 const VideoManangement = () => {
   return (
