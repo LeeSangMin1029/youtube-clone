@@ -1,7 +1,7 @@
-import crypto from "crypto";
+import crypto from 'crypto';
 
-export { envConfig } from "./env";
-export const divideArrays = (arr = [], chunkSize) => {
+export { envConfig } from './env';
+export const divideArrays = <T>(arr: T[], chunkSize: number) => {
   const res = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
     const chunk = arr.slice(i, i + chunkSize);
@@ -11,15 +11,15 @@ export const divideArrays = (arr = [], chunkSize) => {
 };
 
 export const randomKey = () =>
-  typeof window !== "undefined"
+  typeof window !== 'undefined'
     ? window.crypto.randomUUID()
     : crypto.randomUUID();
 
 export const generateParams = (params = {}) =>
-  Object.entries(params).reduce((acc, cur) => acc + `&${cur[0]}=${cur[1]}`, "");
+  Object.entries(params).reduce((acc, cur) => acc + `&${cur[0]}=${cur[1]}`, '');
 
 export const displayedAt = (createdAt = new Date()) => {
-  const milliSeconds = new Date() - createdAt;
+  const milliSeconds = new Date().getTime() - createdAt.getTime();
 
   const seconds = milliSeconds / 1000;
   if (seconds < 60) return `방금 전`;
@@ -43,7 +43,7 @@ export const displayedAt = (createdAt = new Date()) => {
   return `${Math.floor(years)}년 전`;
 };
 
-export const isEmptyObject = (param) =>
+export const isEmptyObject = (param: Object) =>
   Object.keys(param).length === 0 && param.constructor === Object;
 
-export const isEmptyArray = (arr) => Array.isArray(arr) && arr.length === 0;
+export const isEmptyArray = (arr: []) => Array.isArray(arr) && arr.length === 0;

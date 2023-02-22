@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PlayerBoard = styled.div`
   margin-left: 24px;
@@ -18,9 +18,9 @@ export const VideoDetail = styled.div`
   }
 `;
 
-export const PlayerStyled = styled.div`
-  height: ${({ height }) => height + "px"};
-  width: ${({ width }) => width + "px"};
+export const PlayerStyled = styled.div<{ height: string; width: string }>`
+  height: ${({ height }) => height + 'px'};
+  width: ${({ width }) => width + 'px'};
 `;
 
 export const ChannelInfo = styled.div`

@@ -1,21 +1,22 @@
-import { DisplayGrid, GridRow, MarginContent } from "./styles";
-import VideoItem from "@/components/VideoItem";
-import { useVideos } from "@/hooks";
-import { divideArrays, randomKey } from "@/utils";
+import { DisplayGrid, GridRow, MarginContent } from './styles';
+import VideoItem from '@/components/VideoItem';
+import { useVideos } from '@/hooks';
+import { divideArrays, randomKey } from '@/utils';
 
-const getChannels = (channels = [], id) => {
+const getChannels = (channels: Channel[], id: string) => {
   const result = channels.filter((channel) => channel.id === id)[0];
   return result;
 };
 
-const getItems = ({ videos = [], channels = [] }) =>
-  videos.map((video) =>
-    Object.assign(
+const getItems = ({ videos, channels }: { videos: any; channels: any }) =>
+  videos.map((video: any) => {
+    const result = Object.assign(
       {},
       { channel: getChannels(channels, video.snippet.channelId) },
-      video
-    )
-  );
+      video,
+    );
+    return result;
+  });
 
 const VideoList = () => {
   const { fetched, isLoading } = useVideos(true);

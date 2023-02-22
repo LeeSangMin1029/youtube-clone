@@ -1,5 +1,5 @@
-import { memo } from "react";
-import { Link } from "react-router-dom";
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Thumbnails,
   VideoDetails,
@@ -7,30 +7,34 @@ import {
   YoutuberData,
   StyledDiv,
   InteractStyled,
-} from "./styles";
-import { displayedAt } from "@/utils";
+} from './styles';
+import { displayedAt } from '@/utils';
 
-const commaCheck = (digit) => (digit ? "." + digit : "");
+const commaCheck = (digit: number) => (digit ? '.' + digit : '');
 const units = [
-  { unit: "4", type: "천", sub: 0 },
-  { unit: "5", type: "만", sub: 0 },
-  { unit: "9", type: "억", sub: 0 },
-  { unit: "6 7 8", type: "만", sub: 4 },
-  { unit: "10 11 12", type: "억", sub: 8 },
+  { unit: '4', type: '천', sub: 0 },
+  { unit: '5', type: '만', sub: 0 },
+  { unit: '9', type: '억', sub: 0 },
+  { unit: '6 7 8', type: '만', sub: 4 },
+  { unit: '10 11 12', type: '억', sub: 8 },
 ];
 
-const formatingDigit = (str = "") => {
+const formatingDigit = (str: string) => {
   if (str.length <= 3) return str;
   const { type, sub } = units.filter(({ unit }) =>
-    unit.includes(str.length)
+    unit.includes(String(str.length)),
   )[0];
   let subString = !sub
-    ? commaCheck(str[1] - "0")
+    ? commaCheck(Number(str[1]) - 48)
     : str.substring(1, str.length - sub);
   return str[0] + subString + type;
 };
 
-const VideoItem = memo(({ data }) => {
+type VideoItemProps = {
+  data: YoutubeVideoData;
+};
+
+const VideoItem = memo(({ data }: any) => {
   const {
     id,
     snippet,

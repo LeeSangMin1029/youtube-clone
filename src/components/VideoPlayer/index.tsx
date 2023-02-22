@@ -1,25 +1,25 @@
-import { useSearchParams } from "react-router-dom";
-import parse from "html-react-parser";
-import VideoManangement from "@/components/VideoManagement";
+import { useSearchParams } from 'react-router-dom';
+import parse from 'html-react-parser';
+import VideoManangement from '@/components/VideoManagement';
 import {
   PlayerBoard,
   VideoDetail,
   PlayerStyled,
   ChannelInfo,
   BetweenContent,
-} from "./styles";
-import { useFetchVideo } from "@/hooks";
+} from './styles';
+import { useFetchVideo } from '@/hooks';
 
-const WIDTH = "1268";
-const HEIGHT = "713";
+const WIDTH = '1268';
+const HEIGHT = '713';
 
 const VideoPlayer = () => {
   const [params] = useSearchParams();
-  const id = params.get("id");
+  const id: string | null = params.get('id');
   const { video, isLoading } = useFetchVideo(id, WIDTH, HEIGHT);
   if (isLoading) return <div>...Loading</div>;
   const { embedHtml } = video.player;
-  const parseToComponent = (html) => parse(html);
+  const parseToComponent = (html: string) => parse(html);
   return (
     <PlayerBoard>
       <PlayerStyled width={WIDTH} height={HEIGHT}>

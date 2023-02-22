@@ -1,7 +1,7 @@
-import useSWR from "swr";
-import { envConfig } from "@/utils";
+import useSWR from 'swr';
+import { envConfig } from '@/utils';
 
-async function youtubeFetcher(url) {
+async function youtubeFetcher(url: string) {
   const fetched = await fetch(url);
   if (!fetched.ok) {
     const { error = {} } = await fetched.json();
@@ -13,16 +13,25 @@ async function youtubeFetcher(url) {
 }
 
 const swrConfig = {
-  onErrorRetry: (error, key, _, revalidate, { retryCount }) => {
+  onErrorRetry: (
+    error: any,
+    key: string,
+    _: any,
+    revalidate: any,
+    { retryCount }: { retryCount: number },
+  ) => {
     if (error.status === 404) return;
-    if (key === "/api/youtube/v3/videos?") return;
+    if (key === '/api/youtube/v3/videos?') return;
     if (retryCount >= 10) return;
     setTimeout(() => revalidate({ retryCount }), 10000);
   },
 };
 
-// id가 없다면 기본 옵션으로 mostPopular 설정
-export const useFetchVideo = (videoId, width = "", height = "") => {
+export const useFetchVideo = (
+  videoId: string | null,
+  width: string,
+  height: string,
+) => {
   const url = `/api/youtube/v3/videos?key=${envConfig.API_KEY}&id=${videoId}&part=player,snippet&maxWidth=${width}&maxHeight=${height}&fields=items(id,player,snippet(publishedAt,channelId,title,description))`;
   const { data, isLoading, error } = useSWR(url, youtubeFetcher, swrConfig);
   if (error) {
