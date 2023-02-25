@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
   display: flex;
@@ -20,8 +20,4 @@ export const Center = styled.div`
   width: 728px;
   height: 40px;
   min-width: 0;
-`;
-export const End = styled.div`
-  width: 224px;
-  height: 40px;
 `;
