@@ -1,13 +1,10 @@
 import crypto from 'crypto';
-export { worker } from './worker';
-export { envConfig } from './env';
+import CustomWorker from './worker?worker';
+export { encrypt, decrypt } from './encryption';
+export { openSignInWindow } from './window';
+export { isEmptyArray, isEmptyObject } from './checkDataType';
 
-export const openSignInWindow = (url: string, name: string): void => {
-  const strWindowFeatures =
-    'toolbar=no, menubar=no, width=600, height=700, top=100, left=100';
-  let windowObjectReference = window.open(url, name, strWindowFeatures);
-  windowObjectReference?.focus();
-};
+export const worker = new CustomWorker();
 
 export const divideArrays = <T>(arr: T[], chunkSize: number) => {
   const res = [];
@@ -50,8 +47,3 @@ export const displayedAt = (createdAt = new Date()) => {
   const years = days / 365;
   return `${Math.floor(years)}년 전`;
 };
-
-export const isEmptyObject = (param: Object) =>
-  Object.keys(param).length === 0 && param.constructor === Object;
-
-export const isEmptyArray = (arr: []) => Array.isArray(arr) && arr.length === 0;
