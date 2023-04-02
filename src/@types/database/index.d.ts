@@ -4,12 +4,20 @@ export interface UserSchema extends DBSchema {
   user: {
     key: string;
     value: UserData;
+    indexes: { token: string };
   };
 }
 
 export type IDBUserSchema = IDBPDatabase<UserSchema>;
 
-export interface UserDataWithoutId {
+export interface TokenData {
+  refreshToken: string;
+  accessToken: string;
+  expirationDate: Date;
+}
+
+export interface UserData {
+  id: string;
   googleName: string;
   youtubeName: string;
   email: string;
@@ -20,6 +28,5 @@ export interface UserDataWithoutId {
     height: number;
   };
   customUrl: string;
+  token?: string;
 }
-
-export type UserData = UserDataWithoutId & { id: string };
