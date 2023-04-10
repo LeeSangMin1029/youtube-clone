@@ -1,6 +1,6 @@
-import { UserData, UserDataWithoutId } from '@/@types/database';
+import { UserData } from '@/@types/database';
 import { WebWorkerAction } from '@/@types/dispatch';
-import { memo, useEffect, useState, useLayoutEffect } from 'react';
+import { memo, useEffect, useState } from 'react';
 import {
   Container,
   Interact,
@@ -9,13 +9,14 @@ import {
   SVGWrapper,
 } from './styles';
 import { openSignInWindow, worker } from '@/utils';
+import { authGoogleURL } from '@/api';
 import { ReactComponent as UploadIcon } from '@/assets/video_upload.svg';
 import { ReactComponent as AlarmIcon } from '@/assets/video_alarm.svg';
 import { ReactComponent as SettingIcon } from '@/assets/app_settings.svg';
 import { ReactComponent as LoginIcon } from '@/assets/user_login_profile.svg';
 
 type ReceivingData = {
-  payload?: UserDataWithoutId | null;
+  payload?: UserData | null;
   status: string;
   dispatch: WebWorkerAction;
 };
@@ -25,65 +26,19 @@ const Loading = () => {
 };
 
 const UserInteract = memo(() => {
-  const [profile, setProfile] = useState<UserDataWithoutId | null>(null);
+  const [profile, setProfile] = useState<UserData | null>(null);
   const [isLoading, setLoading] = useState(true);
   const handleClick = async () => {
-    const openPopupUrl = await createGoogleAuthLink();
+    const openPopupUrl = await authGoogleURL();
     openSignInWindow(openPopupUrl, 'youtube Auth');
-  };
-  const createGoogleAuthLink = async () => {
-    try {
-      const request = await fetch('http://localhost:5000/api/auth/google', {
-        method: 'POST',
-      });
-      const response = await request.json();
-      return response.url;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchConfig = (token: string): RequestInit => {
-    return {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
   };
 
   useEffect(() => {
-    const channel = new BroadcastChannel('authToken');
-    channel.onmessage = async (e) => {
-      const eventData = e.data;
-      const reqInit = fetchConfig(eventData.accessToken);
-      const googleRes = await fetch(
-        `https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos`,
-        reqInit,
-      );
-      const youtubeRes = await fetch(
-        'https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true',
-        reqInit,
-      );
-      const googleData = await googleRes.json();
-      const youtubeData = await youtubeRes.json();
-      const { thumbnails, customUrl, title } = youtubeData.items[0].snippet;
-      const postData: UserData = {
-        email: googleData.emailAddresses[0].value,
-        googleName: googleData.names[0].displayName,
-        id: googleData.resourceName.split('/')[1],
-        gThumbnails: googleData.photos[0].url,
-        yThumbnails: {
-          url: thumbnails.default.url,
-          width: 32,
-          height: 32,
-        },
-        customUrl,
-        youtubeName: title,
-      };
-      worker.postMessage({
-        payload: postData,
-        dispatch: 'addUser',
-      });
+    const loginChannel = new BroadcastChannel('login');
+    loginChannel.onmessage = async (e: MessageEvent<UserData>) => {
+      const userData = e.data;
+      setProfile(userData);
+      worker.postMessage({ dispatch: 'addUser', payload: userData });
     };
   }, []);
 
@@ -103,7 +58,6 @@ const UserInteract = memo(() => {
         case 'addUser':
           if (status === 'success') {
             setLoading(false);
-            setLoading(true);
           }
           break;
       }
@@ -125,11 +79,7 @@ const UserInteract = memo(() => {
             </SVGWrapper>
             <UserProfile>
               <div>
-                <img
-                  src={profile?.yThumbnails.url}
-                  width={profile?.yThumbnails.width}
-                  height={profile?.yThumbnails.height}
-                />
+                <img src={profile.thumbnails} width={32} height={32} />
               </div>
             </UserProfile>
           </>

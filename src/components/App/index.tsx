@@ -7,7 +7,7 @@ import {
 import { SWRConfig } from 'swr';
 import Home from '@/pages/Home';
 import Watch from '@/pages/Watch';
-import Token from '@/pages/Token';
+import Login from '@/pages/Login';
 import BaseTemplates from '@/components/BaseTemplates';
 import { localStorageProvider } from '@/context/localStorageProvider';
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<BaseTemplates />}>
       <Route index element={<Home />} />
       <Route path="/watch" element={<Watch />} />
-      <Route path="/token" element={<Token />} />
+      <Route path="/login" element={<Login />} />
     </Route>,
   ),
 );
