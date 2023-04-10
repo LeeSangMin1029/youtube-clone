@@ -6,9 +6,8 @@ export type VideoAction =
   | 'addVideo'
   | 'updateVideo'
   | 'deleteVideo';
-export type TokenAction = 'getToken' | 'setToken';
 
-export type WebWorkerAction = UserAction | VideoAction | TokenAction;
+export type WebWorkerAction = UserAction | VideoAction;
 
 export interface VideoDispatch {
   dispatch: VideoAction;

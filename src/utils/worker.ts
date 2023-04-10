@@ -1,8 +1,6 @@
-import { IDBUserSchema, UserData } from '@/@types/database';
+import { UserData } from '@/@types/database';
 import { WebWorkerAction } from '@/@types/dispatch';
-import { envConfig } from '@/config';
-import { decrypt } from './encryption';
-import { databaseInit, addUser, getUser } from '@/database';
+import { addUser, getUser, getDB } from '@/database';
 
 type ReceivingData = {
   payload: UserData;
@@ -16,29 +14,11 @@ type SendingData = {
 };
 
 self.onmessage = async (e: MessageEvent<ReceivingData>) => {
+  const db = await getDB();
   const response: SendingData = { status: 'failed', dispatch: null };
-  let db: IDBUserSchema | null = null;
-  db = await databaseInit();
-  if (!db) return;
   const { payload, dispatch } = e.data;
   response.dispatch = dispatch;
   switch (dispatch) {
-    case 'getToken':
-      {
-        const user = await getUser(db);
-        if (user) {
-          const decryptToken = decrypt(user.token, envConfig.ACCESS_SECRET_KEY);
-          response.status = 'success';
-          response.payload = decryptToken;
-        }
-        self.postMessage(response);
-      }
-      break;
-    case 'setToken':
-      {
-        console.log(payload);
-      }
-      break;
     case 'getUser':
       {
         const user = await getUser(db);
@@ -52,7 +32,7 @@ self.onmessage = async (e: MessageEvent<ReceivingData>) => {
       }
       break;
     case 'addUser':
-      if (await addUser(db, payload.id, payload)) {
+      if (await addUser(db, payload.googleID, payload)) {
         response.status = 'success';
       } else {
         response.status = 'failed';
