@@ -1,22 +1,16 @@
 import { UserData } from '@/@types/database';
-import { WebWorkerAction } from '@/@types/dispatch';
+import { WebWorkerAction, WorkerEventData } from '@/@types/dispatch';
 import { addUser, getUser, getDB } from '@/database';
 
 type ReceivingData = {
-  payload: UserData;
+  payload?: UserData;
   dispatch: WebWorkerAction;
-};
-
-type SendingData = {
-  payload?: {} | null;
-  status: 'failed' | 'success';
-  dispatch: WebWorkerAction | null;
 };
 
 self.onmessage = async (e: MessageEvent<ReceivingData>) => {
   const db = await getDB();
-  const response: SendingData = { status: 'failed', dispatch: null };
   const { payload, dispatch } = e.data;
+  const response: WorkerEventData = { status: 'failed', dispatch: null };
   response.dispatch = dispatch;
   switch (dispatch) {
     case 'getUser':
@@ -32,7 +26,7 @@ self.onmessage = async (e: MessageEvent<ReceivingData>) => {
       }
       break;
     case 'addUser':
-      if (await addUser(db, payload.googleID, payload)) {
+      if (payload && (await addUser(db, payload.googleID, payload))) {
         response.status = 'success';
       } else {
         response.status = 'failed';
