@@ -1,6 +1,6 @@
 export const authGoogleURL = async () => {
   try {
-    const request = await fetch('https://localhost:5112/api/auth/google', {
+    const request = await fetch('api/auth/google', {
       method: 'POST',
     });
     const response = await request.json();

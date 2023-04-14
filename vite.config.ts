@@ -17,7 +17,7 @@ export default defineConfig({
     https: true,
     proxy: {
       '/api': {
-        target: 'https://www.googleapis.com',
+        target: 'https://localhost:5112/api',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
