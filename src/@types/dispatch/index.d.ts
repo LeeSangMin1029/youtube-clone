@@ -12,3 +12,9 @@ export type WebWorkerAction = UserAction | VideoAction;
 export interface VideoDispatch {
   dispatch: VideoAction;
 }
+
+export type WorkerEventData = {
+  payload?: {} | UserData;
+  status: 'failed' | 'success';
+  dispatch: WebWorkerAction | null;
+};
