@@ -1,7 +1,6 @@
-import { TokenData } from '@/@types/database';
 import CryptoJS from 'crypto-js';
 
-export type EncryptionType = string | TokenData | Object;
+export type EncryptionType = string | Object;
 
 export const encrypt = (data: EncryptionType, key: string) =>
   CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();

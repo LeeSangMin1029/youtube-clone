@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { envConfig } from '@/utils';
+import { envConfig } from '@/config';
 
 async function youtubeFetcher(url: string) {
   const fetched = await fetch(url);
