@@ -1,6 +1,6 @@
 import { UserData } from '@/@types/database';
 import { SVGWrapper, LoginButton } from './styles';
-import { openSignInWindow, worker } from '@/utils';
+import { openSignInWindow, UserWorker } from '@/utils';
 import { authGoogleURL } from '@/api';
 import { memo, useEffect } from 'react';
 import { ReactComponent as SettingIcon } from '@/assets/app_settings.svg';
@@ -17,6 +17,7 @@ const UserLoggedOut = memo(() => {
   useEffect(() => {
     const loginChannel = new BroadcastChannel('login');
     loginChannel.onmessage = async (e: MessageEvent<UserData>) => {
+      const worker = new UserWorker();
       const userData = e.data;
       setUser(userData);
       setLogged(true);

@@ -1,10 +1,10 @@
 import { UserData } from '@/@types/database';
-import { WebWorkerAction, WorkerEventData } from '@/@types/dispatch';
+import { UserAction, WorkerEventData } from '@/@types/dispatch';
 import { addUser, getUser, getDB } from '@/database';
 
 type ReceivingData = {
   payload?: UserData;
-  dispatch: WebWorkerAction;
+  dispatch: UserAction;
 };
 
 self.onmessage = async (e: MessageEvent<ReceivingData>) => {
@@ -40,16 +40,6 @@ self.onmessage = async (e: MessageEvent<ReceivingData>) => {
     case 'deleteUser':
       {
       }
-      break;
-    case 'getVideo':
-      break;
-    case 'getAllVideo':
-      break;
-    case 'addVideo':
-      break;
-    case 'updateVideo':
-      break;
-    case 'deleteVideo':
       break;
     default:
       break;

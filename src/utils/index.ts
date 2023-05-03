@@ -1,10 +1,8 @@
 import crypto from 'crypto';
-import CustomWorker from './worker?worker';
 export { encrypt, decrypt } from './encryption';
 export { openSignInWindow } from './window';
 export { isEmptyArray, isEmptyObject } from './checkDataType';
-
-export const worker = new CustomWorker();
+export { default as UserWorker } from '@/worker/user?worker';
 
 export const divideArrays = <T>(arr: T[], chunkSize: number) => {
   const res = [];
@@ -19,9 +17,6 @@ export const randomKey = () =>
   typeof window !== 'undefined'
     ? window.crypto.randomUUID()
     : crypto.randomUUID();
-
-export const generateParams = (params = {}) =>
-  Object.entries(params).reduce((acc, cur) => acc + `&${cur[0]}=${cur[1]}`, '');
 
 export const displayedAt = (createdAt = new Date()) => {
   const milliSeconds = new Date().getTime() - createdAt.getTime();
