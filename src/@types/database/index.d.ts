@@ -9,10 +9,10 @@ export interface UserSchema extends DBSchema {
 
 export type IDBUserSchema = IDBPDatabase<UserSchema>;
 
-export interface UserData {
+export type UserData = {
   googleID: string;
   name: string;
   email: string;
   thumbnails: string;
   userURL: string;
-}
+};
