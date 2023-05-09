@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const VideoDetails = styled.div`
   display: flex;
@@ -15,6 +15,7 @@ export const VideoDetails = styled.div`
 
 export const StyledDiv = styled.div`
   position: relative;
+  width: auto;
   &:hover {
     cursor: pointer;
   }
@@ -27,7 +28,7 @@ export const YoutuberData = styled.div`
   span {
     color: #606060;
     :nth-child(2):before {
-      content: "•";
+      content: '•';
       margin: 0 4px;
     }
   }

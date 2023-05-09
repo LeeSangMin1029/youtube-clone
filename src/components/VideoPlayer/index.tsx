@@ -8,7 +8,6 @@ import {
   ChannelInfo,
   BetweenContent,
 } from './styles';
-import { useFetchVideo } from '@/hooks';
 
 const WIDTH = '1268';
 const HEIGHT = '713';
@@ -16,17 +15,17 @@ const HEIGHT = '713';
 const VideoPlayer = () => {
   const [params] = useSearchParams();
   const id: string | null = params.get('id');
-  const { video, isLoading } = useFetchVideo(id, WIDTH, HEIGHT);
-  if (isLoading) return <div>...Loading</div>;
-  const { embedHtml } = video.player;
+  // const { video, isLoading } = useFetchVideo(id, WIDTH, HEIGHT);
+  // if (isLoading) return <div>...Loading</div>;
+  // const { embedHtml } = video.player;
   const parseToComponent = (html: string) => parse(html);
   return (
     <PlayerBoard>
       <PlayerStyled width={WIDTH} height={HEIGHT}>
-        {parseToComponent(embedHtml)}
+        {/* {parseToComponent(embedHtml)} */}
       </PlayerStyled>
       <VideoDetail>
-        <h1>{video.snippet.title}</h1>
+        {/* <h1>{video.snippet.title}</h1> */}
         <BetweenContent>
           <ChannelInfo>
             <a
