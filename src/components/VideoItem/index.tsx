@@ -9,6 +9,7 @@ import {
   InteractStyled,
 } from './styles';
 import { displayedAt } from '@/utils';
+import { YoutubeVideo } from '@/@types/youtube';
 
 const commaCheck = (digit: number) => (digit ? '.' + digit : '');
 const units = [
@@ -30,16 +31,12 @@ const formatingDigit = (str: string) => {
   return str[0] + subString + type;
 };
 
-type VideoItemProps = {
-  data: YoutubeVideoData;
-};
-
-const VideoItem = memo(({ data }: any) => {
+const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
   const {
     id,
     snippet,
     statistics: { viewCount },
-    channel,
+    // channel,
   } = data;
   const {
     channelId,
@@ -49,7 +46,7 @@ const VideoItem = memo(({ data }: any) => {
     publishedAt,
   } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
-  const { url: channelThumb } = channel.snippet.thumbnails.default;
+  // const { url: channelThumb } = channel.snippet.thumbnails.default;
   const formattedViewCount = formatingDigit(viewCount);
   const formattedPublishedAt = displayedAt(new Date(publishedAt));
 
@@ -58,12 +55,12 @@ const VideoItem = memo(({ data }: any) => {
       <InteractStyled />
       <Thumbnails>
         <Link to={`/watch?id=${id}`}>
-          <img src={vThumb.maxres.url} alt="test" />
+          <img src={vThumb?.standard?.url} alt="thumbnails" />
         </Link>
       </Thumbnails>
       <VideoDetails>
         <a href={channelHref}>
-          <img src={channelThumb} alt="testI" width="36px" height="36px" />
+          {/* <img src={channelThumb} alt="testI" width="36px" height="36px" /> */}
         </a>
         <Description>
           <h3>
