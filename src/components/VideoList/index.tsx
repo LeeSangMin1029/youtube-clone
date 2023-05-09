@@ -1,37 +1,41 @@
-import { DisplayGrid, GridRow, MarginContent } from './styles';
-import VideoItem from '@/components/VideoItem';
+import { useEffect, useState } from 'react';
+import { DisplayGrid, MarginContent, GridRow } from './styles';
+import { UserWorker, randomKey } from '@/utils';
+import { WorkerEventData } from '@/@types/dispatch';
 import { useVideos } from '@/hooks';
-import { divideArrays, randomKey } from '@/utils';
-
-const getChannels = (channels: Channel[], id: string) => {
-  const result = channels.filter((channel) => channel.id === id)[0];
-  return result;
-};
-
-const getItems = ({ videos, channels }: { videos: any; channels: any }) =>
-  videos.map((video: any) => {
-    const result = Object.assign(
-      {},
-      { channel: getChannels(channels, video.snippet.channelId) },
-      video,
-    );
-    return result;
-  });
+import VideoItem from '@/components/VideoItem';
 
 const VideoList = () => {
-  const { fetched, isLoading } = useVideos(true);
-  if (isLoading) return <div>...Loading</div>;
-  const result = divideArrays(getItems(fetched), 5);
+  const [email, setEmail] = useState('');
+  const [googleID, setGoogleID] = useState('');
+  const { videos, isLoading } = useVideos(email!, googleID!);
+  useEffect(() => {
+    const worker = new UserWorker();
+    worker.postMessage({ dispatch: 'getUser' });
+    worker.onmessage = async (e: MessageEvent<WorkerEventData>) => {
+      const { payload, status } = e.data;
+      if (status === 'failed') return;
+      if (payload) {
+        setEmail(payload.email);
+        setGoogleID(payload.googleID);
+      }
+    };
+  });
+  if (isLoading) return <div>isLoading...</div>;
   return (
     <MarginContent>
       <DisplayGrid>
-        {result.map((items) => (
-          <GridRow key={randomKey()}>
-            {items.map((item) => (
-              <VideoItem key={randomKey()} data={item} />
-            ))}
-          </GridRow>
-        ))}
+        <GridRow>
+          {videos?.map((video) => (
+            <>
+              <VideoItem key={randomKey()} data={video} />
+              <VideoItem key={randomKey()} data={video} />
+              <VideoItem key={randomKey()} data={video} />
+              <VideoItem key={randomKey()} data={video} />
+              <VideoItem key={randomKey()} data={video} />
+            </>
+          ))}
+        </GridRow>
       </DisplayGrid>
     </MarginContent>
   );

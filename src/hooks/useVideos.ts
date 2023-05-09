@@ -1,58 +1,24 @@
-import useSWR from 'swr';
-import { generateParams } from '@/utils';
+import { YoutubeVideoList } from '@/@types/youtube';
+import useSWR, { Fetcher } from 'swr';
 
-const baseOption = {
-  maxResults: '1',
-  regionCode: 'kr',
-};
-
-const videosOption = {
-  part: 'snippet,player,statistics',
-  chart: 'mostPopular',
-  maxWidth: '1280',
-  maxHeight: '714',
-  fields:
-    'items(id,snippet(channelId,channelTitle,publishedAt,thumbnails(maxres),title),player,statistics(viewCount))',
-};
-
-const channelsOption = {
-  part: 'snippet',
-  fields: 'items(id,snippet(thumbnails(default)))',
-};
-
-const requestURL = () => {
-  const apiPath = `/api/youtube/v3/`;
-  const key = '?key=AIzaSyAD9cDA4VH2MKgN3stX0hbe5xtOhIX2yNs';
-  return (resource: string, options: Object) => {
-    const param = generateParams({ ...baseOption, ...options });
-    return `${apiPath + resource + key + param}`;
-  };
-};
-
-const channelIdParams = (items = []) =>
-  items.reduce((acc, cur: any) => acc + cur.snippet.channelId + ',', '');
-
-export const useVideos = (isNotCached = true) => {
-  const fetcher = (input: RequestInfo, init: RequestInit) =>
-    fetch(input, init).then((res) => res.json());
-  const url = requestURL();
-  const { data: video } = useSWR(
-    isNotCached ? url('videos', videosOption) : null,
+export const useVideos = (email: string, googleID: string) => {
+  const fetcher: Fetcher<YoutubeVideoList> = (url: string) =>
+    fetch(url, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, googleID }),
+    }).then((res) => res.json());
+  const { data, isLoading } = useSWR<YoutubeVideoList>(
+    email && googleID ? 'api/youtube/videos' : null,
     fetcher,
+    { revalidateOnFocus: false },
   );
-  const { data: cnthumb, isLoading } = useSWR(
-    isNotCached && video
-      ? [
-          url('channels', {
-            ...channelsOption,
-            id: channelIdParams(video.items),
-          }),
-        ]
-      : null,
-    fetcher,
-  );
+  let videos = null;
+  if (data) videos = data.items;
   return {
-    fetched: { videos: video?.items, channels: cnthumb?.items },
+    videos,
     isLoading,
   };
 };
