@@ -1,3 +1,5 @@
+import { reportError, getErrorMessage } from '@/utils/errors';
+
 export const authGoogleURL = async () => {
   try {
     const request = await fetch('api/auth/google', {
@@ -6,6 +8,6 @@ export const authGoogleURL = async () => {
     const response = await request.json();
     return response.url;
   } catch (error) {
-    console.error(error);
+    throw new Error(reportError({ message: getErrorMessage(error) }));
   }
 };
