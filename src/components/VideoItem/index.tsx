@@ -36,7 +36,7 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
     id,
     snippet,
     statistics: { viewCount },
-    // channel,
+    channel,
   } = data;
   const {
     channelId,
@@ -46,7 +46,7 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
     publishedAt,
   } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
-  // const { url: channelThumb } = channel.snippet.thumbnails.default;
+  const { url: channelThumb } = channel.snippet.thumbnails.default;
   const formattedViewCount = formatingDigit(viewCount);
   const formattedPublishedAt = displayedAt(new Date(publishedAt));
 
@@ -60,7 +60,7 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
       </Thumbnails>
       <VideoDetails>
         <a href={channelHref}>
-          {/* <img src={channelThumb} alt="testI" width="36px" height="36px" /> */}
+          <img src={channelThumb} alt="testI" width="36px" height="36px" />
         </a>
         <Description>
           <h3>
