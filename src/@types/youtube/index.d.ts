@@ -4,6 +4,28 @@ export type YoutubeVideoList = {
 
 export type YoutubeVideo = {
   id: string;
+  channel: {
+    id: string;
+    snippet: {
+      thumbnails: {
+        default: {
+          url: string;
+          width: number;
+          height: number;
+        };
+        medium: {
+          url: string;
+          width: number;
+          height: number;
+        };
+        high: {
+          url: string;
+          width: number;
+          height: number;
+        };
+      };
+    };
+  };
   snippet: {
     publishedAt: string;
     channelId: string;
