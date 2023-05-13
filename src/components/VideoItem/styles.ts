@@ -15,7 +15,7 @@ export const VideoDetails = styled.div`
 
 export const StyledDiv = styled.div`
   position: relative;
-  width: auto;
+  max-width: 344px;
   &:hover {
     cursor: pointer;
   }
@@ -41,9 +41,9 @@ export const YoutuberData = styled.div`
 `;
 
 export const Description = styled.div`
-  padding-right: 24px;
-  width: 100%;
   line-height: 20px;
+  padding-right: 24px;
+
   h3 {
     display: block;
     a {
@@ -51,7 +51,7 @@ export const Description = styled.div`
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       max-height: 4.4rem;
-      margin: 12px 0 4px 00;
+      margin: 12px 0 4px 0;
       overflow: hidden;
       white-space: normal;
       text-overflow: ellipsis;

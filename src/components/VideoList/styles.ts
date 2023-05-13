@@ -8,16 +8,6 @@ export const MarginContent = styled.div`
 export const DisplayGrid = styled.div`
   padding-top: 24px;
   display: grid;
-`;
-
-export const GridRow = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 1800px;
-  margin: 0 16px;
-  > div {
-    width: 344px;
-    margin: 0 8px;
-    margin-bottom: 40px;
-  }
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: minmax(340px, auto);
 `;
