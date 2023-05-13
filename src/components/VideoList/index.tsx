@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DisplayGrid, MarginContent, GridRow } from './styles';
+import { DisplayGrid, MarginContent } from './styles';
 import { UserWorker, randomKey } from '@/utils';
 import { WorkerEventData } from '@/@types/dispatch';
 import { useVideos } from '@/hooks';
@@ -22,20 +22,13 @@ const VideoList = () => {
     };
   });
   if (isLoading) return <div>isLoading...</div>;
+
   return (
     <MarginContent>
       <DisplayGrid>
-        <GridRow>
-          {videos?.map((video) => (
-            <>
-              <VideoItem key={randomKey()} data={video} />
-              <VideoItem key={randomKey()} data={video} />
-              <VideoItem key={randomKey()} data={video} />
-              <VideoItem key={randomKey()} data={video} />
-              <VideoItem key={randomKey()} data={video} />
-            </>
-          ))}
-        </GridRow>
+        {videos?.map((video) => (
+          <VideoItem key={randomKey()} data={video} />
+        ))}
       </DisplayGrid>
     </MarginContent>
   );
