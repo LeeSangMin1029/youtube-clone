@@ -2,8 +2,8 @@ import { ReactNode, createContext, useContext, useState } from 'react';
 import { UserData } from '@/@types/database';
 
 type UserContextType = {
-  user: UserData | undefined;
-  setUser: React.Dispatch<React.SetStateAction<UserData | undefined>>;
+  user: UserData;
+  setUser: React.Dispatch<React.SetStateAction<UserData>>;
   isLoggedIn: boolean;
   setLogged: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -22,8 +22,16 @@ type UserProviderProps = {
   children: ReactNode;
 };
 
+const initUser = {
+  googleID: '',
+  name: '',
+  email: '',
+  thumbnails: '',
+  userURL: '',
+};
+
 const UserProvider = ({ children }: UserProviderProps) => {
-  const [user, setUser] = useState<UserData | undefined>();
+  const [user, setUser] = useState<UserData>(initUser);
   const [isLoggedIn, setLogged] = useState(false);
   const contextValue = { user, setUser, isLoggedIn, setLogged };
   return (

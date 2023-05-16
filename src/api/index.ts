@@ -1,1 +1,0 @@
-export { authGoogleURL } from './local';
