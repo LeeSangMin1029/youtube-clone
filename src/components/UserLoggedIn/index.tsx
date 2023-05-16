@@ -1,6 +1,5 @@
 import { SVGWrapper, UserProfile } from './styles';
-import { ReactComponent as UploadIcon } from '@/assets/video_upload.svg';
-import { ReactComponent as AlarmIcon } from '@/assets/video_alarm.svg';
+import { UploadIcon, AlarmIcon } from '@/assets';
 import { useUserContext } from '@/context/UserContext';
 import { memo } from 'react';
 

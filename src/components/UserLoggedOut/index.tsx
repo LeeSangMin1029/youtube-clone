@@ -3,8 +3,7 @@ import { SVGWrapper, LoginButton } from './styles';
 import { openSignInWindow, UserWorker } from '@/utils';
 import { authGoogleURL } from '@/api';
 import { memo, useEffect } from 'react';
-import { ReactComponent as SettingIcon } from '@/assets/app_settings.svg';
-import { ReactComponent as LoginIcon } from '@/assets/user_login_profile.svg';
+import { SettingIcon, LoginIcon } from '@/assets';
 import { useUserContext } from '@/context/UserContext';
 
 const UserLoggedOut = memo(() => {
