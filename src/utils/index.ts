@@ -3,5 +3,5 @@ export { encrypt, decrypt } from './encryption';
 export { openSignInWindow } from './window';
 export { isEmptyArray, isEmptyObject } from './checkDataType';
 export { splitArray } from './object';
-export { displayedAt } from './render';
-export { randomKey } from './render';
+export { displayedAt, randomKey, formatingDigit } from './render';
+export { googleAuthentication } from './fetch';

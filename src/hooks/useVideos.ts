@@ -1,7 +1,11 @@
-import { YoutubeVideoList } from '@/@types/youtube';
 import useSWR, { Fetcher } from 'swr';
+import { YoutubeVideoList } from '@/@types/youtube';
+import { useUser } from './useUser';
 
-export const useVideos = (email: string, googleID: string) => {
+export const useVideos = () => {
+  const {
+    user: { email, googleID },
+  } = useUser();
   const fetcher: Fetcher<YoutubeVideoList> = (url: string) =>
     fetch(url, {
       method: 'post',

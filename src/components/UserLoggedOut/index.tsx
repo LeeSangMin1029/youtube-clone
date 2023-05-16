@@ -1,35 +1,22 @@
-import { UserData } from '@/@types/database';
+import { memo } from 'react';
 import { SVGWrapper, LoginButton } from './styles';
-import { openSignInWindow, UserWorker } from '@/utils';
-import { authGoogleURL } from '@/api';
-import { memo, useEffect } from 'react';
+import { openSignInWindow, googleAuthentication } from '@/utils';
 import { SettingIcon, LoginIcon } from '@/assets';
-import { useUserContext } from '@/context/UserContext';
+import { useLogin } from '@/hooks';
 
 const UserLoggedOut = memo(() => {
-  const { setUser, setLogged } = useUserContext();
-  const handleClick = async () => {
-    const openPopupUrl = await authGoogleURL();
-    openSignInWindow(openPopupUrl, 'youtube Auth');
+  useLogin();
+  const displayLoginWindow = async () => {
+    const openPopupUrl = await googleAuthentication();
+    openSignInWindow(openPopupUrl, 'google Auth');
   };
-
-  useEffect(() => {
-    const loginChannel = new BroadcastChannel('login');
-    loginChannel.onmessage = async (e: MessageEvent<UserData>) => {
-      const worker = new UserWorker();
-      const userData = e.data;
-      setUser(userData);
-      setLogged(true);
-      worker.postMessage({ dispatch: 'addUser', payload: userData });
-    };
-  }, []);
 
   return (
     <>
       <SVGWrapper>
         <SettingIcon />
       </SVGWrapper>
-      <LoginButton onClick={handleClick}>
+      <LoginButton onClick={displayLoginWindow}>
         <LoginIcon fill="#065fd4" width="24px" height="24px" />
         로그인
       </LoginButton>

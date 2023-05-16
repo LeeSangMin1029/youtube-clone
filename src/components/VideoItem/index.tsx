@@ -8,28 +8,8 @@ import {
   StyledDiv,
   InteractStyled,
 } from './styles';
-import { displayedAt } from '@/utils';
+import { displayedAt, formatingDigit } from '@/utils';
 import { YoutubeVideo } from '@/@types/youtube';
-
-const commaCheck = (digit: number) => (digit ? '.' + digit : '');
-const units = [
-  { unit: '4', type: '천', sub: 0 },
-  { unit: '5', type: '만', sub: 0 },
-  { unit: '9', type: '억', sub: 0 },
-  { unit: '6 7 8', type: '만', sub: 4 },
-  { unit: '10 11 12', type: '억', sub: 8 },
-];
-
-const formatingDigit = (str: string) => {
-  if (str.length <= 3) return str;
-  const { type, sub } = units.filter(({ unit }) =>
-    unit.includes(String(str.length)),
-  )[0];
-  let subString = !sub
-    ? commaCheck(Number(str[1]) - 48)
-    : str.substring(1, str.length - sub);
-  return str[0] + subString + type;
-};
 
 const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
   const {
@@ -47,8 +27,6 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
   } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
   const { url: channelThumb } = channel.snippet.thumbnails.default;
-  const formattedViewCount = formatingDigit(viewCount);
-  const formattedPublishedAt = displayedAt(new Date(publishedAt));
 
   return (
     <StyledDiv>
@@ -69,8 +47,8 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
           <YoutuberData>
             <a href={channelHref}>{channelTitle}</a>
             <div>
-              <span>조회수 {formattedViewCount}회</span>
-              <span>{formattedPublishedAt}</span>
+              <span>조회수 {formatingDigit(viewCount)}회</span>
+              <span>{displayedAt(new Date(publishedAt))}</span>
             </div>
           </YoutuberData>
         </Description>
