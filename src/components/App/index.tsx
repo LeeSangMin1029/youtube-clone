@@ -4,7 +4,6 @@ import {
   RouterProvider,
   Route,
 } from 'react-router-dom';
-import { SWRConfig } from 'swr';
 import Home from '@/pages/Home';
 import Watch from '@/pages/Watch';
 import Login from '@/pages/Login';
@@ -21,11 +20,7 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
-  return (
-    <SWRConfig>
-      <RouterProvider router={router} />
-    </SWRConfig>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
