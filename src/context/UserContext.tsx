@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, createContext, useContext, useState, useMemo } from 'react';
 import { UserData } from '@/@types/database';
 
 type UserContextType = {
@@ -33,7 +33,11 @@ const initUser = {
 const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserData>(initUser);
   const [isLoggedIn, setLogged] = useState(false);
-  const contextValue = { user, setUser, isLoggedIn, setLogged };
+  const contextValue = useMemo(
+    () => ({ user, setUser, isLoggedIn, setLogged }),
+    [user, setUser, isLoggedIn, setLogged],
+  );
+
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );

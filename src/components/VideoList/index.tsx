@@ -1,21 +1,27 @@
+import { memo } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { DisplayGrid, MarginContent } from './styles';
-import { randomKey } from '@/utils';
 import { useVideos } from '@/hooks';
-import VideoItem from '@/components/VideoItem';
+import { useUserContext } from '@/context/UserContext';
+import VideoItem from '../VideoItem';
+import { randomKey } from '@/utils';
 
-const VideoList = () => {
-  const { videos, isLoading } = useVideos();
-  if (isLoading) return <div>isLoading...</div>;
-
+const VideoList = memo(() => {
+  const {
+    user: { googleID },
+  } = useUserContext();
+  const { videos } = useVideos(googleID, '');
   return (
     <MarginContent>
       <DisplayGrid>
-        {videos?.map((video) => (
-          <VideoItem key={randomKey()} data={video} />
-        ))}
+        <ErrorBoundary fallback={<div>...error</div>}>
+          {videos?.map((video) => (
+            <VideoItem data={video} key={randomKey()} />
+          ))}
+        </ErrorBoundary>
       </DisplayGrid>
     </MarginContent>
   );
-};
+});
 
 export default VideoList;
