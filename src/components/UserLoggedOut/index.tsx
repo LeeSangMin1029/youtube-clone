@@ -2,10 +2,8 @@ import { memo } from 'react';
 import { SVGWrapper, LoginButton } from './styles';
 import { openSignInWindow, googleAuthentication } from '@/utils';
 import { SettingIcon, LoginIcon } from '@/assets';
-import { useLogin } from '@/hooks';
 
 const UserLoggedOut = memo(() => {
-  useLogin();
   const displayLoginWindow = async () => {
     const openPopupUrl = await googleAuthentication();
     openSignInWindow(openPopupUrl, 'google Auth');

@@ -1,11 +1,13 @@
+import { UserData } from '@/@types/database';
 import { SVGWrapper, UserProfile } from './styles';
 import { UploadIcon, AlarmIcon } from '@/assets';
-import { useUserContext } from '@/context/UserContext';
 import { memo } from 'react';
 
-const UserLoggedIn = memo(() => {
-  const { user } = useUserContext();
+type UserLoggedInProps = {
+  user: UserData;
+};
 
+const UserLoggedIn = memo(({ user }: UserLoggedInProps) => {
   return (
     <>
       <SVGWrapper>
