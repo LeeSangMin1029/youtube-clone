@@ -37,9 +37,9 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
         </Link>
       </Thumbnails>
       <VideoDetails>
-        <a href={channelHref}>
+        <Link to={channelHref}>
           <img src={channelThumb} alt="testI" width="36px" height="36px" />
-        </a>
+        </Link>
         <Description>
           <h3>
             <Link to={`/watch?id=${id}`}>{title}</Link>
