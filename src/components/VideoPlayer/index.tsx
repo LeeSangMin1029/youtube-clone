@@ -1,31 +1,36 @@
 import { useSearchParams } from 'react-router-dom';
-import parse from 'html-react-parser';
 import VideoManangement from '@/components/VideoManagement';
 import {
   PlayerBoard,
   VideoDetail,
-  PlayerStyled,
   ChannelInfo,
   BetweenContent,
 } from './styles';
 import { useVideos } from '@/hooks';
-
-const WIDTH = '1268';
-const HEIGHT = '713';
+import YTPlayer from 'react-youtube';
 
 const VideoPlayer = () => {
   const [params] = useSearchParams();
   const id = params.get('id');
   const { videos } = useVideos({ id: id! }, '0');
-  let video = videos?.at(0);
-  const parseToComponent = (html: string) => parse(html);
+  const video = videos?.at(0);
+
   return (
     <PlayerBoard>
       {video && (
         <>
-          <PlayerStyled width={WIDTH} height={HEIGHT}>
-            {video && parseToComponent(video.player.embedHtml)}
-          </PlayerStyled>
+          <YTPlayer
+            className="player"
+            videoId={video.id}
+            opts={{
+              height: video?.player.embedHeight,
+              width: video?.player.embedWidth,
+              playerVars: {
+                autoplay: 1,
+                mute: 1,
+              },
+            }}
+          />
           <VideoDetail>
             <h1>{video && video.snippet.title}</h1>
             <BetweenContent>
