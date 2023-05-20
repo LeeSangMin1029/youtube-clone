@@ -8,43 +8,45 @@ import {
   ChannelInfo,
   BetweenContent,
 } from './styles';
+import { useVideos } from '@/hooks';
 
 const WIDTH = '1268';
 const HEIGHT = '713';
 
 const VideoPlayer = () => {
   const [params] = useSearchParams();
-  const id: string | null = params.get('id');
-  // const { video, isLoading } = useFetchVideo(id, WIDTH, HEIGHT);
-  // if (isLoading) return <div>...Loading</div>;
-  // const { embedHtml } = video.player;
+  const id = params.get('id');
+  const { videos } = useVideos({ id: id! }, '0');
+  let video = videos?.at(0);
   const parseToComponent = (html: string) => parse(html);
   return (
     <PlayerBoard>
-      <PlayerStyled width={WIDTH} height={HEIGHT}>
-        {/* {parseToComponent(embedHtml)} */}
-      </PlayerStyled>
-      <VideoDetail>
-        {/* <h1>{video.snippet.title}</h1> */}
-        <BetweenContent>
-          <ChannelInfo>
-            <a
-              href={`https://www.youtube.com/channel/UCtybqqaTj6Nx74Azdz1KrsA`}
-            >
-              <img src="https://yt3.ggpht.com/eyq-DtqUZb9kY1xHkTi1BrmBieCg8E7nI4hBA3_z_46dEBimEGxubgPevtuxUSyNOTIp8RWvOXg=s88-c-k-c0x00ffffff-no-rj" />
-            </a>
-            <div>
-              <a
-                href={`https://www.youtube.com/channel/UCtybqqaTj6Nx74Azdz1KrsA`}
-              >
-                아무튼 채널 이름임
-              </a>
-              <p>구독자</p>
-            </div>
-          </ChannelInfo>
-          <VideoManangement />
-        </BetweenContent>
-      </VideoDetail>
+      {video && (
+        <>
+          <PlayerStyled width={WIDTH} height={HEIGHT}>
+            {video && parseToComponent(video.player.embedHtml)}
+          </PlayerStyled>
+          <VideoDetail>
+            <h1>{video && video.snippet.title}</h1>
+            <BetweenContent>
+              <ChannelInfo>
+                <a href={`https://www.youtube.com/channel/${video.channel.id}`}>
+                  <img src={video.channel.snippet.thumbnails.medium.url} />
+                </a>
+                <div>
+                  <a
+                    href={`https://www.youtube.com/channel/${video.channel.id}`}
+                  >
+                    {`${video.snippet.channelTitle}`}
+                  </a>
+                  <p>구독자 {`${video.statistics.viewCount}`}</p>
+                </div>
+              </ChannelInfo>
+              <VideoManangement />
+            </BetweenContent>
+          </VideoDetail>
+        </>
+      )}
     </PlayerBoard>
   );
 };

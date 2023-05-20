@@ -2,15 +2,11 @@ import { memo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { DisplayGrid, MarginContent } from './styles';
 import { useVideos } from '@/hooks';
-import { useUserContext } from '@/context/UserContext';
 import VideoItem from '../VideoItem';
 import { randomKey } from '@/utils';
 
 const VideoList = memo(() => {
-  const {
-    user: { googleID },
-  } = useUserContext();
-  const { videos } = useVideos(googleID, '');
+  const { videos } = useVideos({ results: 5 }, '');
   return (
     <MarginContent>
       <DisplayGrid>

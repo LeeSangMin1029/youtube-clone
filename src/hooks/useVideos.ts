@@ -1,7 +1,16 @@
 import { YoutubeVideoList } from '@/@types/youtube';
+import { useUserContext } from '@/context/UserContext';
 import { useQuery } from 'react-query';
 
-export const useVideos = (googleID: string, nextToken: string) => {
+type VideoParams = {
+  results?: number;
+  id?: string;
+};
+
+export const useVideos = (params: VideoParams, nextToken: string) => {
+  const {
+    user: { googleID },
+  } = useUserContext();
   const getVideos = async (
     googleID: string,
     token: string,
@@ -11,7 +20,7 @@ export const useVideos = (googleID: string, nextToken: string) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ googleID }),
+      body: JSON.stringify({ googleID, params }),
     }).then((fetched) => fetched.json());
   const { data } = useQuery({
     queryKey: ['videos', nextToken],
@@ -20,6 +29,5 @@ export const useVideos = (googleID: string, nextToken: string) => {
     retry: 0,
     enabled: !!googleID,
   });
-  const videos = data?.items;
-  return { videos };
+  return { videos: data?.items };
 };
