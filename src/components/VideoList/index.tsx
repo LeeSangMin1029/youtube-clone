@@ -6,7 +6,7 @@ import VideoItem from '../VideoItem';
 import { randomKey } from '@/utils';
 
 const VideoList = memo(() => {
-  const { videos } = useVideos({ results: 5 }, '');
+  const { videos } = useVideos({ maxResults: 5, chart: 'mostPopular' });
   return (
     <MarginContent>
       <DisplayGrid>
