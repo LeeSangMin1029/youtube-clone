@@ -1,3 +1,8 @@
+type ValueOfParmas = number | string | string[];
+type Params = {
+  [key: string]: ValueOfParmas;
+};
+
 export const splitArray = <T>(arr: T[], chunkSize: number) => {
   const res = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
@@ -6,3 +11,10 @@ export const splitArray = <T>(arr: T[], chunkSize: number) => {
   }
   return res;
 };
+
+export const objectToSementic = (param: Params) =>
+  Object.keys(param)
+    .map((key) => {
+      return param[key];
+    })
+    .join('/');
