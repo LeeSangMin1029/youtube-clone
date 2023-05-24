@@ -25,6 +25,9 @@ export type YoutubeVideo = {
         };
       };
     };
+    statistics: {
+      subscriberCount: number;
+    };
   };
   snippet: {
     publishedAt: string;

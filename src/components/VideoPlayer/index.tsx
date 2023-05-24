@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
+import YTPlayer from 'react-youtube';
 import VideoManangement from '@/components/VideoManagement';
 import {
   PlayerBoard,
@@ -7,24 +8,35 @@ import {
   BetweenContent,
 } from './styles';
 import { useVideos } from '@/hooks';
-import YTPlayer from 'react-youtube';
+import { getVideoInfo } from '@/utils';
 
 const VideoPlayer = () => {
   const [params] = useSearchParams();
   const id = params.get('id');
-  const { videos } = useVideos({ id: id! }, '0');
+  const { videos } = useVideos({ id: [id!] });
   const video = videos?.at(0);
-
+  const {
+    width,
+    height,
+    videoId,
+    title,
+    channelId,
+    viewCount,
+    videoSrc,
+    channelTitle,
+    subscriberCount,
+  } = getVideoInfo(video!);
+  console.log(video);
   return (
     <PlayerBoard>
       {video && (
         <>
           <YTPlayer
             className="player"
-            videoId={video.id}
+            videoId={videoId}
             opts={{
-              height: video?.player.embedHeight,
-              width: video?.player.embedWidth,
+              height,
+              width,
               playerVars: {
                 autoplay: 1,
                 mute: 1,
@@ -32,19 +44,15 @@ const VideoPlayer = () => {
             }}
           />
           <VideoDetail>
-            <h1>{video && video.snippet.title}</h1>
+            <h1>{title}</h1>
             <BetweenContent>
               <ChannelInfo>
-                <a href={`https://www.youtube.com/channel/${video.channel.id}`}>
-                  <img src={video.channel.snippet.thumbnails.medium.url} />
+                <a href={channelId}>
+                  <img src={videoSrc} />
                 </a>
                 <div>
-                  <a
-                    href={`https://www.youtube.com/channel/${video.channel.id}`}
-                  >
-                    {`${video.snippet.channelTitle}`}
-                  </a>
-                  <p>구독자 {`${video.statistics.viewCount}`}</p>
+                  <a href={channelId}>{channelTitle}</a>
+                  <p>구독자 {subscriberCount}</p>
                 </div>
               </ChannelInfo>
               <VideoManangement />

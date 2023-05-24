@@ -8,7 +8,7 @@ import {
   StyledDiv,
   InteractStyled,
 } from './styles';
-import { displayedAt, formatingDigit } from '@/utils';
+import { displayedAt, getCountFormat } from '@/utils';
 import { YoutubeVideo } from '@/@types/youtube';
 
 const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
@@ -47,7 +47,7 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
           <YoutuberData>
             <a href={channelHref}>{channelTitle}</a>
             <div>
-              <span>조회수 {formatingDigit(viewCount)}회</span>
+              <span>조회수 {getCountFormat(viewCount, 0)}회</span>
               <span>{displayedAt(new Date(publishedAt))}</span>
             </div>
           </YoutuberData>
