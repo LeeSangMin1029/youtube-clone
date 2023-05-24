@@ -1,3 +1,4 @@
+import { YoutubeVideo } from '@/@types/youtube';
 import crypto from 'crypto';
 
 export const displayedAt = (createdAt = new Date()) => {
@@ -30,22 +31,29 @@ export const randomKey = () =>
     ? window.crypto.randomUUID()
     : crypto.randomUUID();
 
-export const commaCheck = (digit: number) => (digit ? '.' + digit : '');
-export const units = [
-  { unit: '4', type: '천', sub: 0 },
-  { unit: '5', type: '만', sub: 0 },
-  { unit: '9', type: '억', sub: 0 },
-  { unit: '6 7 8', type: '만', sub: 4 },
-  { unit: '10 11 12', type: '억', sub: 8 },
-];
+export const getVideoInfo = (video: YoutubeVideo) => {
+  const { id, player, snippet, channel, statistics: vStatic } = video || {};
+  const { title } = snippet || {};
+  const { embedWidth, embedHeight } = player || {};
+  const { statistics: cStatic } = channel || {};
+  return {
+    title,
+    videoId: id,
+    videoSrc: channel?.snippet?.thumbnails?.medium?.url,
+    channelId: `https://www.youtube.com/channel/${channel?.id}`,
+    width: embedWidth,
+    height: embedHeight,
+    viewCount: getCountFormat(vStatic?.viewCount, 2),
+    subscriberCount: getCountFormat(cStatic?.subscriberCount, 0),
+    channelTitle: snippet?.channelTitle,
+  };
+};
 
-export const formatingDigit = (str: string) => {
-  if (str.length <= 3) return str;
-  const { type, sub } = units.filter(({ unit }) =>
-    unit.includes(String(str.length)),
-  )[0];
-  let subString = !sub
-    ? commaCheck(Number(str[1]) - 48)
-    : str.substring(1, str.length - sub);
-  return str[0] + subString + type;
+export const getCountFormat = (count: string | number, digit: number) => {
+  const intlCall = new Intl.NumberFormat('ko-KR', {
+    notation: 'compact',
+    maximumFractionDigits: digit,
+  });
+  if (typeof count === 'string') return intlCall.format(Number(count));
+  return intlCall.format(count);
 };
