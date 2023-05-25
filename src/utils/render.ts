@@ -44,7 +44,7 @@ export const getVideoInfo = (video: YoutubeVideo) => {
     width: embedWidth,
     height: embedHeight,
     viewCount: getCountFormat(vStatic?.viewCount, 2),
-    subscriberCount: getCountFormat(cStatic?.subscriberCount, 0),
+    subscriberCount: getCountFormat(cStatic?.subscriberCount, 1),
     channelTitle: snippet?.channelTitle,
   };
 };
