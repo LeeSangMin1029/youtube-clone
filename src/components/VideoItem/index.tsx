@@ -9,9 +9,9 @@ import {
   InteractStyled,
 } from './styles';
 import { displayedAt, getCountFormat } from '@/utils';
-import { YoutubeVideo } from '@/@types/youtube';
+import { YoutubeVideoItem } from '@/@types/youtube';
 
-const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
+const VideoItem = memo(({ data }: { data: YoutubeVideoItem }) => {
   const {
     id,
     snippet,

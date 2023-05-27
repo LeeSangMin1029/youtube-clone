@@ -1,50 +1,47 @@
 export type YoutubeVideoList = {
-  items: YoutubeVideo[];
+  items: YoutubeVideoItem[];
 };
 
-export type YoutubeVideo = {
-  id: string;
-  channel: {
-    id: string;
-    snippet: {
-      thumbnails: {
-        default: {
-          url: string;
-          width: number;
-          height: number;
-        };
-        medium: {
-          url: string;
-          width: number;
-          height: number;
-        };
-        high: {
-          url: string;
-          width: number;
-          height: number;
-        };
-      };
+export type YoutubeVideoSnippet = {
+  description: string;
+  publishedAt: string;
+  channelId: string;
+  title: string;
+  thumbnails: {
+    default: {
+      url: string;
+      width: number;
+      height: number;
     };
-    statistics: {
-      subscriberCount: number;
+    high: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    standard: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    medium: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    maxres: {
+      url: string;
+      width: number;
+      height: number;
     };
   };
+  channelTitle: string;
+};
+
+export type YoutubeChannel = {
+  id: string;
   snippet: {
-    publishedAt: string;
-    channelId: string;
-    title: string;
     thumbnails: {
       default: {
-        url: string;
-        width: number;
-        height: number;
-      };
-      high: {
-        url: string;
-        width: number;
-        height: number;
-      };
-      standard: {
         url: string;
         width: number;
         height: number;
@@ -54,14 +51,22 @@ export type YoutubeVideo = {
         width: number;
         height: number;
       };
-      maxres: {
+      high: {
         url: string;
         width: number;
         height: number;
       };
     };
-    channelTitle: string;
   };
+  statistics: {
+    subscriberCount: number;
+  };
+};
+
+export type YoutubeVideoItem = {
+  id: string;
+  snippet: YoutubeVideoSnippet;
+  channel: YoutubeChannel;
   statistics: {
     viewCount: string;
   };
