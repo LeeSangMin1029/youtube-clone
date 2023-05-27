@@ -3,5 +3,12 @@ export { encrypt, decrypt } from './encryption';
 export { openSignInWindow } from './window';
 export { isEmptyArray, isEmptyObject } from './checkDataType';
 export { splitArray, objectToSementic } from './object';
-export { displayedAt, randomKey, getCountFormat, getVideoInfo } from './render';
+export {
+  displayedAt,
+  randomKey,
+  getCountFormat,
+  getVideoInfo,
+  getToday,
+  getFullViewCount,
+} from './render';
 export { googleAuthentication } from './fetch';

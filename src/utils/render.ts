@@ -1,4 +1,4 @@
-import { YoutubeVideo } from '@/@types/youtube';
+import { YoutubeVideoItem, YoutubeVideoList } from '@/@types/youtube';
 import crypto from 'crypto';
 
 export const displayedAt = (createdAt = new Date()) => {
@@ -31,7 +31,7 @@ export const randomKey = () =>
     ? window.crypto.randomUUID()
     : crypto.randomUUID();
 
-export const getVideoInfo = (video: YoutubeVideo) => {
+export const getVideoInfo = (video: YoutubeVideoItem) => {
   const { id, player, snippet, channel, statistics: vStatic } = video || {};
   const { title } = snippet || {};
   const { embedWidth, embedHeight } = player || {};
@@ -40,12 +40,14 @@ export const getVideoInfo = (video: YoutubeVideo) => {
     title,
     videoId: id,
     videoSrc: channel?.snippet?.thumbnails?.medium?.url,
+    description: snippet?.description,
     channelId: `https://www.youtube.com/channel/${channel?.id}`,
     width: embedWidth,
     height: embedHeight,
-    viewCount: getCountFormat(vStatic?.viewCount, 2),
-    subscriberCount: getCountFormat(cStatic?.subscriberCount, 1),
+    viewCount: vStatic?.viewCount,
+    subscriberCount: cStatic?.subscriberCount,
     channelTitle: snippet?.channelTitle,
+    publishedAt: snippet?.publishedAt,
   };
 };
 
@@ -56,4 +58,19 @@ export const getCountFormat = (count: string | number, digit: number) => {
   });
   if (typeof count === 'string') return intlCall.format(Number(count));
   return intlCall.format(count);
+};
+
+export const getFullViewCount = (viewCount: string | number) => {
+  if (typeof viewCount === 'string') {
+    return Number(viewCount).toLocaleString('ko-KR');
+  }
+  return viewCount.toLocaleString('ko-KR');
+};
+
+export const getToday = (date: Date | string) => {
+  const newDate = new Date(date);
+  const year = new Date(newDate).getFullYear();
+  const month = ('0' + (1 + newDate.getMonth())).slice(-2);
+  const day = ('0' + newDate.getDate()).slice(-2);
+  return year + '. ' + month + '. ' + day;
 };
