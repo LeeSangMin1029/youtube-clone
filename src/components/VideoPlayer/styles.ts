@@ -6,15 +6,23 @@ export const PlayerBoard = styled.div`
   padding-right: 24px;
   display: flex;
   flex-direction: column;
-  height: 1300px;
+  max-height: 100%;
 `;
 
 export const VideoDetail = styled.div`
   margin-top: 12px;
   margin-bottom: 24px;
+  max-width: 1270px;
   h1 {
+    word-break: break-word;
     font-size: 20px;
     font-weight: 600;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    line-height: 25px;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    white-space: normal;
   }
 `;
 
