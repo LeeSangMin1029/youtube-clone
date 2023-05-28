@@ -7,10 +7,10 @@ import {
   StretchContent,
 } from './styles';
 import {
-  getToday,
-  getFullViewCount,
+  getTodayFormat,
   getCountFormat,
   getDateSinceUpload,
+  getViewFormat,
 } from '@/utils';
 import { useState } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -28,7 +28,6 @@ const VideoDescription = ({
   publishedAt: UTCDate,
 }: DescriptionProps) => {
   const [isExtend, setExtend] = useState(false);
-  const publishedAt = getToday(UTCDate);
   const onClickHandler = () => {
     setExtend(!isExtend);
   };
@@ -43,7 +42,6 @@ const VideoDescription = ({
       ),
     ),
   );
-
   return (
     <StyledBoard isExtend={isExtend}>
       <Content>
@@ -51,7 +49,7 @@ const VideoDescription = ({
           조회수{' '}
           {isExtend ? (
             <>
-              {getFullViewCount(viewCount)}회 {publishedAt}
+              {getViewFormat(viewCount)}회 {getTodayFormat(UTCDate)}
             </>
           ) : (
             <>
