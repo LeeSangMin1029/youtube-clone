@@ -1,5 +1,6 @@
 import { UserData } from '@/@types/database';
-import { SVGWrapper, UserProfile } from './styles';
+import { UserProfile } from './styles';
+import { SVG } from '@/styles/utils';
 import { UploadIcon, AlarmIcon } from '@/assets';
 import { memo } from 'react';
 
@@ -10,12 +11,8 @@ type UserLoggedInProps = {
 const UserLoggedIn = memo(({ user }: UserLoggedInProps) => {
   return (
     <>
-      <SVGWrapper>
-        <UploadIcon />
-      </SVGWrapper>
-      <SVGWrapper>
-        <AlarmIcon />
-      </SVGWrapper>
+      <SVG children={<UploadIcon />} />
+      <SVG children={<AlarmIcon />} />
       <UserProfile>
         <div>
           <img src={user?.thumbnails} width={32} height={32} />

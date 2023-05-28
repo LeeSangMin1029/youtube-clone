@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-export const SVGWrapper = styled.div`
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  margin-right: 8px;
-`;
-
 export const LoginButton = styled.div`
   width: 100px;
   height: 36px;

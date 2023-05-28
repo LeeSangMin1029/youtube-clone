@@ -1,7 +1,8 @@
 import { memo } from 'react';
-import { SVGWrapper, LoginButton } from './styles';
+import { LoginButton } from './styles';
 import { openSignInWindow, googleAuthentication } from '@/utils';
 import { SettingIcon, LoginIcon } from '@/assets';
+import { SVG } from '@/styles/utils';
 
 const UserLoggedOut = memo(() => {
   const displayLoginWindow = async () => {
@@ -11,9 +12,7 @@ const UserLoggedOut = memo(() => {
 
   return (
     <>
-      <SVGWrapper>
-        <SettingIcon />
-      </SVGWrapper>
+      <SVG children={<SettingIcon />} />
       <LoginButton onClick={displayLoginWindow}>
         <LoginIcon fill="#065fd4" width="24px" height="24px" />
         로그인
