@@ -1,4 +1,4 @@
-import UserInteract from '@/components/UserInteract';
+import UserAreaInfo from '@/components/UserAreaInfo';
 import { StyledHeader, Start, Center } from './styles';
 
 const Header = () => {
@@ -6,7 +6,7 @@ const Header = () => {
     <StyledHeader>
       <Start />
       <Center />
-      <UserInteract />
+      <UserAreaInfo />
     </StyledHeader>
   );
 };
