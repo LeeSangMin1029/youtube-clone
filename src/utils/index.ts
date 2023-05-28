@@ -4,7 +4,7 @@ export { openSignInWindow } from './window';
 export { isEmptyArray, isEmptyObject } from './checkDataType';
 export { splitArray, objectToSementic } from './object';
 export {
-  displayedAt,
+  getDateSinceUpload,
   randomKey,
   getCountFormat,
   getVideoInfo,

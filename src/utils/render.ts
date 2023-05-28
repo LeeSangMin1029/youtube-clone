@@ -1,8 +1,11 @@
-import { YoutubeVideoItem, YoutubeVideoList } from '@/@types/youtube';
+import { YoutubeVideoItem } from '@/@types/youtube';
 import crypto from 'crypto';
 
-export const displayedAt = (createdAt = new Date()) => {
-  const milliSeconds = new Date().getTime() - createdAt.getTime();
+export const getOnlyDate = (date: string | Date) =>
+  typeof date === 'string' ? new Date(date) : date;
+
+export const getDateSinceUpload = (date: string | Date) => {
+  const milliSeconds = new Date().getTime() - getOnlyDate(date).getTime();
 
   const seconds = milliSeconds / 1000;
   if (seconds < 60) return `방금 전`;

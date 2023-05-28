@@ -10,7 +10,7 @@ import {
   getToday,
   getFullViewCount,
   getCountFormat,
-  displayedAt,
+  getDateSinceUpload,
 } from '@/utils';
 import { useState } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -55,7 +55,7 @@ const VideoDescription = ({
             </>
           ) : (
             <>
-              {getCountFormat(viewCount, 0)}회 {displayedAt(new Date(UTCDate))}
+              {getCountFormat(viewCount, 0)}회 {getDateSinceUpload(UTCDate)}
             </>
           )}
         </InfoTitle>
