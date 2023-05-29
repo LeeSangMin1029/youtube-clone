@@ -30,12 +30,6 @@ export const Expander = styled.div<{ isExtend: boolean }>`
   ${({ isExtend }) => (isExtend ? 'margin-top: 2rem;' : 'margin-left: 4px;')};
 `;
 
-export const LinkHashtag = styled.span`
-  a {
-    color: #065fd4;
-  }
-`;
-
 export const StretchContent = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
