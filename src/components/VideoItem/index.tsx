@@ -8,7 +8,7 @@ import {
   StyledDiv,
   InteractStyled,
 } from './styles';
-import { getDateSinceUpload, getCountFormat } from '@/utils';
+import { renderDateSinceUpload, renderViewFormat } from '@/utils';
 import { YoutubeVideoItem } from '@/@types/youtube';
 
 const VideoItem = memo(({ data }: { data: YoutubeVideoItem }) => {
@@ -47,8 +47,13 @@ const VideoItem = memo(({ data }: { data: YoutubeVideoItem }) => {
           <YoutuberData>
             <a href={channelHref}>{channelTitle}</a>
             <div>
-              <span>조회수 {getCountFormat(viewCount, 0)}회</span>
-              <span>{getDateSinceUpload(publishedAt)}</span>
+              <span>
+                {renderViewFormat('view', {
+                  source: viewCount,
+                  digit: 0,
+                })}
+              </span>
+              <span>{renderDateSinceUpload(publishedAt)}</span>
             </div>
           </YoutuberData>
         </Description>

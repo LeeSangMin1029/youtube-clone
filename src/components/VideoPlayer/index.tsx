@@ -9,7 +9,7 @@ import {
   BetweenContent,
 } from './styles';
 import { useVideos } from '@/hooks';
-import { getVideoInfo, getCountFormat } from '@/utils';
+import { getVideoInfo, renderViewFormat } from '@/utils';
 
 const VideoPlayer = () => {
   const [params] = useSearchParams();
@@ -44,7 +44,12 @@ const VideoPlayer = () => {
                 </a>
                 <div>
                   <a href={channelId}>{channelTitle}</a>
-                  <p>구독자 {getCountFormat(subscriberCount, 1)}명</p>
+                  <span>
+                    {renderViewFormat('subscription', {
+                      source: subscriberCount,
+                      digit: 1,
+                    })}
+                  </span>
                 </div>
               </ChannelInfo>
               <VideoManangement />

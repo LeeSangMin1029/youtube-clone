@@ -1,11 +1,22 @@
 import { YoutubeVideoItem } from '@/@types/youtube';
+import { CountFormatOptions, RenderFormat } from '@/@types/global';
 import { getSinceSeconds, dateFormat } from './date';
 import crypto from 'crypto';
+import { getViewFormat } from './format';
 
-export const getDateSinceUpload = (date: string | Date) => {
+export const renderDateSinceUpload = (date: string | Date) => {
   const seconds = getSinceSeconds(date);
   const since = dateFormat.filter((v) => seconds / v.divide < v.compare)[0];
   return `${Math.floor(seconds / since.divide)}${since.unit} 전`;
+};
+
+export const renderViewFormat = (
+  render: RenderFormat,
+  options: CountFormatOptions,
+) => {
+  const formattedNumber = getViewFormat(options);
+  if (render === 'view') return `조회수 ${formattedNumber}회`;
+  else if (render === 'subscription') return `구독자 ${formattedNumber}명`;
 };
 
 export const randomKey = () =>

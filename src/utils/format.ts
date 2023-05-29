@@ -1,22 +1,19 @@
-export const getViewFormat = (viewCount: string | number) => {
-  if (typeof viewCount === 'string') {
-    return Number(viewCount).toLocaleString('ko-KR');
-  }
-  return viewCount.toLocaleString('ko-KR');
-};
+import { CountFormatOptions } from '@/@types/global';
 
-export const getCountFormat = (count: string | number, digit: number) => {
-  const intlCall = new Intl.NumberFormat('ko-KR', {
-    notation: 'compact',
+const LANGUAGE = {
+  korea: 'ko-KR',
+} as const;
+type LANGUAGE = (typeof LANGUAGE)[keyof typeof LANGUAGE];
+
+export const getViewFormat = ({ source, digit }: CountFormatOptions) =>
+  new Intl.NumberFormat(LANGUAGE.korea, {
+    notation: digit === undefined ? 'standard' : 'compact',
     maximumFractionDigits: digit,
-  });
-  if (typeof count === 'string') return intlCall.format(Number(count));
-  return intlCall.format(count);
-};
+  }).format(Number(source));
 
-export const getTodayFormat = (date: Date | string) => {
+export const getTodayFormat = (date: Date | string | number) => {
   const newDate = new Date(date);
-  const year = new Date(newDate).getFullYear();
+  const year = newDate.getFullYear();
   const month = ('0' + (1 + newDate.getMonth())).slice(-2);
   const day = ('0' + newDate.getDate()).slice(-2);
   return year + '. ' + month + '. ' + day;

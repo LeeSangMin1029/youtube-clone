@@ -2,19 +2,19 @@ import {
   StyledBoard,
   Content,
   InfoTitle,
-  Expander,
-  LinkHashtag,
+  Extender,
   StretchContent,
 } from './styles';
 import {
   getTodayFormat,
-  getCountFormat,
-  getDateSinceUpload,
-  getViewFormat,
+  renderViewFormat,
+  renderDateSinceUpload,
 } from '@/utils';
-import { useState } from 'react';
+import HashTag from '@/components/HashTag';
+import { useCallback, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import parseHtml from 'html-react-parser';
+import { rHashTags } from '@/utils';
 
 type DescriptionProps = {
   description: string;
@@ -28,46 +28,39 @@ const VideoDescription = ({
   publishedAt: UTCDate,
 }: DescriptionProps) => {
   const [isExtend, setExtend] = useState(false);
-  const onClickHandler = () => {
-    setExtend(!isExtend);
-  };
-  const replacedDescription = parseHtml(
-    description.replaceAll(/#[a-zA-Zㄱ-ㅎ가-힣0-9_]+/gms, (substring: string) =>
-      renderToString(
-        <LinkHashtag>
-          <a href={`https://www.youtube.com/hashtag/${substring.substring(1)}`}>
-            {substring}
-          </a>
-        </LinkHashtag>,
-      ),
+  const html = parseHtml(
+    description.replaceAll(rHashTags, (substring: string) =>
+      renderToString(<HashTag substring={substring} />),
     ),
   );
+
+  const onClickHandler = useCallback(() => {
+    setExtend(!isExtend);
+  }, [isExtend]);
+
   return (
     <StyledBoard isExtend={isExtend}>
       <Content>
         <InfoTitle>
-          조회수{' '}
-          {isExtend ? (
-            <>
-              {getViewFormat(viewCount)}회 {getTodayFormat(UTCDate)}
-            </>
-          ) : (
-            <>
-              {getCountFormat(viewCount, 0)}회 {getDateSinceUpload(UTCDate)}
-            </>
-          )}
+          <span>
+            {isExtend
+              ? `${renderViewFormat('view', {
+                  source: viewCount,
+                })} ${getTodayFormat(UTCDate)}`
+              : `${renderViewFormat('view', {
+                  source: viewCount,
+                  digit: 0,
+                })} ${renderDateSinceUpload(UTCDate)}`}
+          </span>
         </InfoTitle>
-        {isExtend ? (
-          replacedDescription
-        ) : (
-          <StretchContent>{replacedDescription}</StretchContent>
-        )}
+        {isExtend ? html : <StretchContent>{html}</StretchContent>}
         {isExtend && <div></div>}
-        <Expander isExtend={isExtend} onClick={onClickHandler}>
+        <Extender isExtend={isExtend} onClick={onClickHandler}>
           {isExtend ? '간략히' : '더보기'}
-        </Expander>
+        </Extender>
       </Content>
     </StyledBoard>
   );
 };
+
 export default VideoDescription;
