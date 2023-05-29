@@ -5,4 +5,5 @@ export { isEmptyArray, isEmptyObject } from './checkDataType';
 export { splitArray, objectToSementic } from './object';
 export { getDateSinceUpload, randomKey, getVideoInfo } from './render';
 export { getViewFormat, getCountFormat, getTodayFormat } from './format';
+export { rHashTags } from './regex';
 export { googleAuthentication } from './fetch';
