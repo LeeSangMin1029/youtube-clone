@@ -23,7 +23,7 @@ export const InfoTitle = styled.div`
   display: flex;
 `;
 
-export const Expander = styled.div<{ isExtend: boolean }>`
+export const Extender = styled.div<{ isExtend: boolean }>`
   cursor: pointer;
   border: none;
   display: inline-flex;

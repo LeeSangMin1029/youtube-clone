@@ -49,7 +49,7 @@ export const ChannelInfo = styled.div`
     a {
       line-height: 20px;
     }
-    p {
+    span {
       line-height: 18px;
       font-size: 12px;
     }
