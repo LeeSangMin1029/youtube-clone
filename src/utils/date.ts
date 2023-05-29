@@ -19,8 +19,5 @@ export const dateFormat = [
   { compare: 365, unit: '년', divide: DIVIDE_DATE.YEARS },
 ];
 
-export const getOnlyDate = (date: string | Date) =>
-  typeof date === 'string' ? new Date(date) : date;
-
 export const getSinceSeconds = (date: Date | string) =>
-  (new Date().getTime() - getOnlyDate(date).getTime()) / 1000;
+  (new Date().getTime() - new Date(date).getTime()) / 1000;
