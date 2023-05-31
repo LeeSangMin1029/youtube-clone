@@ -8,14 +8,11 @@ import {
   ChannelInfo,
   BetweenContent,
 } from './styles';
-import { useVideos } from '@/hooks';
+import { useFindVideo } from '@/hooks';
 import { getVideoInfo, renderViewFormat } from '@/utils';
 
 const VideoPlayer = () => {
-  const [params] = useSearchParams();
-  const id = params.get('id');
-  const { videos } = useVideos({ id: [id!] });
-  const video = videos?.at(0);
+  const video = useFindVideo();
   const {
     width,
     height,
@@ -32,36 +29,34 @@ const VideoPlayer = () => {
 
   return (
     <PlayerBoard>
-      <>
-        <Player width={width} height={height} videoId={videoId} />
-        {video && (
-          <VideoDetail>
-            <h1>{title}</h1>
-            <BetweenContent>
-              <ChannelInfo>
-                <a href={channelId}>
-                  <img src={videoSrc} />
-                </a>
-                <div>
-                  <a href={channelId}>{channelTitle}</a>
-                  <span>
-                    {renderViewFormat('subscription', {
-                      source: subscriberCount,
-                      digit: 1,
-                    })}
-                  </span>
-                </div>
-              </ChannelInfo>
-              <VideoManangement />
-            </BetweenContent>
-            <VideoDescription
-              description={description}
-              viewCount={viewCount}
-              publishedAt={publishedAt}
-            />
-          </VideoDetail>
-        )}
-      </>
+      <Player width={width} height={height} videoId={videoId} />
+      {video && (
+        <VideoDetail>
+          <h1>{title}</h1>
+          <BetweenContent>
+            <ChannelInfo>
+              <a href={channelId}>
+                <img src={videoSrc} />
+              </a>
+              <div>
+                <a href={channelId}>{channelTitle}</a>
+                <span>
+                  {renderViewFormat('subscription', {
+                    source: subscriberCount,
+                    digit: 1,
+                  })}
+                </span>
+              </div>
+            </ChannelInfo>
+            <VideoManangement />
+          </BetweenContent>
+          <VideoDescription
+            description={description}
+            viewCount={viewCount}
+            publishedAt={publishedAt}
+          />
+        </VideoDetail>
+      )}
     </PlayerBoard>
   );
 };

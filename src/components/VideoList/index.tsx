@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { DisplayGrid, MarginContent } from './styles';
-import { useVideos } from '@/hooks';
-import VideoItem from '../VideoItem';
+import { useGetAllVideo } from '@/hooks';
+import VideoItem from '@/components/VideoItem';
 import { randomKey } from '@/utils';
 
 const VideoList = memo(() => {
-  const { videos } = useVideos({ maxResults: 5, chart: 'mostPopular' });
+  const { videos } = useGetAllVideo();
   return (
     <MarginContent>
       <DisplayGrid>

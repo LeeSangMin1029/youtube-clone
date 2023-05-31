@@ -29,6 +29,7 @@ export const useVideos = (vParams: VideoParams) => {
     queryFn: async () => await getVideos(googleID, vParams),
     refetchOnWindowFocus: false,
     retry: 0,
+    staleTime: 120 * 1000,
     enabled: !!googleID,
   });
   return { videos: data?.items };

@@ -5,7 +5,7 @@ const Watch = () => {
   return (
     <StyledBoard>
       <MainContent>
-        <VideoPlayer></VideoPlayer>
+        <VideoPlayer />
       </MainContent>
       <RecommendVideoList>추천 동영상 및 관련 동영상</RecommendVideoList>
     </StyledBoard>
