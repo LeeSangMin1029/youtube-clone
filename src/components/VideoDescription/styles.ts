@@ -19,10 +19,6 @@ export const Content = styled.div`
   margin: 12px;
 `;
 
-export const InfoTitle = styled.div`
-  display: flex;
-`;
-
 export const Extender = styled.div<{ isExtend: boolean }>`
   cursor: pointer;
   border: none;

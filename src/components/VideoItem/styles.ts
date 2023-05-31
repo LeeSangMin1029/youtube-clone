@@ -25,13 +25,6 @@ export const YoutuberData = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  span {
-    color: #606060;
-    :nth-child(2):before {
-      content: '•';
-      margin: 0 4px;
-    }
-  }
   a {
     color: #606060;
   }
