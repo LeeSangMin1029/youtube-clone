@@ -1,14 +1,11 @@
-import { UserData } from '@/@types/database';
 import { UserProfile } from './styles';
 import { SVG } from '@/styles/utils';
 import { UploadIcon, AlarmIcon } from '@/assets';
 import { memo } from 'react';
+import { useUserContext } from '@/context/UserContext';
 
-type UserLoggedInProps = {
-  user: UserData;
-};
-
-const UserLoggedIn = memo(({ user }: UserLoggedInProps) => {
+const UserLoggedIn = memo(() => {
+  const { user } = useUserContext();
   return (
     <>
       <SVG children={<UploadIcon />} />

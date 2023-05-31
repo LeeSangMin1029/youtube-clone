@@ -1,4 +1,3 @@
-export { default as UserWorker } from '@/worker/user?worker';
 export { encrypt, decrypt } from './encryption';
 export { openSignInWindow } from './window';
 export { isEmptyArray, isEmptyObject } from './checkDataType';
@@ -12,3 +11,4 @@ export {
 export { getViewFormat, getTodayFormat } from './format';
 export { rHashTags } from './regex';
 export { googleAuthentication } from './fetch';
+export { makeWorkerApiAndCleanup } from './worker';

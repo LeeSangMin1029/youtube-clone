@@ -1,41 +1,32 @@
-import { useEffect } from 'react';
-import { WebWorkerAction } from '@/@types/dispatch';
 import { UserData } from '@/@types/database';
+import { useWebWorker } from './useWebWorker';
 import { useUserContext } from '@/context/UserContext';
-import { UserWorker } from '@/utils';
-
-type ReceivingData = {
-  payload?: UserData;
-  status: string;
-  dispatch: WebWorkerAction;
-};
+import { useEffect, useState } from 'react';
 
 export const useLogin = () => {
-  const { setUser, setLogged, isLoggedIn, user } = useUserContext();
+  const { user, setUser } = useUserContext();
+  const [isLoaded, setLoaded] = useState<boolean | null>(null);
+  const { workerApi } = useWebWorker();
+
   useEffect(() => {
     const loginChannel = new BroadcastChannel('login');
     const handleCreateUser = async (e: MessageEvent<UserData>) => {
-      const worker = new UserWorker();
-      const userData = e.data;
-      setUser(userData);
-      setLogged(true);
-      worker.postMessage({ dispatch: 'addUser', payload: userData });
+      const createdUser = e.data;
+      setUser({ isLoggedIn: true, ...createdUser });
+      await workerApi.addUser(createdUser.googleID, createdUser);
+      setLoaded(true);
     };
-    const worker = new UserWorker();
-    worker.onmessage = (e: MessageEvent<ReceivingData>) => {
-      const { status, payload } = e.data;
-      if (status === 'failed') return;
-      setUser({ ...payload! });
-      setLogged(true);
+    const login = async () => {
+      const dbUser = await workerApi.getUser();
+      if (dbUser) setUser({ isLoggedIn: true, ...dbUser });
+      setLoaded(true);
     };
-    if (!isLoggedIn) {
-      worker.postMessage({ dispatch: 'getUser' });
-    }
-    loginChannel.onmessage = handleCreateUser;
+    if (!user.isLoggedIn) login();
+
+    loginChannel.addEventListener('message', handleCreateUser);
     return () => {
       loginChannel.removeEventListener('message', handleCreateUser);
-      worker.terminate();
     };
   }, []);
-  return { isLoggedIn, user };
+  return { user, isLoaded };
 };
