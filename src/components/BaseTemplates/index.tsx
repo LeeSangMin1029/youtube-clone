@@ -5,14 +5,12 @@ import UserProvider from '@/context/UserContext';
 
 const BaseTemplates = () => {
   return (
-    <>
-      <UserProvider>
-        <Header />
-        <Content>
-          <Outlet />
-        </Content>
-      </UserProvider>
-    </>
+    <UserProvider>
+      <Header />
+      <Content>
+        <Outlet />
+      </Content>
+    </UserProvider>
   );
 };
 
