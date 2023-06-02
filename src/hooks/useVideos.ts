@@ -24,13 +24,15 @@ export const useVideos = (vParams: VideoParams) => {
       body: JSON.stringify({ googleID, params }),
     }).then((fetched) => fetched.json());
   };
+
   const { data } = useQuery({
-    queryKey: ['videos', vParams],
+    queryKey: ['videos', googleID, vParams],
     queryFn: async () => await getVideos(googleID, vParams),
     refetchOnWindowFocus: false,
     retry: 0,
     staleTime: 120 * 1000,
-    enabled: !!googleID,
+    enabled: googleID !== '',
+    suspense: true,
   });
   return { videos: data?.items };
 };
