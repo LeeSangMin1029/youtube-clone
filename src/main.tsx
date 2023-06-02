@@ -11,13 +11,14 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 0,
+      useErrorBoundary: true,
+      suspense: true,
     },
   },
 });
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    {/* devtools */}
     <ReactQueryDevtools initialIsOpen={true} />
     <App />
   </QueryClientProvider>,
