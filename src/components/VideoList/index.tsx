@@ -1,22 +1,16 @@
 import { memo } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { DisplayGrid, MarginContent } from './styles';
-import { useGetAllVideo } from '@/hooks';
+import { useVideos } from '@/hooks';
 import VideoItem from '@/components/VideoItem';
 import { randomKey } from '@/utils';
 
 const VideoList = memo(() => {
-  const { videos } = useGetAllVideo();
+  const { videos } = useVideos({ maxResults: 5, chart: 'mostPopular' });
   return (
-    <MarginContent>
-      <DisplayGrid>
-        <ErrorBoundary fallback={<div>...error</div>}>
-          {videos?.map((video) => (
-            <VideoItem data={video} key={randomKey()} />
-          ))}
-        </ErrorBoundary>
-      </DisplayGrid>
-    </MarginContent>
+    <>
+      {videos?.map((video) => (
+        <VideoItem data={video} key={randomKey()} />
+      ))}
+    </>
   );
 });
 

@@ -1,7 +1,7 @@
-import VideoList from "@/components/VideoList";
+import Videos from '@/components/Videos';
 
 const Home = () => {
-  return <VideoList />;
+  return <Videos />;
 };
 
 export default Home;
