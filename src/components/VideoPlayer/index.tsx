@@ -1,6 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
 import VideoManangement from '@/components/VideoManagement';
-import Player from '@/components/Player';
 import VideoDescription from '@/components/VideoDescription';
 import {
   PlayerBoard,
@@ -10,12 +8,11 @@ import {
 } from './styles';
 import { useFindVideo } from '@/hooks';
 import { getVideoInfo, renderViewFormat } from '@/utils';
+import parseHtml from 'html-react-parser';
 
 const VideoPlayer = () => {
   const video = useFindVideo();
   const {
-    width,
-    height,
     videoId,
     title,
     channelId,
@@ -25,11 +22,17 @@ const VideoPlayer = () => {
     subscriberCount,
     viewCount,
     publishedAt,
+    html,
   } = getVideoInfo(video!);
-
+  const target = `src="https://www.youtube.com/embed/${videoId}`;
+  const Parse = parseHtml(
+    html
+      ?.toString()
+      .replaceAll(target, `${target}?autoplay=1&mute=1&wmode=opaque`) || '',
+  );
   return (
     <PlayerBoard>
-      <Player width={width} height={height} videoId={videoId} />
+      {Parse}
       {video && (
         <VideoDetail>
           <h1>{title}</h1>

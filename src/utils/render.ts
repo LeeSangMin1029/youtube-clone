@@ -27,7 +27,7 @@ export const randomKey = () =>
 export const getVideoInfo = (video: YoutubeVideoItem) => {
   const { id, player, snippet, channel, statistics: vStatic } = video || {};
   const { title } = snippet || {};
-  const { embedWidth, embedHeight } = player || {};
+  const { embedWidth, embedHeight, embedHtml } = player || {};
   const { statistics: cStatic } = channel || {};
   return {
     title,
@@ -41,5 +41,6 @@ export const getVideoInfo = (video: YoutubeVideoItem) => {
     subscriberCount: cStatic?.subscriberCount,
     channelTitle: snippet?.channelTitle,
     publishedAt: snippet?.publishedAt,
+    html: embedHtml,
   };
 };
