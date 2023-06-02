@@ -9,9 +9,8 @@ export const getDB = async (): Promise<IDBUserSchema> =>
       }),
   });
 
-const db = await getDB();
-
 export const getUser = async () => {
+  const db = await getDB();
   const tx = db.transaction('user', 'readonly');
   const user = tx.objectStore('user');
   const req = await user.openCursor();
@@ -19,6 +18,7 @@ export const getUser = async () => {
 };
 
 export const addUser = async (key: string, data: UserData) => {
+  const db = await getDB();
   const tx = db.transaction('user', 'readwrite');
   const store = tx.objectStore('user');
   const req = await store.openCursor(key);
