@@ -2,13 +2,17 @@
 
 ## 개요
 
+기술 : react, typescript, indexedDB, react-query, webworker, vite
+
 **프로젝트 구성**
 
-```html📦src
+```📦src
  ┣ 📂@types
  ┃ ┣ 📂database
  ┃ ┃ ┗ 📜index.d.ts
- ┃ ┣ 📂dispatch
+ ┃ ┣ 📂env
+ ┃ ┃ ┗ 📜index.d.ts
+ ┃ ┣ 📂global
  ┃ ┃ ┗ 📜index.d.ts
  ┃ ┣ 📂react-svg
  ┃ ┃ ┗ 📜index.d.ts
@@ -16,6 +20,8 @@
  ┃ ┃ ┗ 📜index.d.ts
  ┣ 📂assets
  ┃ ┣ 📜app_settings.svg
+ ┃ ┣ 📜index.tsx
+ ┃ ┣ 📜loading.svg
  ┃ ┣ 📜user_login_profile.svg
  ┃ ┣ 📜video_alarm.svg
  ┃ ┗ 📜video_upload.svg
@@ -27,46 +33,90 @@
  ┃ ┣ 📂Content
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styles.ts
+ ┃ ┣ 📂ErrorBoundarySuspense
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂Fallback
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂HashTag
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
  ┃ ┣ 📂Header
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styles.ts
- ┃ ┣ 📂UserInteract
+ ┃ ┣ 📂LazyRouter
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂Skeleton
+ ┃ ┃ ┣ 📜Avatar.tsx
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┣ 📜User.tsx
+ ┃ ┃ ┗ 📜Videos.tsx
+ ┃ ┣ 📂UserAreaInfo
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┣ 📂UserLoggedIn
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┣ 📂UserLoggedOut
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┣ 📂VideoDescription
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styles.ts
  ┃ ┣ 📂VideoItem
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styles.ts
  ┃ ┣ 📂VideoList
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.ts
+ ┃ ┃ ┗ 📜index.tsx
  ┃ ┣ 📂VideoManagement
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styles.ts
- ┃ ┗ 📂VideoPlayer
+ ┃ ┣ 📂VideoPlayer
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styles.ts
+ ┃ ┣ 📂Videos
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┗ 📂ViewsWithDate
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
+ ┣ 📂config
+ ┃ ┗ 📜index.ts
  ┣ 📂context
- ┃ ┣ 📜index.ts
- ┃ ┗ 📜localStorageProvider.ts
+ ┃ ┗ 📜UserContext.tsx
  ┣ 📂database
  ┃ ┗ 📜index.ts
  ┣ 📂hooks
  ┃ ┣ 📜index.ts
- ┃ ┣ 📜useFetchVideo.ts
- ┃ ┗ 📜useVideos.ts
+ ┃ ┣ 📜useCreateUser.ts
+ ┃ ┣ 📜useFindVideo.ts
+ ┃ ┣ 📜useGetUser.ts
+ ┃ ┣ 📜usePromise.ts
+ ┃ ┣ 📜useVideos.ts
+ ┃ ┗ 📜useWebWorker.ts
  ┣ 📂pages
  ┃ ┣ 📂Home
  ┃ ┃ ┗ 📜index.tsx
- ┃ ┣ 📂Token
+ ┃ ┣ 📂Login
  ┃ ┃ ┗ 📜index.tsx
  ┃ ┗ 📂Watch
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styles.ts
+ ┣ 📂styles
+ ┃ ┗ 📜utils.ts
  ┣ 📂utils
- ┃ ┣ 📜env.ts
+ ┃ ┣ 📜checkDataType.ts
+ ┃ ┣ 📜date.ts
+ ┃ ┣ 📜encryption.ts
+ ┃ ┣ 📜errors.ts
+ ┃ ┣ 📜fetch.ts
+ ┃ ┣ 📜format.ts
  ┃ ┣ 📜index.ts
+ ┃ ┣ 📜object.ts
+ ┃ ┣ 📜regex.ts
+ ┃ ┣ 📜render.ts
+ ┃ ┣ 📜window.ts
  ┃ ┗ 📜worker.ts
- ┣ 📂workers
+ ┣ 📂worker
  ┃ ┗ 📜index.ts
  ┣ 📜index.css
  ┗ 📜main.tsx
