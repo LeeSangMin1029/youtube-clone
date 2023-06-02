@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardContent, Skeleton } from '@mui/material';
 import Avatar from './Avatar';
+import { randomKey } from '@/utils';
 
 interface VideosProps {
   videoCount: number;
@@ -9,7 +10,10 @@ const Videos = ({ videoCount }: VideosProps) => {
   return (
     <>
       {[...Array(videoCount).keys()].map(() => (
-        <Card sx={{ maxWidth: 344, border: 'none', boxShadow: 'none' }}>
+        <Card
+          key={randomKey()}
+          sx={{ maxWidth: 344, border: 'none', boxShadow: 'none' }}
+        >
           <Skeleton
             sx={{ height: 194, borderRadius: '12px' }}
             animation="wave"
