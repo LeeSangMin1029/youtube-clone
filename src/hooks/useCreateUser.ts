@@ -1,11 +1,10 @@
 import { UserData } from '@/@types/database';
-import { useWebWorker } from './useWebWorker';
+import { useEffect } from 'react';
 import { useUserContext } from '@/context/UserContext';
-import { useEffect, useState } from 'react';
+import { useWebWorker } from './useWebWorker';
 
-export const useLogin = () => {
-  const { user, setUser } = useUserContext();
-  const [isLoaded, setLoaded] = useState<boolean | null>(null);
+export const useCreateUser = () => {
+  const { setUser } = useUserContext();
   const { workerApi } = useWebWorker();
 
   useEffect(() => {
@@ -14,19 +13,10 @@ export const useLogin = () => {
       const createdUser = e.data;
       setUser({ isLoggedIn: true, ...createdUser });
       await workerApi.addUser(createdUser.googleID, createdUser);
-      setLoaded(true);
     };
-    const login = async () => {
-      const dbUser = await workerApi.getUser();
-      if (dbUser) setUser({ isLoggedIn: true, ...dbUser });
-      setLoaded(true);
-    };
-    if (!user.isLoggedIn) login();
-
     loginChannel.addEventListener('message', handleCreateUser);
     return () => {
       loginChannel.removeEventListener('message', handleCreateUser);
     };
   }, []);
-  return { user, isLoaded };
 };

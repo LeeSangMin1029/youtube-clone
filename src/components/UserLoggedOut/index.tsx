@@ -3,8 +3,10 @@ import { LoginButton } from './styles';
 import { openSignInWindow, googleAuthentication } from '@/utils';
 import { SettingIcon, LoginIcon } from '@/assets';
 import { SVG } from '@/styles/utils';
+import { useCreateUser } from '@/hooks';
 
 const UserLoggedOut = memo(() => {
+  useCreateUser();
   const displayLoginWindow = async () => {
     const openPopupUrl = await googleAuthentication();
     openSignInWindow(openPopupUrl, 'google Auth');
