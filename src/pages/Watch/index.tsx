@@ -1,12 +1,19 @@
+import ErrorBoundarySuspense from '@/components/ErrorBoundarySuspense';
 import { StyledBoard, RecommendVideoList, MainContent } from './styles';
-import VideoPlayer from '@/components/VideoPlayer';
+import { lazy } from 'react';
+import { LoadingSpinner } from '@/assets';
+import Fallback from '@/components/Fallback';
+
+const VideoPlayer = lazy(() => import('@/components/VideoPlayer'));
 
 const Watch = () => {
   return (
     <StyledBoard>
-      <MainContent>
-        <VideoPlayer />
-      </MainContent>
+      <ErrorBoundarySuspense Fallback={Fallback} Loading={<LoadingSpinner />}>
+        <MainContent>
+          <VideoPlayer />
+        </MainContent>
+      </ErrorBoundarySuspense>
       <RecommendVideoList>추천 동영상 및 관련 동영상</RecommendVideoList>
     </StyledBoard>
   );
