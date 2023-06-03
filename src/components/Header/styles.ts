@@ -15,6 +15,14 @@ export const StyledHeader = styled.header`
 export const Start = styled.div`
   min-width: 168px;
   height: 56px;
+  display: flex;
+  flex-direction: row;
+  > svg {
+    padding: 18px 14px 18px 16px;
+    :hover {
+      cursor: pointer;
+    }
+  }
 `;
 export const Center = styled.div`
   width: 728px;

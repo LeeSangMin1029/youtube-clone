@@ -1,13 +1,18 @@
 import { StyledHeader, Start, Center } from './styles';
 import ErrorBoundarySuspense from '@/components/ErrorBoundarySuspense';
-import { lazy } from 'react';
+import DropdownMenu from '@/components/DropdownMenu';
 import Fallback from '@/components/Fallback';
+import { YoutubeLogo } from '@/assets';
+import { lazy } from 'react';
 const UserAreaInfo = lazy(() => import('@/components/UserAreaInfo'));
 
 const Header = () => {
   return (
     <StyledHeader>
-      <Start />
+      <Start>
+        <DropdownMenu />
+        <YoutubeLogo />
+      </Start>
       <Center />
       <ErrorBoundarySuspense Fallback={Fallback} Loading={<></>}>
         <UserAreaInfo />
