@@ -10,7 +10,7 @@ const Videos = () => {
       <DisplayGrid>
         <ErrorBoundarySuspense
           Fallback={Fallback}
-          Loading={<Skeleton videoCount={5} />}
+          Loading={<Skeleton videoCount={30} />}
         >
           <VideoList />
         </ErrorBoundarySuspense>
