@@ -1,5 +1,10 @@
-export type YoutubeVideoList = {
-  items: YoutubeVideoItem[];
+export type YoutubeVideoInfo = {
+  items: YoutubeVideo[];
+  nextPageToken: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
 };
 
 export type YoutubeVideoSnippet = {
@@ -63,7 +68,7 @@ export type YoutubeChannel = {
   };
 };
 
-export type YoutubeVideoItem = {
+export type YoutubeVideo = {
   id: string;
   snippet: YoutubeVideoSnippet;
   channel: YoutubeChannel;

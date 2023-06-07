@@ -8,10 +8,10 @@ import {
   StyledDiv,
   InteractStyled,
 } from './styles';
-import { YoutubeVideoItem } from '@/@types/youtube';
+import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
 
-const VideoItem = memo(({ data }: { data: YoutubeVideoItem }) => {
+const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
   const {
     id,
     snippet,

@@ -1,4 +1,4 @@
-import { YoutubeVideoItem } from '@/@types/youtube';
+import { YoutubeVideo } from '@/@types/youtube';
 import { CountFormatOptions, RenderFormat } from '@/@types/global';
 import { getSinceSeconds, dateFormat } from './date';
 import crypto from 'crypto';
@@ -24,7 +24,7 @@ export const randomKey = () =>
     ? window.crypto.randomUUID()
     : crypto.randomUUID();
 
-export const getVideoInfo = (video: YoutubeVideoItem) => {
+export const getVideoInfo = (video: YoutubeVideo) => {
   const { id, player, snippet, channel, statistics: vStatic } = video || {};
   const { title } = snippet || {};
   const { embedWidth, embedHeight, embedHtml } = player || {};

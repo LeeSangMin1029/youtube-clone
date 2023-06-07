@@ -1,4 +1,4 @@
-import { YoutubeVideoList } from '@/@types/youtube';
+import { YoutubeVideoInfo } from '@/@types/youtube';
 import { useUserContext } from '@/context/UserContext';
 import { useQuery } from 'react-query';
 
@@ -15,7 +15,7 @@ export const useVideos = (vParams: VideoParams) => {
   const getVideos = async (
     googleID: string,
     params: VideoParams,
-  ): Promise<YoutubeVideoList> => {
+  ): Promise<YoutubeVideoInfo> => {
     return await fetch(`/api/youtube/videos`, {
       method: 'post',
       headers: {
