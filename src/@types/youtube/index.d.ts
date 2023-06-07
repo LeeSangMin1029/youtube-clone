@@ -1,3 +1,9 @@
+export type QualityOptions = {
+  url: string;
+  width: number;
+  height: number;
+};
+
 export type YoutubeVideoInfo = {
   items: YoutubeVideo[];
   nextPageToken?: string;
@@ -7,61 +13,30 @@ export type YoutubeVideoInfo = {
   };
 };
 
+export type YoutubeCommonThumbnails = {
+  default: QualityOptions;
+  medium: QualityOptions;
+  high: QualityOptions;
+};
+
+export type YoutubeVideoThumbnails = YoutubeCommonThumbnails & {
+  standard: QualityOptions;
+  maxres: QualityOptions;
+};
+
 export type YoutubeVideoSnippet = {
   description: string;
   publishedAt: string;
   channelId: string;
   title: string;
-  thumbnails: {
-    default: {
-      url: string;
-      width: number;
-      height: number;
-    };
-    high: {
-      url: string;
-      width: number;
-      height: number;
-    };
-    standard: {
-      url: string;
-      width: number;
-      height: number;
-    };
-    medium: {
-      url: string;
-      width: number;
-      height: number;
-    };
-    maxres: {
-      url: string;
-      width: number;
-      height: number;
-    };
-  };
+  thumbnails: YoutubeVideoThumbnails;
   channelTitle: string;
 };
 
 export type YoutubeChannel = {
   id: string;
   snippet: {
-    thumbnails: {
-      default: {
-        url: string;
-        width: number;
-        height: number;
-      };
-      medium: {
-        url: string;
-        width: number;
-        height: number;
-      };
-      high: {
-        url: string;
-        width: number;
-        height: number;
-      };
-    };
+    thumbnails: YoutubeCommonThumbnails;
   };
   statistics: {
     subscriberCount: number;
