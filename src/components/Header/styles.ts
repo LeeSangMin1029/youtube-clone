@@ -10,6 +10,7 @@ export const StyledHeader = styled.header`
   top: 0;
   padding: 0 16px;
   background-color: #ffffff;
+  z-index: 10;
 `;
 
 export const Start = styled.div`
