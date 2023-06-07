@@ -6,7 +6,7 @@ import VideoItem from '@/components/VideoItem';
 import { randomKey } from '@/utils';
 
 const VideoList = memo(() => {
-  const { data, isFetching, hasNextPage, fetchNextPage } = useFetchVideo({
+  const { videos, isFetching, hasNextPage, fetchNextPage } = useFetchVideo({
     maxResults: 30,
     chart: 'mostPopular',
   });
@@ -15,11 +15,6 @@ const VideoList = memo(() => {
     observer.unobserve(entry.target);
     if (hasNextPage && !isFetching) fetchNextPage();
   });
-
-  const videos = useMemo(
-    () => (data ? data.pages.flatMap(({ items }) => items) : []),
-    [data],
-  );
 
   return (
     <>

@@ -2,13 +2,14 @@ import { useUserContext } from '@/context/UserContext';
 import { YoutubeVideoInfo, VideoParams } from '@/@types/youtube';
 import { fetchPostVideos, videoKeys } from '@/utils';
 import { useInfiniteQuery } from 'react-query';
+import { useMemo } from 'react';
 
 export const useFetchVideo = (params: VideoParams) => {
   const {
     user: { googleID },
   } = useUserContext();
 
-  return useInfiniteQuery({
+  const { data, isFetching, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: [...videoKeys.lists(), googleID, params],
     queryFn: async ({ pageParam = null }) => {
       params.pageToken = pageParam;
@@ -21,4 +22,10 @@ export const useFetchVideo = (params: VideoParams) => {
     enabled: googleID !== '',
     suspense: true,
   });
+
+  const videos = useMemo(
+    () => (data ? data.pages.flatMap(({ items }) => items) : []),
+    [data],
+  );
+  return { videos, isFetching, hasNextPage, fetchNextPage };
 };
