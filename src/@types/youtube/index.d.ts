@@ -1,6 +1,6 @@
 export type YoutubeVideoInfo = {
   items: YoutubeVideo[];
-  nextPageToken: string;
+  nextPageToken?: string;
   pageInfo: {
     totalResults: number;
     resultsPerPage: number;
@@ -80,4 +80,11 @@ export type YoutubeVideo = {
     embedHeight: string;
     embedWidth: string;
   };
+};
+
+export type VideoParams = {
+  maxResults?: number;
+  id?: string[];
+  chart?: 'mostPopular';
+  pageToken?: string;
 };

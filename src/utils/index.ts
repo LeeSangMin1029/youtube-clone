@@ -10,5 +10,6 @@ export {
 } from './render';
 export { getViewFormat, getTodayFormat } from './format';
 export { rHashTags } from './regex';
-export { googleAuthentication } from './fetch';
+export { googleAuthentication, fetchPostVideos } from './fetch';
 export { makeWorkerApiAndCleanup } from './worker';
+export { videoKeys } from './reactQueryKeys';
