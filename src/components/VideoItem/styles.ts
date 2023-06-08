@@ -16,6 +16,7 @@ export const VideoDetails = styled.div`
 export const StyledDiv = styled.div`
   position: relative;
   max-width: 344px;
+  margin-bottom: 40px;
   &:hover {
     cursor: pointer;
   }
