@@ -47,6 +47,9 @@ export type YoutubeVideo = {
   id: string;
   snippet: YoutubeVideoSnippet;
   channel: YoutubeChannel;
+  contentDetails: {
+    duration: string;
+  };
   statistics: {
     viewCount: string;
   };

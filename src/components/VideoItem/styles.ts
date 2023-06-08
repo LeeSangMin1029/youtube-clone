@@ -52,17 +52,6 @@ export const Description = styled.div`
   }
 `;
 
-export const Thumbnails = styled.div`
-  a {
-    display: flex;
-    img {
-      width: 344px;
-      height: 194px;
-      border-radius: 12px;
-    }
-  }
-`;
-
 export const InteractStyled = styled.div`
   display: inline-block;
   pointer-events: none;

@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Thumbnails,
   VideoDetails,
   Description,
   YoutuberData,
@@ -10,6 +9,7 @@ import {
 } from './styles';
 import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
+import VideoThumbnails from '@/components/VideoThumbnails';
 
 const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
   const {
@@ -17,25 +17,20 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
     snippet,
     statistics: { viewCount },
     channel,
+    contentDetails,
   } = data;
-  const {
-    channelId,
-    channelTitle,
-    title,
-    thumbnails: vThumb,
-    publishedAt,
-  } = snippet;
+  const { channelId, channelTitle, title, thumbnails, publishedAt } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
   const { url: channelThumb } = channel.snippet.thumbnails.default;
 
   return (
     <StyledDiv>
       <InteractStyled />
-      <Thumbnails>
-        <Link to={`/watch?id=${id}`}>
-          <img src={vThumb?.maxres?.url} alt="thumbnails" />
-        </Link>
-      </Thumbnails>
+      <VideoThumbnails
+        id={id}
+        thumbnails={thumbnails}
+        duration={contentDetails.duration}
+      />
       <VideoDetails>
         <Link to={channelHref}>
           <img src={channelThumb} alt="testI" width="36px" height="36px" />
