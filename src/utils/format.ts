@@ -18,3 +18,11 @@ export const getTodayFormat = (date: Date | string | number) => {
   const day = ('0' + newDate.getDate()).slice(-2);
   return `${year}. ${month}. ${day}.`;
 };
+
+export const getDuration = (duration: string) => {
+  const [first, ...rest] = duration.split(/[PT,H,M,S]/gms).filter((t) => t);
+  if (!rest.length) return `0:${first.padStart(2, '0')}`;
+  const result =
+    first + rest.reduce((acc, str) => acc + ':' + str.padStart(2, '0'), '');
+  return result;
+};

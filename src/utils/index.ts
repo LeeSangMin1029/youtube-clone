@@ -8,7 +8,7 @@ export {
   getVideoInfo,
   renderViewFormat,
 } from './render';
-export { getViewFormat, getTodayFormat } from './format';
+export { getViewFormat, getTodayFormat, getDuration } from './format';
 export { rHashTags } from './regex';
 export { googleAuthentication, fetchPostVideos } from './fetch';
 export { makeWorkerApiAndCleanup } from './worker';
