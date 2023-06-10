@@ -1,13 +1,15 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { ReloadTarget } from './styles';
 import { useIntersect, useFetchVideo } from '@/hooks';
 import { Videos as Skeleton } from '@/components/Skeleton';
 import VideoItem from '@/components/VideoItem';
 import { randomKey } from '@/utils';
+import { useVideoContext } from '@/context/VideoContext';
 
 const VideoList = memo(() => {
+  const { viewVideoCount } = useVideoContext();
   const { videos, isFetching, hasNextPage, fetchNextPage } = useFetchVideo({
-    maxResults: 30,
+    maxResults: viewVideoCount,
     chart: 'mostPopular',
   });
 
@@ -21,7 +23,7 @@ const VideoList = memo(() => {
       {videos?.map((video) => (
         <VideoItem data={video} key={randomKey()} />
       ))}
-      {isFetching && <Skeleton videoCount={30} />}
+      {isFetching && <Skeleton />}
       <ReloadTarget ref={ref} />
     </>
   );

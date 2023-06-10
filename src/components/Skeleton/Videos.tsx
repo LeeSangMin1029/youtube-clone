@@ -1,15 +1,13 @@
-import { Card, CardHeader, CardContent, Skeleton } from '@mui/material';
+import { Card, CardHeader, Skeleton } from '@mui/material';
 import Avatar from './Avatar';
 import { randomKey } from '@/utils';
+import { useVideoContext } from '@/context/VideoContext';
 
-interface VideosProps {
-  videoCount: number;
-}
-
-const Videos = ({ videoCount }: VideosProps) => {
+const Videos = () => {
+  const { viewVideoCount } = useVideoContext();
   return (
     <>
-      {[...Array(videoCount).keys()].map(() => (
+      {[...Array(viewVideoCount).keys()].map(() => (
         <Card
           key={randomKey()}
           sx={{ maxWidth: 344, border: 'none', boxShadow: 'none' }}
