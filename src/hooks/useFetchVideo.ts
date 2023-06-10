@@ -24,7 +24,7 @@ export const useFetchVideo = (params: VideoParams) => {
   });
 
   const videos = useMemo(
-    () => (data ? data.pages.flatMap(({ items }) => items) : []),
+    () => data?.pages.flatMap(({ items }) => items),
     [data],
   );
   return { videos, isFetching, hasNextPage, fetchNextPage };
