@@ -13,3 +13,4 @@ export { rHashTags } from './regex';
 export { googleAuthentication, fetchPostVideos } from './fetch';
 export { makeWorkerApiAndCleanup } from './worker';
 export { videoKeys } from './reactQueryKeys';
+export { MOUSE_ACTION } from './const';

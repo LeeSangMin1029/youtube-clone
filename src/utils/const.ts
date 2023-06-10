@@ -1,0 +1,7 @@
+export const MOUSE_ACTION = {
+  MOUSE_ENTER: 'MOUSE_ENTER',
+  MOUSE_LEAVE: 'MOUSE_LEAVE',
+  MOUSE_DOWN: 'MOUSE_DOWN',
+  MOUSE_UP: 'MOUSE_UP',
+} as const;
+export type MOUSE_ACTION = (typeof MOUSE_ACTION)[keyof typeof MOUSE_ACTION];
