@@ -5,4 +5,11 @@ export type CountFormatOptions = {
 
 type RenderFormat = 'view' | 'subscription';
 
-export type DocumentMouseEvent = MouseEvent;
+export type CustomMouseEvent = React.MouseEvent | MouseEvent;
+
+export type MouseState = {
+  enter: boolean;
+  leave: boolean;
+  down: boolean;
+  up: boolean | null;
+};

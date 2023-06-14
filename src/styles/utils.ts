@@ -38,7 +38,6 @@ export const fill = keyframes`
 export const border = keyframes`
   from {
     opacity: 0.2;
-    border: 1px solid black;
   }
   to {
     opacity: 0;

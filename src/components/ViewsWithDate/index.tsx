@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Content } from './styles';
 import {
   getTodayFormat,
@@ -15,30 +15,31 @@ type ViewWithDateProps = {
 
 const ViewsWithDate = memo(
   ({ isExtend, delimiters, view, publishedAt }: ViewWithDateProps) => {
+    const renderOptions = useMemo(
+      () => ({ source: view, digit: isExtend ? undefined : 0 }),
+      [isExtend, view],
+    );
+
+    const formattedView = useMemo(
+      () => renderViewFormat('view', renderOptions),
+      [renderOptions],
+    );
+
+    const formattedDate = useMemo(
+      () =>
+        isExtend
+          ? getTodayFormat(publishedAt)
+          : renderDateSinceUpload(publishedAt),
+      [isExtend, publishedAt],
+    );
+
     return (
       <Content delimiters={delimiters}>
-        {isExtend ? (
-          <>
-            <span>
-              {renderViewFormat('view', {
-                source: view,
-              })}
-            </span>
-            <span>{getTodayFormat(publishedAt)}</span>
-          </>
-        ) : (
-          <>
-            <span>
-              {renderViewFormat('view', {
-                source: view,
-                digit: 0,
-              })}
-            </span>
-            <span>{renderDateSinceUpload(publishedAt)}</span>
-          </>
-        )}
+        <span>{formattedView}</span>
+        <span>{formattedDate}</span>
       </Content>
     );
   },
 );
+
 export default ViewsWithDate;

@@ -1,4 +1,4 @@
-import { MouseState } from '@/hooks/useMouseHandler';
+import { MouseState } from '@/@types/global';
 import { fill, border } from '@/styles/utils';
 import styled, { css } from 'styled-components';
 
@@ -68,30 +68,34 @@ const interact = css`
 export const InteractStyled = styled.div<{ mouse: MouseState }>`
   ${interact}
   margin: -4px;
-  > .background {
-    ${interact}
-    border-radius: 4px;
-    background-color: black;
-    opacity: 0;
-    ${({ mouse }) => {
-      const down = mouse.down && `opacity: 0.1;`;
-      const up = mouse.up && fill;
-      return css`
-        ${down}
-        animation: 0.3s ${up}
-      `;
-    }}
-  }
+  > .background,
   > .border {
     ${interact}
     border-radius: 4px;
-    ${({ mouse }) => {
-      const up = mouse.up && border;
-      return css`
-        opacity: 0;
+    opacity: 0;
+  }
+
+  > .background {
+    background-color: black;
+    ${({ mouse }) =>
+      mouse.down &&
+      css`
+        opacity: 0.1;
+      `}
+    ${({ mouse }) =>
+      mouse.up &&
+      css`
+        animation: 0.3s ${fill};
+      `}
+  }
+
+  > .border {
+    border: 1px solid black;
+    ${({ mouse }) =>
+      mouse.up &&
+      css`
         animation-duration: 0.6s;
-        animation-name: ${up};
-      `;
-    }}
+        animation-name: ${border};
+      `}
   }
 `;

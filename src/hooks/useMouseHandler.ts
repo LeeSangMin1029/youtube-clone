@@ -1,12 +1,6 @@
 import { useReducer, useCallback, useEffect } from 'react';
 import { MOUSE_ACTION } from '@/utils';
-
-export type MouseState = {
-  enter: boolean;
-  leave: boolean;
-  down: boolean;
-  up: boolean | null;
-};
+import { CustomMouseEvent, MouseState } from '@/@types/global';
 
 const initMouseState: MouseState = {
   enter: false,
@@ -36,19 +30,19 @@ const reducer = (
 export const useMouseHandler = () => {
   const [mouse, dispatch] = useReducer(reducer, initMouseState);
 
-  const onMouseEnter = useCallback(() => {
+  const onMouseEnter = useCallback((event: CustomMouseEvent) => {
     dispatch({ type: MOUSE_ACTION.MOUSE_ENTER });
   }, []);
 
-  const onMouseDown = useCallback(() => {
+  const onMouseDown = useCallback((event: CustomMouseEvent) => {
     dispatch({ type: MOUSE_ACTION.MOUSE_DOWN });
   }, []);
 
-  const onMouseLeave = useCallback(() => {
+  const onMouseLeave = useCallback((event: CustomMouseEvent) => {
     dispatch({ type: MOUSE_ACTION.MOUSE_LEAVE });
   }, []);
 
-  const onMouseUp = useCallback(() => {
+  const onMouseUp = useCallback((event: CustomMouseEvent) => {
     dispatch({ type: MOUSE_ACTION.MOUSE_UP });
   }, []);
   const onDragStart = onMouseDown;
