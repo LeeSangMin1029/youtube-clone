@@ -1,13 +1,39 @@
-import styled from 'styled-components';
+import { MouseState } from '@/@types/global';
+import { animation } from '@/styles/utils';
+import styled, { css } from 'styled-components';
 
-export const Thumbnails = styled.div`
+export const Overlay = styled.div`
+  position: absolute;
+  margin: 4px;
+  bottom: 0;
+  right: 0;
+  background-color: black;
+  color: white;
+  padding: 3px 4px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+`;
+
+export const Thumbnails = styled.div<{ mouse: MouseState }>`
   a {
     display: flex;
     position: relative;
     img {
+      will-change: border-radius;
       width: 344px;
       height: 194px;
       border-radius: 12px;
     }
+    ${({ mouse }) =>
+      mouse.enter &&
+      css`
+        ${Overlay} {
+          animation: 0.3s ${animation('opacity', '1', '0')} forwards;
+        }
+        img {
+          animation: 0.3s ${animation('border-radius', '12px', '0px')} forwards;
+        }
+      `}
   }
 `;

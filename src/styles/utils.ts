@@ -1,3 +1,4 @@
+import { CSSPropertiesKebab } from '@/@types/global';
 import styled, { css, keyframes } from 'styled-components';
 
 export const SVG = styled.div`
@@ -17,29 +18,14 @@ export const conditionalContent = (delimiters: boolean) => css`
   }
 `;
 
-export const fadeIn = keyframes`
-  from {
-    border-radius: 12px;
-  }
-  to {
-    border-radius: 0px;
-  }
-`;
+const keyframesTemplate = (
+  property: CSSPropertiesKebab,
+  from: string,
+  to: string,
+) => `from { ${property} : ${from} } to { ${property} : ${to} }`;
 
-export const fill = keyframes`
-  from {
-    opacity: 0.1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
-
-export const border = keyframes`
-  from {
-    opacity: 0.2;
-  }
-  to {
-    opacity: 0;
-  }
-`;
+export const animation = (
+  property: CSSPropertiesKebab,
+  from: string,
+  to: string,
+) => keyframes`${keyframesTemplate(property, from, to)}`;

@@ -1,3 +1,5 @@
+import { CSSProperties } from 'styled-components';
+
 export type CountFormatOptions = {
   source: number | string;
   digit?: number;
@@ -13,3 +15,12 @@ export type MouseState = {
   down: boolean;
   up: boolean | null;
 };
+
+export type Kebab<
+  T extends string,
+  A extends string = '',
+> = T extends `${infer F}${infer R}`
+  ? Kebab<R, `${A}${F extends Lowercase<F> ? '' : '-'}${Lowercase<F>}`>
+  : A;
+
+export type CSSPropertiesKebab = Kebab<keyof CSSProperties>;

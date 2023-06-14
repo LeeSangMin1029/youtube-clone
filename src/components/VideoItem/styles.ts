@@ -1,5 +1,5 @@
 import { MouseState } from '@/@types/global';
-import { fill, border } from '@/styles/utils';
+import { animation } from '@/styles/utils';
 import styled, { css } from 'styled-components';
 
 export const VideoDetails = styled.div`
@@ -85,7 +85,7 @@ export const InteractStyled = styled.div<{ mouse: MouseState }>`
     ${({ mouse }) =>
       mouse.up &&
       css`
-        animation: 0.3s ${fill};
+        animation: 0.3s ${animation('opacity', '0.1', '0')};
       `}
   }
 
@@ -95,7 +95,7 @@ export const InteractStyled = styled.div<{ mouse: MouseState }>`
       mouse.up &&
       css`
         animation-duration: 0.6s;
-        animation-name: ${border};
+        animation-name: ${animation('opacity', '0.2', '0')};
       `}
   }
 `;
