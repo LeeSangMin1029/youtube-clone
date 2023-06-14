@@ -1,6 +1,6 @@
 import { YoutubeVideoThumbnails } from '@/@types/youtube';
 import { MouseState } from '@/@types/global';
-import { memo } from 'react';
+import { ReactNode, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Overlay, Thumbnails } from './styles';
 import { getDuration } from '@/utils';
@@ -10,10 +10,11 @@ type VideoThumbnailsProps = {
   thumbnails: YoutubeVideoThumbnails;
   duration: string;
   mouse: MouseState;
+  children: ReactNode;
 };
 
 const VideoThumbnails = memo(
-  ({ id, thumbnails, duration, mouse }: VideoThumbnailsProps) => {
+  ({ id, thumbnails, duration, mouse, children }: VideoThumbnailsProps) => {
     return (
       <Thumbnails mouse={mouse}>
         <Link to={`/watch?id=${id}`}>
@@ -23,6 +24,7 @@ const VideoThumbnails = memo(
           />
           <Overlay>{getDuration(duration)}</Overlay>
         </Link>
+        {children}
       </Thumbnails>
     );
   },
