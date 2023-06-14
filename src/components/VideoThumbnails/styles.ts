@@ -16,6 +16,7 @@ export const Overlay = styled.div`
 `;
 
 export const Thumbnails = styled.div<{ mouse: MouseState }>`
+  position: relative;
   a {
     display: flex;
     position: relative;
