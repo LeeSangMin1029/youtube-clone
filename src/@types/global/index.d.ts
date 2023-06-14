@@ -4,3 +4,5 @@ export type CountFormatOptions = {
 };
 
 type RenderFormat = 'view' | 'subscription';
+
+export type DocumentMouseEvent = MouseEvent;

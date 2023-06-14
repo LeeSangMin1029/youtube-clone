@@ -10,8 +10,13 @@ import {
 import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
 import VideoThumbnails from '@/components/VideoThumbnails';
+import { useMouseHandler } from '@/hooks';
 
-const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
+type VideoItemProps = {
+  data: YoutubeVideo;
+};
+
+const VideoItem = ({ data }: VideoItemProps) => {
   const {
     id,
     snippet,
@@ -22,10 +27,14 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
   const { channelId, channelTitle, title, thumbnails, publishedAt } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
   const { url: channelThumb } = channel.snippet.thumbnails.default;
+  const { mouse, ...rest } = useMouseHandler();
 
   return (
-    <StyledDiv>
-      <InteractStyled />
+    <StyledDiv {...rest}>
+      <InteractStyled mouse={mouse}>
+        <div className="border" />
+        <div className="background" />
+      </InteractStyled>
       <VideoThumbnails
         id={id}
         thumbnails={thumbnails}
@@ -52,6 +61,6 @@ const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
       </VideoDetails>
     </StyledDiv>
   );
-});
+};
 
-export default VideoItem;
+export default memo(VideoItem);

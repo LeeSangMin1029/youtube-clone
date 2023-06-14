@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 export const SVG = styled.div`
   width: 40px;
@@ -14,5 +14,33 @@ export const conditionalContent = (delimiters: boolean) => css`
       content: ${delimiters ? "'•'" : "''"};
       margin: 0 4px;
     }
+  }
+`;
+
+export const fadeIn = keyframes`
+  from {
+    border-radius: 12px;
+  }
+  to {
+    border-radius: 0px;
+  }
+`;
+
+export const fill = keyframes`
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+export const border = keyframes`
+  from {
+    opacity: 0.2;
+    border: 1px solid black;
+  }
+  to {
+    opacity: 0;
   }
 `;

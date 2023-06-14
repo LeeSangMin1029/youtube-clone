@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import { MouseState } from '@/hooks/useMouseHandler';
+import { fill, border } from '@/styles/utils';
+import styled, { css } from 'styled-components';
 
 export const VideoDetails = styled.div`
   display: flex;
@@ -53,16 +55,43 @@ export const Description = styled.div`
   }
 `;
 
-export const InteractStyled = styled.div`
+const interact = css`
+  will-change: opacity;
   display: inline-block;
-  pointer-events: none;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+`;
+
+export const InteractStyled = styled.div<{ mouse: MouseState }>`
+  ${interact}
   margin: -4px;
-  border-radius: 4px;
-  transition: opacity 0.2s linear;
-  opacity: 0;
+  > .background {
+    ${interact}
+    border-radius: 4px;
+    background-color: black;
+    opacity: 0;
+    ${({ mouse }) => {
+      const down = mouse.down && `opacity: 0.1;`;
+      const up = mouse.up && fill;
+      return css`
+        ${down}
+        animation: 0.3s ${up}
+      `;
+    }}
+  }
+  > .border {
+    ${interact}
+    border-radius: 4px;
+    ${({ mouse }) => {
+      const up = mouse.up && border;
+      return css`
+        opacity: 0;
+        animation-duration: 0.6s;
+        animation-name: ${up};
+      `;
+    }}
+  }
 `;
