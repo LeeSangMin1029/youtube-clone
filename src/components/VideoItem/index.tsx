@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   VideoDetails,
@@ -11,7 +11,6 @@ import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
 import VideoThumbnails from '@/components/VideoThumbnails';
 import { useMouseHandler } from '@/hooks';
-import { CustomMouseEvent } from '@/@types/global';
 import YoutubeVideoPlayer from '@/components/YoutubeVideoPlayer';
 
 type VideoItemProps = {
@@ -30,12 +29,9 @@ const VideoItem = ({ data }: VideoItemProps) => {
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
   const { url: channelThumb } = channel.snippet.thumbnails.default;
   const { mouse, ...handler } = useMouseHandler();
-  const onMouseEnter = useCallback((event: CustomMouseEvent) => {
-    handler.onMouseEnter(event); // default function
-  }, []);
 
   return (
-    <StyledDiv {...handler} onMouseEnter={onMouseEnter}>
+    <StyledDiv {...handler}>
       <InteractStyled mouse={mouse}>
         <div className="border" />
         <div className="background" />
@@ -46,7 +42,7 @@ const VideoItem = ({ data }: VideoItemProps) => {
         duration={contentDetails.duration}
         mouse={mouse}
       >
-        {mouse.down && (
+        {mouse.enter && (
           <YoutubeVideoPlayer videoId={id} height={194} width={344} />
         )}
       </VideoThumbnails>
