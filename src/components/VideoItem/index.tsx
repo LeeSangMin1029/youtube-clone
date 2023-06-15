@@ -1,5 +1,5 @@
-import { memo } from 'react';
-import { Link } from 'react-router-dom';
+import { memo, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   VideoDetails,
   Description,
@@ -29,6 +29,12 @@ const VideoItem = ({ data }: VideoItemProps) => {
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
   const { url: channelThumb } = channel.snippet.thumbnails.default;
   const { mouse, ...handler } = useMouseHandler();
+  const targetLink = useNavigate();
+  useEffect(() => {
+    if (!mouse.leave && mouse.up) {
+      targetLink(`/watch?id=${id}`);
+    }
+  }, [mouse.leave, mouse.up]);
 
   return (
     <StyledDiv {...handler}>
