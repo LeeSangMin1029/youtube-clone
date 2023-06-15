@@ -1,17 +1,12 @@
 import { memo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  VideoDetails,
-  Description,
-  YoutuberData,
-  StyledDiv,
-  InteractStyled,
-} from './styles';
+import { VideoDetails, Description, YoutuberData, StyledDiv } from './styles';
 import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
 import VideoThumbnails from '@/components/VideoThumbnails';
 import { useMouseHandler } from '@/hooks';
 import YoutubeVideoPlayer from '@/components/YoutubeVideoPlayer';
+import CoverInteract from '@/components/CoverInteract';
 
 type VideoItemProps = {
   data: YoutubeVideo;
@@ -38,10 +33,7 @@ const VideoItem = ({ data }: VideoItemProps) => {
 
   return (
     <StyledDiv {...handler}>
-      <InteractStyled mouse={mouse}>
-        <div className="border" />
-        <div className="background" />
-      </InteractStyled>
+      <CoverInteract mouse={mouse} variant="rect" />
       <VideoThumbnails
         id={id}
         thumbnails={thumbnails}

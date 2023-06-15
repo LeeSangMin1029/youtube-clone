@@ -24,3 +24,5 @@ export type Kebab<
   : A;
 
 export type CSSPropertiesKebab = Kebab<keyof CSSProperties>;
+
+export type VariantShape = 'rect' | 'circular' | 'rounded';
