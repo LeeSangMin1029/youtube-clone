@@ -1,4 +1,6 @@
-import { Card, CardHeader, Skeleton } from '@mui/material';
+import Card from '@mui/material/Card';
+import Skeleton from '@mui/material/Skeleton';
+import CardHeader from '@mui/material/CardHeader';
 import Avatar from './Avatar';
 import { randomKey } from '@/utils';
 import { useVideoContext } from '@/context/VideoContext';

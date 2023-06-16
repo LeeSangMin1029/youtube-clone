@@ -1,5 +1,5 @@
 import { SxProps } from '@mui/system';
-import { Stack } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Avatar from './Avatar';
 
 type UserProps = {
