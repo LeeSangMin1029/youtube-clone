@@ -1,6 +1,7 @@
 import { useReducer, useCallback, useEffect } from 'react';
 import { MOUSE_ACTION } from '@/utils';
 import { CustomMouseEvent, MouseState } from '@/@types/global';
+import { MOUSE_WHICH } from '@/utils/const';
 
 const initMouseState: MouseState = {
   enter: false,
@@ -30,20 +31,22 @@ const reducer = (
 export const useMouseHandler = () => {
   const [mouse, dispatch] = useReducer(reducer, initMouseState);
 
+  const isLeftMouse = (btn: MOUSE_WHICH) => btn === MOUSE_WHICH.LEFT;
+
   const onMouseEnter = useCallback((event: CustomMouseEvent) => {
-    dispatch({ type: MOUSE_ACTION.MOUSE_ENTER });
+    if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_ENTER });
   }, []);
 
   const onMouseDown = useCallback((event: CustomMouseEvent) => {
-    dispatch({ type: MOUSE_ACTION.MOUSE_DOWN });
+    if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_DOWN });
   }, []);
 
   const onMouseLeave = useCallback((event: CustomMouseEvent) => {
-    dispatch({ type: MOUSE_ACTION.MOUSE_LEAVE });
+    if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_LEAVE });
   }, []);
 
   const onMouseUp = useCallback((event: CustomMouseEvent) => {
-    dispatch({ type: MOUSE_ACTION.MOUSE_UP });
+    if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_UP });
   }, []);
   const onDragStart = onMouseDown;
   const onDragEnd = onMouseUp;

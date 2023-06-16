@@ -18,9 +18,6 @@ export const StyledDiv = styled.div`
   max-width: 344px;
   margin-bottom: 40px;
   border-radius: 4px;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export const YoutuberData = styled.div`

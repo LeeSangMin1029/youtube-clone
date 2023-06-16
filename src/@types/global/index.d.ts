@@ -16,6 +16,18 @@ export type MouseState = {
   up: boolean | null;
 };
 
+type EventHandler = (event: CustomMouseEvent) => void;
+
+export type HOCMouseState = {
+  mouse: MouseState;
+  onMouseEnter: EventHandler;
+  onMouseDown: EventHandler;
+  onMouseLeave: EventHandler;
+  onMouseUp: EventHandler;
+  onDragEnd: EventHandler;
+  onDragStart: EventHandler;
+};
+
 export type Kebab<
   T extends string,
   A extends string = '',
