@@ -45,6 +45,9 @@ export const useMouseHandler = () => {
     if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_LEAVE });
   }, []);
 
+  // 해당 이벤트는 이 hook에서만 관리를 한다.
+  // 임의의 Component에 onMouseUp 이벤트가 적용된다면
+  // 클릭하거나 down 이벤트가 발생하지 않았음에도 불구하고, 실행된다.
   const onMouseUp = useCallback((event: CustomMouseEvent) => {
     if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_UP });
   }, []);
@@ -54,10 +57,10 @@ export const useMouseHandler = () => {
   useEffect(() => {
     if (mouse.leave && mouse.down) {
       document.addEventListener('mouseup', onMouseUp);
-      return () => {
-        document.removeEventListener('mouseup', onMouseUp);
-      };
     }
+    return () => {
+      document.removeEventListener('mouseup', onMouseUp);
+    };
   }, [mouse.leave, mouse.down]);
 
   return {
@@ -65,7 +68,6 @@ export const useMouseHandler = () => {
     onMouseEnter,
     onMouseDown,
     onMouseLeave,
-    onMouseUp,
     onDragEnd,
     onDragStart,
   };
