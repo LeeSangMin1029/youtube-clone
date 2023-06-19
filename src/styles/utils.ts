@@ -28,4 +28,23 @@ export const animation = (
   property: CSSPropertiesKebab,
   from: string,
   to: string,
-) => keyframes`${keyframesTemplate(property, from, to)}`;
+) => {
+  return keyframes`${keyframesTemplate(property, from, to)}`;
+};
+
+export const scrollBar = css`
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: #606060;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(0, 0%, 60%);
+  }
+`;
