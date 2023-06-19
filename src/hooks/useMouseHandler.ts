@@ -55,7 +55,7 @@ export const useMouseHandler = () => {
   const onDragEnd = onMouseUp;
 
   useEffect(() => {
-    if (mouse.leave && mouse.down) {
+    if (mouse.down) {
       document.addEventListener('mouseup', onMouseUp);
     }
     return () => {
