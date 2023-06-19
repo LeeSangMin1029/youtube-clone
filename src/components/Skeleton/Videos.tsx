@@ -12,7 +12,12 @@ const Videos = () => {
       {[...Array(viewVideoCount).keys()].map(() => (
         <Card
           key={randomKey()}
-          sx={{ maxWidth: 344, border: 'none', boxShadow: 'none' }}
+          sx={{
+            maxWidth: '344px',
+            width: '100%',
+            border: 'none',
+            boxShadow: 'none',
+          }}
         >
           <Skeleton
             sx={{ height: 194, borderRadius: '12px' }}
