@@ -1,16 +1,22 @@
-import { MouseState, VariantShape } from '@/@types/global';
+import { MouseState, AnimationDelay } from '@/@types/global';
 import { Interact } from './styles';
+import { CSSProperties } from 'react';
 
 type CoverInteractProps = {
   mouse: MouseState;
-  variant: VariantShape;
+  interact?: AnimationDelay;
+  customCSS?: CSSProperties;
 };
 
-const CoverInteract = ({ variant, ...props }: CoverInteractProps) => {
+const CoverInteract = ({
+  interact,
+  customCSS,
+  ...props
+}: CoverInteractProps) => {
   return (
     <Interact {...props}>
-      <div className={`stroke ${variant}`} />
-      <div className={`fill ${variant}`} />
+      <div className={`stroke ${interact}`} style={customCSS} />
+      <div className={`fill ${interact}`} style={customCSS} />
     </Interact>
   );
 };

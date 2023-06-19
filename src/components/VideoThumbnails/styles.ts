@@ -1,5 +1,6 @@
 import { MouseState } from '@/@types/global';
 import { animation } from '@/styles/utils';
+import { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 
 export const Overlay = styled.div`
@@ -38,3 +39,5 @@ export const Thumbnails = styled.div<{ mouse: MouseState }>`
       `}
   }
 `;
+
+export const InteractMargin: CSSProperties = { margin: '-4px' };

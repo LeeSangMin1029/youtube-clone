@@ -15,7 +15,7 @@ const HamburgerButton = () => {
   }, [mouse.leave, mouse.up]);
   return (
     <Content {...handler}>
-      <CoverInteract mouse={mouse} variant="circular" />
+      <CoverInteract mouse={mouse} interact="immediate" />
       <Hamburger />
     </Content>
   );

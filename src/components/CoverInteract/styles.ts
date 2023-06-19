@@ -22,10 +22,7 @@ export const Interact = styled.div<{
   .stroke {
     border: 1px solid black;
   }
-  .rect {
-    margin: -4px;
-  }
-  .fill.circular {
+  .fill.immediate {
     ${({ mouse }) =>
       (mouse.enter || mouse.down) &&
       css`
@@ -39,7 +36,7 @@ export const Interact = styled.div<{
       `};
   }
 
-  .stroke.circular {
+  .stroke.immediate {
     ${({ mouse }) =>
       mouse.up &&
       css`
@@ -47,7 +44,7 @@ export const Interact = styled.div<{
       `}
   }
 
-  .fill.rect {
+  .fill {
     ${({ mouse }) =>
       mouse.down &&
       css`
@@ -60,7 +57,7 @@ export const Interact = styled.div<{
       `}
   }
 
-  .stroke.rect {
+  .stroke {
     ${({ mouse }) =>
       mouse.up &&
       css`

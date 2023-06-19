@@ -1,7 +1,7 @@
 import { YoutubeVideoThumbnails } from '@/@types/youtube';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { Overlay, Thumbnails } from './styles';
+import { Overlay, Thumbnails, InteractMargin } from './styles';
 import { getDuration } from '@/utils';
 import { useMouseHandler } from '@/hooks';
 import YoutubeVideoPlayer from '@/components/YoutubeVideoPlayer';
@@ -18,7 +18,7 @@ const VideoThumbnails = memo(
     const { mouse, ...handler } = useMouseHandler();
     return (
       <>
-        <CoverInteract {...handler} mouse={mouse} variant="rect" />
+        <CoverInteract {...handler} mouse={mouse} customCSS={InteractMargin} />
         <Thumbnails mouse={mouse}>
           <Link to={`/watch?id=${id}`}>
             <img

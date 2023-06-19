@@ -12,7 +12,7 @@ const SliderItem = ({ name, children }: SliderItemProps) => {
 
   return (
     <Item {...handler}>
-      <CoverInteract mouse={mouse} variant="rect" />
+      <CoverInteract mouse={mouse} interact="immediate" />
       <Content>
         <div>{children}</div>
         <span>{name}</span>

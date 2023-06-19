@@ -37,4 +37,4 @@ export type Kebab<
 
 export type CSSPropertiesKebab = Kebab<keyof CSSProperties>;
 
-export type VariantShape = 'rect' | 'circular' | 'rounded';
+export type AnimationDelay = 'immediate';
