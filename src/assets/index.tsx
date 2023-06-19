@@ -5,3 +5,4 @@ export { ReactComponent as LoginIcon } from './user_login_profile.svg';
 export { ReactComponent as LoadingSpinner } from './loading.svg';
 export { ReactComponent as YoutubeLogo } from './youtube_logo.svg';
 export { ReactComponent as Hamburger } from './hamburger.svg';
+export { ReactComponent as Home } from './home.svg';
