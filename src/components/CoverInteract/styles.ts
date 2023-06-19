@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { MouseState } from '@/@types/global';
-import { animation, coverInteract } from '@/styles/utils';
+import { animation } from '@/styles/utils';
 
 export const Interact = styled.div<{
   mouse: MouseState;
@@ -8,7 +8,13 @@ export const Interact = styled.div<{
   border-radius: inherit;
   .fill,
   .stroke {
-    ${coverInteract}
+    will-change: opacity;
+    display: inline-block;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: inherit;
   }
   .fill {
     background: black;

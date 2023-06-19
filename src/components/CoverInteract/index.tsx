@@ -1,12 +1,12 @@
 import { MouseState, VariantShape } from '@/@types/global';
 import { Interact } from './styles';
 
-type CoverInteract = {
+type CoverInteractProps = {
   mouse: MouseState;
   variant: VariantShape;
 };
 
-const CoverInteract = ({ variant, ...props }: CoverInteract) => {
+const CoverInteract = ({ variant, ...props }: CoverInteractProps) => {
   return (
     <Interact {...props}>
       <div className={`stroke ${variant}`} />

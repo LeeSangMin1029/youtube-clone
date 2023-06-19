@@ -18,16 +18,6 @@ export const conditionalContent = (delimiters: boolean) => css`
   }
 `;
 
-export const coverInteract = css`
-  will-change: opacity;
-  display: inline-block;
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-  border-radius: inherit;
-`;
-
 const keyframesTemplate = (
   property: CSSPropertiesKebab,
   from: string,
