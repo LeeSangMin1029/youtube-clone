@@ -4,7 +4,7 @@ import { CSSProperties } from 'react';
 
 type CoverInteractProps = {
   mouse: MouseState;
-  interact?: AnimationDelay;
+  interact?: AnimationDelay | null;
   customCSS?: CSSProperties;
 };
 
@@ -15,8 +15,14 @@ const CoverInteract = ({
 }: CoverInteractProps) => {
   return (
     <Interact {...props}>
-      <div className={`stroke ${interact}`} style={customCSS} />
-      <div className={`fill ${interact}`} style={customCSS} />
+      <div
+        className={`${interact ? 'stroke ' + interact : 'stroke'}`}
+        style={customCSS}
+      />
+      <div
+        className={`${interact ? 'fill ' + interact : 'fill'}`}
+        style={customCSS}
+      />
     </Interact>
   );
 };
