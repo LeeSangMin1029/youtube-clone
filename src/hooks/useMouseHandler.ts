@@ -5,6 +5,7 @@ import { MOUSE_WHICH } from '@/utils/const';
 
 const initMouseState: MouseState = {
   enter: false,
+  enterBeforeDown: false,
   leave: false,
   down: false,
   up: null,
@@ -16,11 +17,37 @@ const reducer = (
 ): MouseState => {
   switch (action.type) {
     case MOUSE_ACTION.MOUSE_ENTER:
-      return { ...state, enter: true, leave: false, up: null };
+      return {
+        ...state,
+        enterBeforeDown: false,
+        enter: true,
+        leave: false,
+        up: null,
+      };
+    case MOUSE_ACTION.MOUSE_ENTER_DOWN:
+      return {
+        ...state,
+        enter: true,
+        enterBeforeDown: true,
+        leave: false,
+        up: null,
+      };
     case MOUSE_ACTION.MOUSE_LEAVE:
-      return { ...state, enter: false, leave: true };
+      return {
+        ...state,
+        enterBeforeDown: false,
+        enter: false,
+        leave: true,
+        up: null,
+      };
     case MOUSE_ACTION.MOUSE_DOWN:
-      return { ...state, leave: false, down: true, up: null };
+      return {
+        ...state,
+        enterBeforeDown: false,
+        leave: false,
+        down: true,
+        up: null,
+      };
     case MOUSE_ACTION.MOUSE_UP:
       return { ...state, down: false, up: true };
     default:
@@ -34,7 +61,13 @@ export const useMouseHandler = () => {
   const isLeftMouse = (btn: MOUSE_WHICH) => btn === MOUSE_WHICH.LEFT;
 
   const onMouseEnter = useCallback((event: CustomMouseEvent) => {
-    if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_ENTER });
+    if (isLeftMouse(event.button)) {
+      if (event.buttons === 1) {
+        dispatch({ type: MOUSE_ACTION.MOUSE_ENTER_DOWN });
+      } else {
+        dispatch({ type: MOUSE_ACTION.MOUSE_ENTER });
+      }
+    }
   }, []);
 
   const onMouseDown = useCallback((event: CustomMouseEvent) => {
@@ -45,26 +78,26 @@ export const useMouseHandler = () => {
     if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_LEAVE });
   }, []);
 
-  // 해당 이벤트는 이 hook에서만 관리를 한다.
-  // 임의의 Component에 onMouseUp 이벤트가 적용된다면
-  // 클릭하거나 down 이벤트가 발생하지 않았음에도 불구하고, 실행된다.
   const onMouseUp = useCallback((event: CustomMouseEvent) => {
     if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_UP });
   }, []);
+
   const onDragStart = onMouseDown;
   const onDragEnd = onMouseUp;
 
   useEffect(() => {
-    if (mouse.down) {
+    if (mouse.down && mouse.leave) {
       document.addEventListener('mouseup', onMouseUp);
     }
+
     return () => {
       document.removeEventListener('mouseup', onMouseUp);
     };
-  }, [mouse.leave, mouse.down]);
+  }, [mouse.down, mouse.leave]);
 
   return {
     mouse,
+    onMouseUp,
     onMouseEnter,
     onMouseDown,
     onMouseLeave,

@@ -11,6 +11,7 @@ export type CustomMouseEvent = React.MouseEvent | MouseEvent;
 
 export type MouseState = {
   enter: boolean;
+  enterBeforeDown: boolean;
   leave: boolean;
   down: boolean;
   up: boolean | null;

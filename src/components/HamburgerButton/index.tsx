@@ -3,18 +3,18 @@ import { Content } from './styles';
 import { Hamburger } from '@/assets';
 import { useMenuContext } from '@/context/MenuContext';
 import CoverInteract from '@/components/CoverInteract';
-import { useEffect } from 'react';
+import { CustomMouseEvent } from '@/@types/global';
 
 const HamburgerButton = () => {
   const { mouse, ...handler } = useMouseHandler();
   const { open, setOpen } = useMenuContext();
-  useEffect(() => {
-    if (!mouse.leave && mouse.up) {
-      setOpen(!open);
-    }
-  }, [mouse.leave, mouse.up]);
+  const onMouseUp = (event: CustomMouseEvent) => {
+    setOpen(!open);
+    handler.onMouseUp(event);
+  };
+
   return (
-    <Content {...handler}>
+    <Content {...handler} onMouseUp={onMouseUp}>
       <CoverInteract mouse={mouse} interact="immediate" />
       <Hamburger />
     </Content>

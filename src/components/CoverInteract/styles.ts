@@ -38,27 +38,30 @@ export const Interact = styled.div<{
 
   .stroke.immediate {
     ${({ mouse }) =>
+      !mouse.enterBeforeDown &&
       mouse.up &&
       css`
-        animation: 0.3s ${animation('opacity', '0.2', '0')};
+        animation: 0.6s ${animation('opacity', '0.2', '0')};
       `}
   }
 
-  .fill {
+  .fill:not(.immediate) {
     ${({ mouse }) =>
       mouse.down &&
       css`
         opacity: 0.1;
       `}
     ${({ mouse }) =>
+      !mouse.enterBeforeDown &&
       mouse.up &&
       css`
         animation: 0.3s ${animation('opacity', '0.1', '0')};
       `}
   }
 
-  .stroke {
+  .stroke:not(.immediate) {
     ${({ mouse }) =>
+      !mouse.enterBeforeDown &&
       mouse.up &&
       css`
         animation-duration: 0.6s;
