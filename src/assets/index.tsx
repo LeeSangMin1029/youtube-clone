@@ -7,3 +7,4 @@ export { ReactComponent as YoutubeLogo } from './youtube_logo.svg';
 export { ReactComponent as Hamburger } from './hamburger.svg';
 export { ReactComponent as Home } from './home.svg';
 export { ReactComponent as Shorts } from './shorts.svg';
+export { ReactComponent as Subscription } from './subscription.svg';
