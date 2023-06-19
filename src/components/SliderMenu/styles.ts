@@ -11,5 +11,5 @@ export const StyledMenu = styled.div<{ open: boolean }>`
 export const StyledList = styled.ul`
   margin-top: 4px;
   line-height: 14px;
-  font-size: 11px;
+  font-size: 10px;
 `;
