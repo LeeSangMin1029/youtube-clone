@@ -48,3 +48,12 @@ export const scrollBar = css`
     background-color: hsl(0, 0%, 60%);
   }
 `;
+
+export const DisplayGrid = styled.div`
+  padding-top: 24px;
+  display: grid;
+  justify-items: center;
+  margin: 0 16px;
+  grid-template-columns: repeat(auto-fit, minmax(344px, 1fr));
+  grid-auto-rows: minmax(340px, auto);
+`;

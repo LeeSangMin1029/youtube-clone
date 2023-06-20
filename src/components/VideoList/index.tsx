@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { ReloadTarget } from './styles';
+import { DisplayGrid } from '@/styles/utils';
 import { useIntersect, useFetchVideo } from '@/hooks';
 import { Videos as Skeleton } from '@/components/Skeleton';
 import VideoItem from '@/components/VideoItem';
@@ -19,13 +20,15 @@ const VideoList = memo(() => {
   });
 
   return (
-    <>
-      {videos?.map((video) => (
-        <VideoItem data={video} key={randomKey()} />
-      ))}
+    <div>
+      <DisplayGrid>
+        {videos?.map((video) => (
+          <VideoItem data={video} key={randomKey()} />
+        ))}
+      </DisplayGrid>
       {isFetching && <Skeleton />}
       <ReloadTarget ref={ref} />
-    </>
+    </div>
   );
 });
 

@@ -1,13 +1,22 @@
 import { scrollBar } from '@/styles/utils';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledMenu = styled.div<{ open: boolean }>`
-  position: fixed;
-  width: 72px;
-  height: 100%;
-  padding: 0 4px;
+  position: sticky;
+  height: 100vh;
   top: 56px;
-  ${scrollBar}
+  align-self: start;
+  transition: 0.3s;
+  ${({ open }) =>
+    open
+      ? css`
+          width: 240px;
+          ${scrollBar}
+        `
+      : css`
+          width: 72px;
+          padding: 0 4px;
+        `}
 `;
 
 export const StyledList = styled.ul`

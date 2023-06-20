@@ -4,11 +4,12 @@ import CardHeader from '@mui/material/CardHeader';
 import Avatar from './Avatar';
 import { randomKey } from '@/utils';
 import { useVideoContext } from '@/context/VideoContext';
+import { DisplayGrid } from '@/styles/utils';
 
 const Videos = () => {
   const { viewVideoCount } = useVideoContext();
   return (
-    <>
+    <DisplayGrid>
       {[...Array(viewVideoCount).keys()].map(() => (
         <Card
           key={randomKey()}
@@ -32,7 +33,7 @@ const Videos = () => {
           />
         </Card>
       ))}
-    </>
+    </DisplayGrid>
   );
 };
 export default Videos;
