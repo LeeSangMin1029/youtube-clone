@@ -1,3 +1,4 @@
+import { scrollBar } from '@/styles/utils';
 import styled from 'styled-components';
 
 export const StyledMenu = styled.div<{ open: boolean }>`
@@ -6,6 +7,7 @@ export const StyledMenu = styled.div<{ open: boolean }>`
   height: 100%;
   padding: 0 4px;
   top: 56px;
+  ${scrollBar}
 `;
 
 export const StyledList = styled.ul`

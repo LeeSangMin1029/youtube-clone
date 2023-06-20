@@ -33,7 +33,7 @@ export const animation = (
 };
 
 export const scrollBar = css`
-  overflow-y: scroll;
+  overflow-y: auto;
   ::-webkit-scrollbar {
     width: 16px;
   }
