@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 export const StyledMenu = styled.div<{ open: boolean }>`
   position: sticky;
-  height: 100vh;
+  height: auto;
   top: 56px;
   align-self: start;
   transition: 0.3s;
