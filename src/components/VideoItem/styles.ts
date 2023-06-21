@@ -15,8 +15,7 @@ export const VideoDetails = styled.div`
 
 export const StyledDiv = styled.div`
   position: relative;
-  max-width: 344px;
-  margin-bottom: 40px;
+  margin: 0 8px 40px 8px;
   border-radius: 4px;
 `;
 

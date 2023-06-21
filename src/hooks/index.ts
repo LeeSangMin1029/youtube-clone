@@ -5,3 +5,4 @@ export { useGetUser } from './useGetUser';
 export { usePromise } from './usePromise';
 export { useIntersect } from './useIntersect';
 export { useMouseHandler } from './useMouseHandler';
+export { useResizeObject } from './useResizeObject';
