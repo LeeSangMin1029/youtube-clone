@@ -5,6 +5,7 @@ import Avatar from './Avatar';
 import { randomKey } from '@/utils';
 import { useVideoContext } from '@/context/VideoContext';
 import { DisplayGrid } from '@/styles/utils';
+import { memo } from 'react';
 
 const Videos = () => {
   const { viewVideoCount } = useVideoContext();
@@ -18,10 +19,11 @@ const Videos = () => {
             width: '100%',
             border: 'none',
             boxShadow: 'none',
+            margin: '0 8px 40px 8px',
           }}
         >
           <Skeleton
-            sx={{ height: 194, borderRadius: '12px' }}
+            sx={{ height: '194px', borderRadius: '12px' }}
             animation="wave"
             variant="rounded"
           />
@@ -36,4 +38,4 @@ const Videos = () => {
     </DisplayGrid>
   );
 };
-export default Videos;
+export default memo(Videos);

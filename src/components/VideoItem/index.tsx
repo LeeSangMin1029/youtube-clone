@@ -19,7 +19,7 @@ const VideoItem = ({ data }: VideoItemProps) => {
   } = data;
   const { channelId, channelTitle, title, thumbnails, publishedAt } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
-  const { url: channelThumb } = channel.snippet.thumbnails.default;
+  const { url: channelThumb } = channel?.snippet?.thumbnails?.default;
   const targetLink = useNavigate();
   const onClick = () => {
     targetLink(`/watch?id=${id}`);
