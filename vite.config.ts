@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import mkcert from 'vite-plugin-mkcert';
+import viteCompression from 'vite-plugin-compression';
 
 import { resolve } from 'path';
 
@@ -11,7 +12,7 @@ function pathResolve(dir: string) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svgr(), react(), mkcert()],
+  plugins: [svgr(), react(), mkcert(), viteCompression()],
   resolve: {
     alias: [
       {

@@ -1,19 +1,29 @@
-import { Card, CardHeader, Skeleton } from '@mui/material';
+import Card from '@mui/material/Card';
+import Skeleton from '@mui/material/Skeleton';
+import CardHeader from '@mui/material/CardHeader';
 import Avatar from './Avatar';
 import { randomKey } from '@/utils';
 import { useVideoContext } from '@/context/VideoContext';
+import { DisplayGrid } from '@/styles/utils';
+import { memo } from 'react';
 
 const Videos = () => {
   const { viewVideoCount } = useVideoContext();
   return (
-    <>
+    <DisplayGrid>
       {[...Array(viewVideoCount).keys()].map(() => (
         <Card
           key={randomKey()}
-          sx={{ maxWidth: 344, border: 'none', boxShadow: 'none' }}
+          sx={{
+            maxWidth: '344px',
+            width: '100%',
+            border: 'none',
+            boxShadow: 'none',
+            margin: '0 8px 40px 8px',
+          }}
         >
           <Skeleton
-            sx={{ height: 194, borderRadius: '12px' }}
+            sx={{ height: '194px', borderRadius: '12px' }}
             animation="wave"
             variant="rounded"
           />
@@ -25,7 +35,7 @@ const Videos = () => {
           />
         </Card>
       ))}
-    </>
+    </DisplayGrid>
   );
 };
-export default Videos;
+export default memo(Videos);

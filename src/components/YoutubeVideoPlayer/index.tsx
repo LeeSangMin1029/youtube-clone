@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Player } from './styles';
 
 type YoutubeVideoPlayerProps = {
@@ -34,4 +35,4 @@ const YoutubeVideoPlayer = ({
     />
   );
 };
-export default YoutubeVideoPlayer;
+export default memo(YoutubeVideoPlayer);

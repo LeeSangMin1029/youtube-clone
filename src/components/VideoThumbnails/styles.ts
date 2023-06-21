@@ -1,5 +1,6 @@
 import { MouseState } from '@/@types/global';
 import { animation } from '@/styles/utils';
+import { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 
 export const Overlay = styled.div`
@@ -22,8 +23,10 @@ export const Thumbnails = styled.div<{ mouse: MouseState }>`
     position: relative;
     img {
       will-change: border-radius;
-      width: 344px;
-      height: 194px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 16/9;
       border-radius: 12px;
     }
     ${({ mouse }) =>
@@ -38,3 +41,5 @@ export const Thumbnails = styled.div<{ mouse: MouseState }>`
       `}
   }
 `;
+
+export const InteractMargin: CSSProperties = { margin: '-4px' };

@@ -1,6 +1,4 @@
-import { MouseState } from '@/@types/global';
-import { animation } from '@/styles/utils';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const VideoDetails = styled.div`
   display: flex;
@@ -17,11 +15,8 @@ export const VideoDetails = styled.div`
 
 export const StyledDiv = styled.div`
   position: relative;
-  max-width: 344px;
-  margin-bottom: 40px;
-  &:hover {
-    cursor: pointer;
-  }
+  margin: 0 8px 40px 8px;
+  border-radius: 4px;
 `;
 
 export const YoutuberData = styled.div`
@@ -52,50 +47,5 @@ export const Description = styled.div`
       white-space: normal;
       text-overflow: ellipsis;
     }
-  }
-`;
-
-const interact = css`
-  will-change: opacity;
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-`;
-
-export const InteractStyled = styled.div<{ mouse: MouseState }>`
-  ${interact}
-  margin: -4px;
-  > .background,
-  > .border {
-    ${interact}
-    border-radius: 4px;
-    opacity: 0;
-  }
-
-  > .background {
-    background-color: black;
-    ${({ mouse }) =>
-      mouse.down &&
-      css`
-        opacity: 0.1;
-      `}
-    ${({ mouse }) =>
-      mouse.up &&
-      css`
-        animation: 0.3s ${animation('opacity', '0.1', '0')};
-      `}
-  }
-
-  > .border {
-    border: 1px solid black;
-    ${({ mouse }) =>
-      mouse.up &&
-      css`
-        animation-duration: 0.6s;
-        animation-name: ${animation('opacity', '0.2', '0')};
-      `}
   }
 `;

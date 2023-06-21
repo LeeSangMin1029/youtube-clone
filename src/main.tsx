@@ -13,6 +13,7 @@ const queryClient = new QueryClient({
       retry: 0,
       useErrorBoundary: true,
       suspense: true,
+      notifyOnChangeProps: 'tracked',
     },
   },
 });

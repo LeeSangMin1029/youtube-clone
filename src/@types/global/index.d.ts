@@ -11,9 +11,22 @@ export type CustomMouseEvent = React.MouseEvent | MouseEvent;
 
 export type MouseState = {
   enter: boolean;
+  enterBeforeDown: boolean;
   leave: boolean;
   down: boolean;
   up: boolean | null;
+};
+
+type EventHandler = (event: CustomMouseEvent) => void;
+
+export type HOCMouseState = {
+  mouse: MouseState;
+  onMouseEnter: EventHandler;
+  onMouseDown: EventHandler;
+  onMouseLeave: EventHandler;
+  onMouseUp: EventHandler;
+  onDragEnd: EventHandler;
+  onDragStart: EventHandler;
 };
 
 export type Kebab<
@@ -24,3 +37,5 @@ export type Kebab<
   : A;
 
 export type CSSPropertiesKebab = Kebab<keyof CSSProperties>;
+
+export type AnimationDelay = 'immediate';

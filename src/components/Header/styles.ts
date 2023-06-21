@@ -18,6 +18,8 @@ export const Start = styled.div`
   height: 56px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   > svg {
     padding: 18px 14px 18px 16px;
     :hover {

@@ -28,4 +28,32 @@ export const animation = (
   property: CSSPropertiesKebab,
   from: string,
   to: string,
-) => keyframes`${keyframesTemplate(property, from, to)}`;
+) => {
+  return keyframes`${keyframesTemplate(property, from, to)}`;
+};
+
+export const scrollBar = css`
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: #606060;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(0, 0%, 60%);
+  }
+`;
+
+export const DisplayGrid = styled.div`
+  padding-top: 24px;
+  display: grid;
+  justify-items: center;
+  margin: 0 16px;
+  grid-template-columns: repeat(auto-fit, minmax(344px, 1fr));
+  grid-auto-rows: minmax(340px, auto);
+`;

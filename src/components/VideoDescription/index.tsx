@@ -12,37 +12,39 @@ type DescriptionProps = {
   publishedAt: string;
 };
 
-const VideoDescription = memo(
-  ({ description, viewCount, publishedAt }: DescriptionProps) => {
-    const [isExtend, setExtend] = useState(false);
-    const html = parseHtml(
-      description.replaceAll(rHashTags, (substring: string) =>
-        renderToString(<HashTag substring={substring} />),
-      ),
-    );
+const VideoDescription = ({
+  description,
+  viewCount,
+  publishedAt,
+}: DescriptionProps) => {
+  const [isExtend, setExtend] = useState(false);
+  const html = parseHtml(
+    description.replaceAll(rHashTags, (substring: string) =>
+      renderToString(<HashTag substring={substring} />),
+    ),
+  );
 
-    const onClickHandler = useCallback(() => {
-      setExtend(!isExtend);
-    }, [isExtend]);
+  const onClickHandler = useCallback(() => {
+    setExtend(!isExtend);
+  }, [isExtend]);
 
-    return (
-      <StyledBoard isExtend={isExtend}>
-        <Content>
-          <ViewsWithDate
-            isExtend={isExtend}
-            delimiters={false}
-            view={viewCount}
-            publishedAt={publishedAt}
-          />
-          {isExtend ? html : <StretchContent>{html}</StretchContent>}
-          {isExtend && <div></div>}
-          <Extender isExtend={isExtend} onClick={onClickHandler}>
-            {isExtend ? '간략히' : '더보기'}
-          </Extender>
-        </Content>
-      </StyledBoard>
-    );
-  },
-);
+  return (
+    <StyledBoard isExtend={isExtend}>
+      <Content>
+        <ViewsWithDate
+          isExtend={isExtend}
+          delimiters={false}
+          view={viewCount}
+          publishedAt={publishedAt}
+        />
+        {isExtend ? html : <StretchContent>{html}</StretchContent>}
+        {isExtend && <div></div>}
+        <Extender isExtend={isExtend} onClick={onClickHandler}>
+          {isExtend ? '간략히' : '더보기'}
+        </Extender>
+      </Content>
+    </StyledBoard>
+  );
+};
 
-export default VideoDescription;
+export default memo(VideoDescription);
