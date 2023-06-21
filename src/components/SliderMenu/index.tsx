@@ -3,8 +3,9 @@ import { useMenuContext } from '@/context/MenuContext';
 import { randomKey } from '@/utils';
 import SliderItem from '@/components/SliderItem';
 import { Home, Shorts, Subscription, Library } from '@/assets';
+import { memo } from 'react';
 
-const list = [
+const expandableList = [
   { name: '홈', Asset: Home },
   { name: 'Shorts', Asset: Shorts },
   { name: '구독', Asset: Subscription },
@@ -13,10 +14,11 @@ const list = [
 
 const SliderMenu = () => {
   const { open } = useMenuContext();
+
   return (
     <StyledMenu open={open}>
       <StyledList>
-        {list.map(({ name, Asset }) => (
+        {expandableList.map(({ name, Asset }) => (
           <SliderItem name={name} key={randomKey()}>
             <Asset />
           </SliderItem>
@@ -26,4 +28,4 @@ const SliderMenu = () => {
   );
 };
 
-export default SliderMenu;
+export default memo(SliderMenu);

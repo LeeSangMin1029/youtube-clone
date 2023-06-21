@@ -3,7 +3,7 @@ import ErrorBoundarySuspense from '@/components/ErrorBoundarySuspense';
 import HamburgerButton from '@/components/HamburgerButton';
 import Fallback from '@/components/Fallback';
 import { YoutubeLogo } from '@/assets';
-import { lazy } from 'react';
+import { lazy, memo } from 'react';
 const UserAreaInfo = lazy(() => import('@/components/UserAreaInfo'));
 
 const Header = () => {
@@ -21,4 +21,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

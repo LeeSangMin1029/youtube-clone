@@ -7,7 +7,7 @@ import VideoItem from '@/components/VideoItem';
 import { randomKey } from '@/utils';
 import { useVideoContext } from '@/context/VideoContext';
 
-const VideoList = memo(() => {
+const VideoList = () => {
   const { viewVideoCount } = useVideoContext();
   const { videos, isFetching, hasNextPage, fetchNextPage } = useFetchVideo({
     maxResults: viewVideoCount,
@@ -30,6 +30,6 @@ const VideoList = memo(() => {
       <ReloadTarget ref={ref} />
     </div>
   );
-});
+};
 
-export default VideoList;
+export default memo(VideoList);

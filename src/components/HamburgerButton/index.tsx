@@ -4,6 +4,7 @@ import { Hamburger } from '@/assets';
 import { useMenuContext } from '@/context/MenuContext';
 import CoverInteract from '@/components/CoverInteract';
 import { CustomMouseEvent } from '@/@types/global';
+import { memo } from 'react';
 
 const HamburgerButton = () => {
   const { mouse, ...handler } = useMouseHandler();
@@ -21,4 +22,4 @@ const HamburgerButton = () => {
   );
 };
 
-export default HamburgerButton;
+export default memo(HamburgerButton);

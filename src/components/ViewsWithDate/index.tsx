@@ -13,33 +13,36 @@ type ViewWithDateProps = {
   publishedAt: string;
 };
 
-const ViewsWithDate = memo(
-  ({ isExtend, delimiters, view, publishedAt }: ViewWithDateProps) => {
-    const renderOptions = useMemo(
-      () => ({ source: view, digit: isExtend ? undefined : 0 }),
-      [isExtend, view],
-    );
+const ViewsWithDate = ({
+  isExtend,
+  delimiters,
+  view,
+  publishedAt,
+}: ViewWithDateProps) => {
+  const renderOptions = useMemo(
+    () => ({ source: view, digit: isExtend ? undefined : 0 }),
+    [isExtend, view],
+  );
 
-    const formattedView = useMemo(
-      () => renderViewFormat('view', renderOptions),
-      [renderOptions],
-    );
+  const formattedView = useMemo(
+    () => renderViewFormat('view', renderOptions),
+    [renderOptions],
+  );
 
-    const formattedDate = useMemo(
-      () =>
-        isExtend
-          ? getTodayFormat(publishedAt)
-          : renderDateSinceUpload(publishedAt),
-      [isExtend, publishedAt],
-    );
+  const formattedDate = useMemo(
+    () =>
+      isExtend
+        ? getTodayFormat(publishedAt)
+        : renderDateSinceUpload(publishedAt),
+    [isExtend, publishedAt],
+  );
 
-    return (
-      <Content delimiters={delimiters}>
-        <span>{formattedView}</span>
-        <span>{formattedDate}</span>
-      </Content>
-    );
-  },
-);
+  return (
+    <Content delimiters={delimiters}>
+      <span>{formattedView}</span>
+      <span>{formattedDate}</span>
+    </Content>
+  );
+};
 
-export default ViewsWithDate;
+export default memo(ViewsWithDate);

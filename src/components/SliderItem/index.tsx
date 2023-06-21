@@ -1,6 +1,7 @@
 import { useMouseHandler } from '@/hooks';
 import { Item, Content } from './styles';
 import CoverInteract from '@/components/CoverInteract';
+import { memo } from 'react';
 
 type SliderItemProps = {
   children: any;
@@ -21,4 +22,4 @@ const SliderItem = ({ name, children }: SliderItemProps) => {
   );
 };
 
-export default SliderItem;
+export default memo(SliderItem);

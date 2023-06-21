@@ -1,6 +1,6 @@
 import { MouseState, AnimationDelay } from '@/@types/global';
 import { Interact } from './styles';
-import { CSSProperties } from 'react';
+import { CSSProperties, memo } from 'react';
 
 type CoverInteractProps = {
   mouse: MouseState;
@@ -26,4 +26,4 @@ const CoverInteract = ({
     </Interact>
   );
 };
-export default CoverInteract;
+export default memo(CoverInteract);
