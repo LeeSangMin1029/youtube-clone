@@ -5,17 +5,19 @@ import Avatar from './Avatar';
 import { randomKey } from '@/utils';
 import { useVideoContext } from '@/context/VideoContext';
 import { DisplayGrid } from '@/styles/utils';
+import { useMenuContext } from '@/context/MenuContext';
 import { memo } from 'react';
 
 const Videos = () => {
   const { viewVideoCount } = useVideoContext();
+  const { open } = useMenuContext();
   return (
     <DisplayGrid>
       {[...Array(viewVideoCount).keys()].map(() => (
         <Card
           key={randomKey()}
           sx={{
-            maxWidth: '344px',
+            maxWidth: open ? '360px' : '344px',
             width: '100%',
             border: 'none',
             boxShadow: 'none',
@@ -23,7 +25,7 @@ const Videos = () => {
           }}
         >
           <Skeleton
-            sx={{ height: '194px', borderRadius: '12px' }}
+            sx={{ height: open ? '202px' : '194px', borderRadius: '12px' }}
             animation="wave"
             variant="rounded"
           />
