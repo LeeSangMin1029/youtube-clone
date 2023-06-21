@@ -11,6 +11,7 @@ export const StyledMenu = styled.div<{ open: boolean }>`
     open
       ? css`
           width: 240px;
+          margin-right: 64px;
           ${scrollBar}
         `
       : css`
