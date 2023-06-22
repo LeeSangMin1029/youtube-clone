@@ -2,8 +2,9 @@ import { StyledMenu, StyledList } from './styles';
 import { useMenuContext } from '@/context/MenuContext';
 import { randomKey } from '@/utils';
 import SliderItem from '@/components/SliderItem';
-import { Home, Shorts, Subscription, Library } from '@/assets';
+import { Home, Shorts, Subscription, Library, WatchHistory } from '@/assets';
 import { memo } from 'react';
+import { useUserContext } from '@/context/UserContext';
 
 const expandableList = [
   { name: '홈', Asset: Home },
@@ -14,6 +15,7 @@ const expandableList = [
 
 const SliderMenu = () => {
   const { open } = useMenuContext();
+  const { user } = useUserContext();
 
   return (
     <StyledMenu open={open}>
@@ -23,6 +25,11 @@ const SliderMenu = () => {
             <Asset />
           </SliderItem>
         ))}
+        {!user.isLoggedIn && (
+          <SliderItem name={'시청 기록'} key={randomKey()}>
+            <WatchHistory />
+          </SliderItem>
+        )}
       </StyledList>
     </StyledMenu>
   );
