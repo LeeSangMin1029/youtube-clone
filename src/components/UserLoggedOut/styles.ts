@@ -11,6 +11,7 @@ export const LoginButton = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  cursor: pointer;
   > svg {
     margin-right: 8px;
   }
