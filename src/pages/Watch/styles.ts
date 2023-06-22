@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledBoard = styled.div`
-  margin-top: 56px;
   display: flex;
   justify-content: center;
   iframe {
