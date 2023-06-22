@@ -9,3 +9,4 @@ export { ReactComponent as Home } from './home.svg';
 export { ReactComponent as Shorts } from './shorts.svg';
 export { ReactComponent as Subscription } from './subscription.svg';
 export { ReactComponent as Library } from './library.svg';
+export { ReactComponent as WatchHistory } from './watch_history.svg';
