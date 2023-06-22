@@ -1,15 +1,15 @@
 import { UserProfile } from './styles';
-import { SVG } from '@/styles/utils';
-import { UploadIcon, AlarmIcon } from '@/assets';
 import { memo } from 'react';
 import { useUserContext } from '@/context/UserContext';
+import Upload from '@/components/Upload';
+import Alarm from '@/components/Alarm';
 
 const UserLoggedIn = memo(() => {
   const { user } = useUserContext();
   return (
     <>
-      <SVG children={<UploadIcon />} />
-      <SVG children={<AlarmIcon />} />
+      <Upload />
+      <Alarm />
       <UserProfile>
         <div>
           <img src={user?.thumbnails} width={32} height={32} />

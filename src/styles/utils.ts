@@ -1,10 +1,22 @@
 import { CSSPropertiesKebab } from '@/@types/global';
 import styled, { css, keyframes } from 'styled-components';
 
-export const SVG = styled.div`
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+export const SVGBtn = styled.button`
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: transparent;
+  border-radius: 50%;
+  > svg {
+    padding: 8px;
+    cursor: pointer;
+  }
+`;
+
+export const ExtendSVGBtn = styled(SVGBtn)`
   margin-right: 8px;
 `;
 

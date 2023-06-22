@@ -1,5 +1,5 @@
 import { useMouseHandler } from '@/hooks';
-import { Content } from './styles';
+import { SVGBtn } from '@/styles/utils';
 import { Hamburger } from '@/assets';
 import { useMenuContext } from '@/context/MenuContext';
 import CoverInteract from '@/components/CoverInteract';
@@ -15,10 +15,10 @@ const HamburgerButton = () => {
   };
 
   return (
-    <Content {...handler} onMouseUp={onMouseUp}>
+    <SVGBtn {...handler} onMouseUp={onMouseUp}>
       <CoverInteract mouse={mouse} interact="immediate" />
-      <Hamburger />
-    </Content>
+      <Hamburger width={'24px'} height={'24px'} />
+    </SVGBtn>
   );
 };
 
