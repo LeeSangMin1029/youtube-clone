@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 export const StyledMenu = styled.div<{ open: boolean }>`
   position: sticky;
-  height: auto;
+  height: calc(100vh - 56px);
   top: 56px;
   align-self: start;
   transition: 0.3s;
@@ -11,7 +11,15 @@ export const StyledMenu = styled.div<{ open: boolean }>`
     open
       ? css`
           width: 240px;
-          ${scrollBar}
+          ${scrollBar};
+          ::-webkit-scrollbar-thumb {
+            background-color: white;
+          }
+          :hover {
+            ::-webkit-scrollbar-thumb {
+              background-color: hsl(0, 0%, 60%);
+            }
+          }
         `
       : css`
           width: 72px;

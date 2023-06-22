@@ -45,6 +45,7 @@ export const animation = (
 };
 
 export const scrollBar = css`
+  overscroll-behavior-y: contain;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 16px;
