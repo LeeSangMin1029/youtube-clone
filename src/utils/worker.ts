@@ -7,7 +7,7 @@ export const makeWorkerApiAndCleanup = () => {
     type: 'module',
   });
   const workerApi = wrap<import('@/worker').ReactWebWorker>(worker);
-  const cleanup = () => {
+  const cleanup = async () => {
     workerApi[releaseProxy]();
     worker.terminate();
   };
