@@ -7,9 +7,6 @@ export const VideoDetails = styled.div`
     height: 36px;
     margin-right: 12px;
     margin-top: 12px;
-    img {
-      border-radius: 50%;
-    }
   }
 `;
 

@@ -7,3 +7,7 @@ export const playListKeys = {
   lists: () => ['play', 'list'] as const,
   list: (filters: string) => [...playListKeys.lists(), { filters }] as const,
 };
+export const channelListKeys = {
+  lists: () => ['channel', 'list'] as const,
+  list: (filters: string) => [...channelListKeys.lists(), { filters }] as const,
+};

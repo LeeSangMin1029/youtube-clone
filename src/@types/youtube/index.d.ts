@@ -37,6 +37,7 @@ export type YoutubeChannel = {
   id: string;
   snippet: {
     thumbnails: YoutubeCommonThumbnails;
+    title: string;
   };
   statistics: {
     subscriberCount: number;
@@ -67,7 +68,7 @@ export type VideoParams = {
   pageToken?: string;
 };
 
-export type APIResource = 'videos' | 'playlists';
+export type APIResource = 'videos' | 'playlists' | 'subscriptions';
 
 export type YoutubePlayListsInfo = {
   items: YoutubePlayLists[];
@@ -76,4 +77,8 @@ export type YoutubePlayListsInfo = {
 export type YoutubePlayLists = {
   id: string;
   snippet: { title: string };
+};
+
+export type YoutubeChannelsList = {
+  items: YoutubeChannel[];
 };

@@ -4,6 +4,7 @@ import { VideoDetails, Description, YoutuberData, StyledDiv } from './styles';
 import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
 import VideoThumbnails from '@/components/VideoThumbnails';
+import ChannelThumbnails from '@/components/ChannelThumbnails';
 
 type VideoItemProps = {
   data: YoutubeVideo;
@@ -19,7 +20,6 @@ const VideoItem = ({ data }: VideoItemProps) => {
   } = data;
   const { channelId, channelTitle, title, thumbnails, publishedAt } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
-  const { url: channelThumb } = channel?.snippet?.thumbnails?.default;
   const targetLink = useNavigate();
   const onClick = () => {
     targetLink(`/watch?id=${id}`);
@@ -34,7 +34,12 @@ const VideoItem = ({ data }: VideoItemProps) => {
       />
       <VideoDetails>
         <Link to={channelHref}>
-          <img src={channelThumb} alt="testI" width="36px" height="36px" />
+          <ChannelThumbnails
+            source={channel?.snippet?.thumbnails}
+            alt={channelTitle}
+            width="36px"
+            height="36px"
+          />
         </Link>
         <Description>
           <h3>

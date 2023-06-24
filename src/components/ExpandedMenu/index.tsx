@@ -9,11 +9,12 @@ import {
   VideoLike,
 } from '@/assets';
 import SliderItem from '@/components/SliderItem';
-import { StyledMenu, Section, StyledList } from './styles';
+import { StyledMenu, Section, StyledList, ListTitle } from './styles';
 import { randomKey } from '@/utils';
 import ChannelOfPlayLists from '@/components/ChannelOfPlayLists';
 import ErrorBoundarySuspense from '@/components/ErrorBoundarySuspense';
 import Fallback from '@/components/Fallback';
+import SubscriptionChannelLists from '@/components/SubscriptionChannelLists';
 
 const firstList = [
   { name: '홈', Asset: <Home /> },
@@ -51,6 +52,14 @@ const ExpandedMenu = () => {
         </StyledList>
       </Section>
       <div className="divide" />
+      <Section>
+        <ListTitle>구독</ListTitle>
+        <StyledList>
+          <ErrorBoundarySuspense Fallback={Fallback} Loading={<></>}>
+            <SubscriptionChannelLists />
+          </ErrorBoundarySuspense>
+        </StyledList>
+      </Section>
     </StyledMenu>
   );
 };
