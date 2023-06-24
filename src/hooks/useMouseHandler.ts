@@ -11,6 +11,10 @@ const initMouseState: MouseState = {
   up: null,
 };
 
+export type InjectHandlerOptions = {
+  handleUp: () => void;
+};
+
 const reducer = (
   state: MouseState,
   action: { type: MOUSE_ACTION },
@@ -55,7 +59,7 @@ const reducer = (
   }
 };
 
-export const useMouseHandler = () => {
+export const useMouseHandler = (inject?: InjectHandlerOptions) => {
   const [mouse, dispatch] = useReducer(reducer, initMouseState);
 
   const isLeftMouse = (btn: MOUSE_WHICH) => btn === MOUSE_WHICH.LEFT;
@@ -78,9 +82,15 @@ export const useMouseHandler = () => {
     if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_LEAVE });
   }, []);
 
-  const onMouseUp = useCallback((event: CustomMouseEvent) => {
-    if (isLeftMouse(event.button)) dispatch({ type: MOUSE_ACTION.MOUSE_UP });
-  }, []);
+  const onMouseUp = useCallback(
+    (event: CustomMouseEvent) => {
+      if (isLeftMouse(event.button)) {
+        dispatch({ type: MOUSE_ACTION.MOUSE_UP });
+        inject?.handleUp();
+      }
+    },
+    [inject?.handleUp],
+  );
 
   const onDragStart = onMouseDown;
   const onDragEnd = onMouseUp;

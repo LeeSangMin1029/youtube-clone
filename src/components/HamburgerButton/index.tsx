@@ -3,19 +3,16 @@ import { SVGBtn } from '@/styles/utils';
 import { Hamburger } from '@/assets';
 import { useMenuContext } from '@/context/MenuContext';
 import CoverInteract from '@/components/CoverInteract';
-import { CustomMouseEvent } from '@/@types/global';
 import { memo } from 'react';
 
 const HamburgerButton = () => {
-  const { mouse, ...handler } = useMouseHandler();
   const { open, setOpen } = useMenuContext();
-  const onMouseUp = (event: CustomMouseEvent) => {
-    setOpen(!open);
-    handler.onMouseUp(event);
-  };
+  const { mouse, ...handler } = useMouseHandler({
+    handleUp: () => setOpen(!open),
+  });
 
   return (
-    <SVGBtn {...handler} onMouseUp={onMouseUp}>
+    <SVGBtn {...handler}>
       <CoverInteract mouse={mouse} interact="immediate" />
       <Hamburger width={'24px'} height={'24px'} />
     </SVGBtn>

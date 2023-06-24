@@ -1,4 +1,6 @@
+import { expandableTheme, expandedTheme } from '@/styles/theme';
 import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
 
 type MenuContextType = {
   open: boolean;
@@ -24,7 +26,11 @@ const MenuProvider = ({ children }: MenuProviderProps) => {
   const contextValue = useMemo(() => ({ open, setOpen }), [open, setOpen]);
 
   return (
-    <MenuContext.Provider value={contextValue}>{children}</MenuContext.Provider>
+    <ThemeProvider theme={open ? expandedTheme : expandableTheme}>
+      <MenuContext.Provider value={contextValue}>
+        {children}
+      </MenuContext.Provider>
+    </ThemeProvider>
   );
 };
 

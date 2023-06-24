@@ -1,8 +1,8 @@
-import { VideoParams } from '@/@types/youtube';
+import { APIResource, VideoParams } from '@/@types/youtube';
 import { reportError, getErrorMessage } from '@/utils/errors';
 
 type RequestParams = {
-  params: VideoParams;
+  params?: VideoParams;
   googleID: string;
 };
 
@@ -18,10 +18,11 @@ export const googleAuthentication = async () => {
   }
 };
 
-export const fetchPostVideos = async <T>(
+export const fetchPost = async <T>(
+  resource: APIResource,
   options?: RequestParams,
 ): Promise<T> => {
-  return await fetch(`/api/youtube/videos`, {
+  return await fetch(`/api/youtube/${resource}`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',

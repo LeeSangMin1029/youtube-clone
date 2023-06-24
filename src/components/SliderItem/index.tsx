@@ -1,22 +1,25 @@
 import { useMouseHandler } from '@/hooks';
-import { Item, Content } from './styles';
+import { Item, Content, AssetWrapper, AssetTitle } from './styles';
 import CoverInteract from '@/components/CoverInteract';
-import { memo } from 'react';
+import { ReactNode, memo } from 'react';
 
 type SliderItemProps = {
-  children: any;
+  asset: ReactNode;
   name: string;
+  handleUp?: () => void;
 };
 
-const SliderItem = ({ name, children }: SliderItemProps) => {
-  const { mouse, ...handler } = useMouseHandler();
+const SliderItem = ({ asset, name, handleUp }: SliderItemProps) => {
+  const { mouse, ...handler } = useMouseHandler({
+    handleUp: handleUp ? handleUp : () => {},
+  });
 
   return (
     <Item {...handler}>
       <CoverInteract mouse={mouse} interact="immediate" />
       <Content>
-        <div>{children}</div>
-        <span>{name}</span>
+        <AssetWrapper>{asset}</AssetWrapper>
+        <AssetTitle>{name}</AssetTitle>
       </Content>
     </Item>
   );

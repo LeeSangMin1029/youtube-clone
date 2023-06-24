@@ -1,6 +1,6 @@
 import { useUserContext } from '@/context/UserContext';
 import { YoutubeVideoInfo, VideoParams } from '@/@types/youtube';
-import { fetchPostVideos, videoKeys } from '@/utils';
+import { fetchPost, videoKeys } from '@/utils';
 import { useInfiniteQuery } from 'react-query';
 import { useMemo } from 'react';
 
@@ -13,7 +13,7 @@ export const useFetchVideo = (params: VideoParams) => {
     queryKey: [...videoKeys.lists(), googleID, params],
     queryFn: async ({ pageParam = null }) => {
       params.pageToken = pageParam;
-      return await fetchPostVideos<YoutubeVideoInfo>({ googleID, params });
+      return await fetchPost<YoutubeVideoInfo>('videos', { googleID, params });
     },
     getNextPageParam: (lastPage) => lastPage?.nextPageToken,
     refetchOnWindowFocus: false,

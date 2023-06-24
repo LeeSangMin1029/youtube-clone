@@ -66,3 +66,14 @@ export type VideoParams = {
   chart?: 'mostPopular';
   pageToken?: string;
 };
+
+export type APIResource = 'videos' | 'playlists';
+
+export type YoutubePlayListsInfo = {
+  items: YoutubePlayLists[];
+};
+
+export type YoutubePlayLists = {
+  id: string;
+  snippet: { title: string };
+};

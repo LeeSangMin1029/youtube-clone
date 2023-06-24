@@ -7,17 +7,24 @@ export const Item = styled.li`
 
 export const Content = styled.div`
   user-select: none;
-  padding: 16px 0 14px;
+  padding: ${({ theme }) => theme.menu.item.padding};
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  div {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  flex-direction: ${({ theme }) => theme.menu.flexDirection};
+  height: ${({ theme }) => theme.menu.item.height};
+`;
+
+export const AssetWrapper = styled.div`
+  ${({ theme }) => theme.menu.iconSpace};
+  width: 24px;
+  height: 24px;
+`;
+
+export const AssetTitle = styled.span`
+  flex: auto;
+  font-size: ${({ theme }) => theme.menu.item.fontSize};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
