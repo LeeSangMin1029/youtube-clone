@@ -1,4 +1,4 @@
-import { useReducer, useCallback, useEffect } from 'react';
+import { useReducer, useCallback, useEffect, useRef } from 'react';
 import { MOUSE_ACTION } from '@/utils';
 import { CustomMouseEvent, MouseState } from '@/@types/global';
 import { MOUSE_WHICH } from '@/utils/const';
@@ -61,7 +61,7 @@ const reducer = (
 
 export const useMouseHandler = (inject?: InjectHandlerOptions) => {
   const [mouse, dispatch] = useReducer(reducer, initMouseState);
-
+  let isOutside = useRef(false);
   const isLeftMouse = (btn: MOUSE_WHICH) => btn === MOUSE_WHICH.LEFT;
 
   const onMouseEnter = useCallback((event: CustomMouseEvent) => {
@@ -86,7 +86,8 @@ export const useMouseHandler = (inject?: InjectHandlerOptions) => {
     (event: CustomMouseEvent) => {
       if (isLeftMouse(event.button)) {
         dispatch({ type: MOUSE_ACTION.MOUSE_UP });
-        inject?.handleUp();
+        !isOutside.current && inject?.handleUp();
+        isOutside.current = false;
       }
     },
     [inject?.handleUp],
@@ -97,6 +98,7 @@ export const useMouseHandler = (inject?: InjectHandlerOptions) => {
 
   useEffect(() => {
     if (mouse.down && mouse.leave) {
+      isOutside.current = true;
       document.addEventListener('mouseup', onMouseUp);
     }
 
