@@ -1,14 +1,14 @@
-import { LessDetails, MoreDetails, PlayListItem } from '@/assets';
+import { PlayListItem } from '@/assets';
 import { useUserContext } from '@/context/UserContext';
 import { useQuery } from 'react-query';
 import { playListKeys } from '@/utils/reactQueryKeys';
 import { fetchPost, randomKey } from '@/utils';
 import { YoutubePlayListsInfo } from '@/@types/youtube';
 import SliderItem from '@/components/SliderItem';
-import { memo, useState } from 'react';
+import { memo } from 'react';
+import MenuMoreDetail from '@/components/MenuMoreDetail';
 
 const ChannelOfPlayLists = () => {
-  const [more, setMore] = useState(false);
   const {
     user: { googleID },
   } = useUserContext();
@@ -19,21 +19,15 @@ const ChannelOfPlayLists = () => {
   });
 
   return (
-    <>
-      {more &&
-        playLists?.items.map(({ snippet }) => (
-          <SliderItem
-            key={randomKey()}
-            asset={<PlayListItem />}
-            name={snippet.title}
-          />
-        ))}
-      <SliderItem
-        asset={more ? <LessDetails /> : <MoreDetails />}
-        name={more ? '간략히 보기' : '더보기'}
-        handleUp={() => setMore(!more)}
-      />
-    </>
+    <MenuMoreDetail>
+      {playLists?.items.map(({ snippet }) => (
+        <SliderItem
+          key={randomKey()}
+          asset={<PlayListItem />}
+          name={snippet.title}
+        />
+      ))}
+    </MenuMoreDetail>
   );
 };
 
