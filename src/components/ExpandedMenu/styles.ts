@@ -17,8 +17,3 @@ export const Section = styled.div`
 export const StyledList = styled.ul`
   width: calc(100% - 8px);
 `;
-
-export const ListTitle = styled.h3`
-  line-height: 22px;
-  padding: 6px 12px 4px;
-`;
