@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledBoard = styled.div<{ isExtend: boolean }>`
   display: flex;
-  max-width: 1280px;
+  width: 100%;
   height: auto;
   white-space: pre-wrap;
   font-size: 14px;

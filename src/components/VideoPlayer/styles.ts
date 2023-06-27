@@ -9,10 +9,17 @@ export const PlayerBoard = styled.div`
   max-height: 100%;
 `;
 
+export const WrapperPlayer = styled.div`
+  position: relative;
+  padding-bottom: 56.25% /* 16:9 */;
+  padding-top: 25;
+  height: 0;
+`;
+
 export const VideoDetail = styled.div`
   margin-top: 12px;
   margin-bottom: 24px;
-  max-width: 1270px;
+  max-width: 100%;
   h1 {
     word-break: break-word;
     font-size: 20px;
@@ -37,10 +44,7 @@ export const ChannelInfo = styled.div`
   margin-top: 12px;
   display: flex;
   a img {
-    border-radius: 50%;
     margin-right: 12px;
-    width: 40px;
-    height: 40px;
   }
   > div {
     display: flex;
