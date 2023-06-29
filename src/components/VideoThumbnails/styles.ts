@@ -16,7 +16,7 @@ export const Overlay = styled.div`
   border-radius: 4px;
 `;
 
-export const Thumbnails = styled.div<{ mouse: MouseState }>`
+export const StyledVideo = styled.div<{ mouse: MouseState }>`
   position: relative;
   a {
     display: flex;

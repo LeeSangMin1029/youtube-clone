@@ -13,8 +13,8 @@ export const Interact = styled.div<{
     position: absolute;
     inset: 0;
     opacity: 0;
-    cursor: pointer;
     border-radius: inherit;
+    pointer-events: none;
   }
   .fill {
     background: black;

@@ -6,7 +6,7 @@ import { channelListKeys } from '@/utils/reactQueryKeys';
 import { useQuery } from 'react-query';
 import SliderItem from '@/components/SliderItem';
 import { memo } from 'react';
-import ChannelThumbnails from '@/components/ChannelThumbnails';
+import Thumbnails from '@/components/Thumbnails';
 
 const SubscriptionChannelLists = () => {
   const {
@@ -25,11 +25,12 @@ const SubscriptionChannelLists = () => {
           key={randomKey()}
           name={title}
           asset={
-            <ChannelThumbnails
+            <Thumbnails
               width="24px"
               height="24px"
-              source={thumbnails}
+              source={thumbnails.default.url || thumbnails.high.url}
               alt={title}
+              to={'#'}
             />
           }
         />

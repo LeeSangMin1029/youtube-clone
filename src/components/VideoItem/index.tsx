@@ -1,10 +1,12 @@
 import { memo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { VideoDetails, Description, YoutuberData, StyledDiv } from './styles';
 import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
 import VideoThumbnails from '@/components/VideoThumbnails';
-import ChannelThumbnails from '@/components/ChannelThumbnails';
+import ChannelThumbnails from '@/components/Thumbnails';
+import { useMouseHandler } from '@/hooks';
+import CustomLink from '@/components/CustomLink';
 
 type VideoItemProps = {
   data: YoutubeVideo;
@@ -20,33 +22,35 @@ const VideoItem = ({ data }: VideoItemProps) => {
   } = data;
   const { channelId, channelTitle, title, thumbnails, publishedAt } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
+  const channelThumbnails = channel?.snippet?.thumbnails;
   const targetLink = useNavigate();
+  const { mouse, ...handler } = useMouseHandler();
   const onClick = () => {
     targetLink(`/watch?id=${id}`);
   };
 
   return (
-    <StyledDiv onClick={onClick}>
+    <StyledDiv {...handler} onClick={onClick}>
       <VideoThumbnails
+        mouse={mouse}
         id={id}
         thumbnails={thumbnails}
         duration={contentDetails.duration}
       />
       <VideoDetails>
-        <Link to={channelHref}>
-          <ChannelThumbnails
-            source={channel?.snippet?.thumbnails}
-            alt={channelTitle}
-            width="36px"
-            height="36px"
-          />
-        </Link>
+        <ChannelThumbnails
+          source={channelThumbnails.default.url || channelThumbnails.high.url}
+          alt={channelTitle}
+          width="36px"
+          height="36px"
+          to={channelHref}
+        />
         <Description>
           <h3>
-            <Link to={`/watch?id=${id}`}>{title}</Link>
+            <CustomLink to={`/watch?id=${id}`}>{title}</CustomLink>
           </h3>
           <YoutuberData>
-            <a href={channelHref}>{channelTitle}</a>
+            <CustomLink to={channelHref}>{channelTitle}</CustomLink>
             <ViewsWithDate
               view={viewCount}
               publishedAt={publishedAt}

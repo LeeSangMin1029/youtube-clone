@@ -1,42 +1,46 @@
 import { YoutubeVideoThumbnails } from '@/@types/youtube';
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
-import { Overlay, Thumbnails, InteractMargin } from './styles';
+import { Overlay, StyledVideo, InteractMargin } from './styles';
 import { getDuration } from '@/utils';
-import { useMouseHandler, useResizeObject } from '@/hooks';
+import { useResizeObject } from '@/hooks';
 import YoutubeVideoPlayer from '@/components/YoutubeVideoPlayer';
 import CoverInteract from '@/components/CoverInteract';
+import Thumbnails from '@/components/Thumbnails';
+import { MouseState } from '@/@types/global';
 
 type VideoThumbnailsProps = {
   id: string;
   thumbnails: YoutubeVideoThumbnails;
   duration: string;
+  mouse: MouseState;
 };
 
 const VideoThumbnails = ({
   id,
   thumbnails,
   duration,
+  mouse,
 }: VideoThumbnailsProps) => {
-  const { mouse, ...handler } = useMouseHandler();
   const { width, height, ref } = useResizeObject();
 
   return (
-    <div {...handler}>
+    <>
       <CoverInteract mouse={mouse} customCSS={InteractMargin} />
-      <Thumbnails mouse={mouse} ref={ref}>
-        <Link to={`/watch?id=${id}`}>
-          <img
-            src={thumbnails?.maxres?.url || thumbnails?.high?.url}
-            alt="thumbnails"
-          />
+      <StyledVideo mouse={mouse} ref={ref}>
+        <Thumbnails
+          source={thumbnails?.maxres?.url || thumbnails?.high?.url}
+          alt="thumbnails"
+          width="auto"
+          height="auto"
+          to={`/watch?id=${id}`}
+        >
           <Overlay>{getDuration(duration)}</Overlay>
-        </Link>
+        </Thumbnails>
         {mouse.enter && (
           <YoutubeVideoPlayer videoId={id} height={height} width={width} />
         )}
-      </Thumbnails>
-    </div>
+      </StyledVideo>
+    </>
   );
 };
 

@@ -10,10 +10,11 @@ import {
 import { useFindVideo } from '@/hooks';
 import { getVideoInfo, renderViewFormat } from '@/utils';
 import YoutubeVideoPlayer from '@/components/YoutubeVideoPlayer';
-import ChannelThumbnails from '@/components/ChannelThumbnails';
+import Thumbnails from '@/components/Thumbnails';
 import ErrorBoundarySuspense from '../ErrorBoundarySuspense';
 import Fallback from '../Fallback';
 import Comments from '../Comments';
+import CustomLink from '../CustomLink';
 
 const VideoPlayer = () => {
   const video = useFindVideo();
@@ -42,16 +43,15 @@ const VideoPlayer = () => {
           <h1>{title}</h1>
           <BetweenContent>
             <ChannelInfo>
-              <a href={channelId}>
-                <ChannelThumbnails
-                  source={thumbnails}
-                  width="40px"
-                  height="40px"
-                  alt={channelTitle}
-                />
-              </a>
+              <Thumbnails
+                source={thumbnails.default.url || thumbnails.high.url}
+                width="40px"
+                height="40px"
+                alt={channelTitle}
+                to={channelId}
+              />
               <div>
-                <a href={channelId}>{channelTitle}</a>
+                <CustomLink to={channelId}>{channelTitle}</CustomLink>
                 <span>
                   {renderViewFormat('subscription', {
                     source: subscriberCount,
@@ -69,7 +69,6 @@ const VideoPlayer = () => {
           />
         </VideoDetail>
       )}
-
       <ErrorBoundarySuspense Fallback={Fallback} Loading={<></>}>
         <Comments id={videoId} count={commentCount} />
       </ErrorBoundarySuspense>
