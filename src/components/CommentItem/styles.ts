@@ -16,6 +16,7 @@ export const Content = styled.div`
     width: fit-content;
     margin-right: 4px;
     margin-bottom: 2px;
+    align-items: center;
     span {
       font-size: 13px;
       font-weight: 500;
@@ -53,4 +54,17 @@ export const Expander = styled.input`
   :hover {
     text-decoration: underline;
   }
+`;
+
+export const UserHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2px;
+`;
+
+export const UpdatedAt = styled.span`
+  font-size: 12px;
+  margin-bottom: 2px;
+  text-align: center;
 `;

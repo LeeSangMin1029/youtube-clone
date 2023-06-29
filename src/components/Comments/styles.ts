@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledComments = styled.div``;
+export const StyledComments = styled.div`
+  max-width: calc(1268px - 30px);
+`;
 
 export const CommentCount = styled.div`
   display: flex;

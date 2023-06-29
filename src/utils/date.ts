@@ -10,7 +10,7 @@ export const DIVIDE_DATE = {
 type DIVIDE_DATE = (typeof DIVIDE_DATE)[keyof typeof DIVIDE_DATE];
 
 export const dateFormat = [
-  { compare: 60, unit: '방금', divide: DIVIDE_DATE.SECONDS },
+  { compare: 1, unit: '방금', divide: DIVIDE_DATE.SECONDS },
   { compare: 60, unit: '분', divide: DIVIDE_DATE.MINUTES },
   { compare: 24, unit: '시간', divide: DIVIDE_DATE.HOURS },
   { compare: 7, unit: '일', divide: DIVIDE_DATE.DAYS },

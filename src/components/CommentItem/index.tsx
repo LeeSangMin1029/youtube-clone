@@ -1,9 +1,17 @@
 import { CommentThread } from '@/@types/youtube';
 import { ReactNode } from 'react';
-import { StyledComment, Content, Description, Expander } from './styles';
+import {
+  StyledComment,
+  Content,
+  Description,
+  Expander,
+  UserHeader,
+  UpdatedAt,
+} from './styles';
 import Thumbnails from '@/components/Thumbnails';
 import CustomLink from '@/components/CustomLink';
 import { useHeight } from '@/hooks/useHeight';
+import { renderDateSinceUpload } from '@/utils';
 
 type CommentItemProps = {
   children?: ReactNode;
@@ -27,9 +35,12 @@ const CommentItem = ({ data }: CommentItemProps) => {
         to={snippet.authorChannelUrl}
       />
       <Content>
-        <CustomLink to={snippet.authorChannelUrl}>
-          <span>{snippet.authorDisplayName}</span>
-        </CustomLink>
+        <UserHeader>
+          <CustomLink to={snippet.authorChannelUrl}>
+            <span>{snippet.authorDisplayName}</span>
+          </CustomLink>
+          <UpdatedAt>{renderDateSinceUpload(snippet.updatedAt)}</UpdatedAt>
+        </UserHeader>
         <Description>
           <span ref={ref}>{snippet.textOriginal}</span>
         </Description>

@@ -7,7 +7,8 @@ import { getViewFormat } from './format';
 export const renderDateSinceUpload = (date: string | Date) => {
   const seconds = getSinceSeconds(date);
   const since = dateFormat.filter((v) => seconds / v.divide < v.compare)[0];
-  return `${Math.floor(seconds / since.divide)}${since.unit} 전`;
+  const uploadedNumber = Math.floor(seconds / since.divide);
+  return `${uploadedNumber ? uploadedNumber : ''}${since.unit} 전`;
 };
 
 export const renderViewFormat = (
