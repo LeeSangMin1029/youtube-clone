@@ -17,24 +17,27 @@ const SubscriptionChannelLists = () => {
     queryFn: async () =>
       await fetchPost<YoutubeChannelsList>('subscriptions', { googleID }),
   });
+  console.log(channelLists);
 
   return (
     <MenuMoreDetail>
-      {channelLists?.items.map(({ snippet: { thumbnails, title } }) => (
-        <SliderItem
-          key={randomKey()}
-          name={title}
-          asset={
-            <Thumbnails
-              width="24px"
-              height="24px"
-              source={thumbnails.default.url || thumbnails.high.url}
-              alt={title}
-              to={'#'}
-            />
-          }
-        />
-      ))}
+      {channelLists?.items.map(
+        ({ snippet: { thumbnails, title, resourceId } }) => (
+          <SliderItem
+            key={randomKey()}
+            name={title}
+            asset={
+              <Thumbnails
+                width="24px"
+                height="24px"
+                source={thumbnails.default.url || thumbnails.high.url}
+                alt={title}
+                to={`https://www.youtube.com/channel/${resourceId?.channelId}`}
+              />
+            }
+          />
+        ),
+      )}
     </MenuMoreDetail>
   );
 };

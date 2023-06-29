@@ -31,6 +31,7 @@ const CommentSubmit = (
       if (ref.current) {
         ref.current.style.backgroundColor = '#0556bf';
         ref.current.style.color = 'white';
+        ref.current.style.cursor = 'pointer';
         ref.current.disabled = false;
         setPlay(true);
       }
@@ -39,6 +40,7 @@ const CommentSubmit = (
       if (ref.current) {
         ref.current.style.backgroundColor = 'rgba(0,0,0,0.05)';
         ref.current.style.color = '#909090';
+        ref.current.style.cursor = 'default';
         ref.current.disabled = true;
         setPlay(false);
       }
@@ -46,11 +48,9 @@ const CommentSubmit = (
   }));
 
   return (
-    <StyledButton id="form1" type="submit" ref={ref}>
+    <StyledButton {...handler} id="form1" type="submit" ref={ref}>
       <span>{isReply ? '답글' : '댓글'}</span>
-      {isPlay && (
-        <CoverInteract {...handler} mouse={mouse} interact="immediate" />
-      )}
+      {isPlay && <CoverInteract mouse={mouse} interact="immediate" />}
     </StyledButton>
   );
 };
