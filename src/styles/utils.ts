@@ -70,3 +70,15 @@ export const DisplayGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(344px, 1fr));
   grid-auto-rows: minmax(340px, auto);
 `;
+
+export const StyledButton = styled.button`
+  background-color: white;
+  position: relative;
+  height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

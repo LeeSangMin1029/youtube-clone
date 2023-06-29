@@ -5,10 +5,15 @@ import {
   VideoDetail,
   ChannelInfo,
   BetweenContent,
+  WrapperPlayer,
 } from './styles';
 import { useFindVideo } from '@/hooks';
 import { getVideoInfo, renderViewFormat } from '@/utils';
-import parseHtml from 'html-react-parser';
+import YoutubeVideoPlayer from '@/components/YoutubeVideoPlayer';
+import ChannelThumbnails from '@/components/ChannelThumbnails';
+import ErrorBoundarySuspense from '../ErrorBoundarySuspense';
+import Fallback from '../Fallback';
+import Comments from '../Comments';
 
 const VideoPlayer = () => {
   const video = useFindVideo();
@@ -16,30 +21,34 @@ const VideoPlayer = () => {
     videoId,
     title,
     channelId,
-    videoSrc,
+    thumbnails,
     channelTitle,
+    commentCount,
     description,
     subscriberCount,
     viewCount,
     publishedAt,
-    html,
+    width,
+    height,
   } = getVideoInfo(video!);
-  const target = `src="https://www.youtube.com/embed/${videoId}`;
-  const Parse = parseHtml(
-    html
-      ?.toString()
-      .replaceAll(target, `${target}?autoplay=1&mute=1&wmode=opaque`) || '',
-  );
+
   return (
     <PlayerBoard>
-      {Parse}
+      <WrapperPlayer>
+        <YoutubeVideoPlayer videoId={videoId} height={height} width={width} />
+      </WrapperPlayer>
       {video && (
         <VideoDetail>
           <h1>{title}</h1>
           <BetweenContent>
             <ChannelInfo>
               <a href={channelId}>
-                <img src={videoSrc} />
+                <ChannelThumbnails
+                  source={thumbnails}
+                  width="40px"
+                  height="40px"
+                  alt={channelTitle}
+                />
               </a>
               <div>
                 <a href={channelId}>{channelTitle}</a>
@@ -60,6 +69,10 @@ const VideoPlayer = () => {
           />
         </VideoDetail>
       )}
+
+      <ErrorBoundarySuspense Fallback={Fallback} Loading={<></>}>
+        <Comments id={videoId} count={commentCount} />
+      </ErrorBoundarySuspense>
     </PlayerBoard>
   );
 };

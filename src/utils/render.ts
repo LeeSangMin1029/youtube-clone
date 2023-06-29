@@ -32,7 +32,7 @@ export const getVideoInfo = (video: YoutubeVideo) => {
   return {
     title,
     videoId: id,
-    videoSrc: channel?.snippet?.thumbnails?.medium?.url,
+    thumbnails: channel?.snippet?.thumbnails,
     description: snippet?.description,
     channelId: `https://www.youtube.com/channel/${channel?.id}`,
     width: embedWidth,
@@ -42,5 +42,7 @@ export const getVideoInfo = (video: YoutubeVideo) => {
     channelTitle: snippet?.channelTitle,
     publishedAt: snippet?.publishedAt,
     html: embedHtml,
+    channel,
+    commentCount: vStatic?.commentCount,
   };
 };

@@ -53,6 +53,7 @@ export type YoutubeVideo = {
   };
   statistics: {
     viewCount: string;
+    commentCount: string;
   };
   player: {
     embedHtml: string;
@@ -66,9 +67,12 @@ export type VideoParams = {
   id?: string[];
   chart?: 'mostPopular';
   pageToken?: string;
+  videoId?: string[];
+
+  allThreadsRelatedToChannelId?: string;
 };
 
-export type APIResource = 'videos' | 'playlists' | 'subscriptions';
+export type APIResource = 'videos' | 'playlists' | 'subscriptions' | 'comments';
 
 export type YoutubePlayListsInfo = {
   items: YoutubePlayLists[];
@@ -82,3 +86,9 @@ export type YoutubePlayLists = {
 export type YoutubeChannelsList = {
   items: YoutubeChannel[];
 };
+
+export type YoutubeCommentsList = {
+  items: YoutubeComments[];
+};
+
+export type YoutubeComments = {};
