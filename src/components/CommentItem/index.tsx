@@ -24,7 +24,9 @@ const CommentItem = ({ data }: CommentItemProps) => {
     },
   } = data;
   const { height, ref } = useHeight();
-
+  const modified = snippet?.publishedAt === snippet?.updatedAt;
+  const resultUpdatedAt =
+    renderDateSinceUpload(snippet.publishedAt) + (modified ? '' : '(수정됨)');
   return (
     <StyledComment>
       <Thumbnails
@@ -39,7 +41,7 @@ const CommentItem = ({ data }: CommentItemProps) => {
           <CustomLink to={snippet.authorChannelUrl}>
             <span>{snippet.authorDisplayName}</span>
           </CustomLink>
-          <UpdatedAt>{renderDateSinceUpload(snippet.updatedAt)}</UpdatedAt>
+          <UpdatedAt>{resultUpdatedAt}</UpdatedAt>
         </UserHeader>
         <Description>
           <span ref={ref}>{snippet.textOriginal}</span>
