@@ -3,6 +3,7 @@ import { Form, CommentBox, Input, Submit } from './styles';
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import CommentCancel from '@/components/CommentCancel';
 import CommentSubmit, { ColorHandle } from '@/components/CommentSubmit';
+import { CustomMouseEvent } from '@/@types/global';
 
 type CommentFormProps = {
   isReply: boolean;
@@ -48,7 +49,6 @@ const CommentForm = ({ isReply, id }: CommentFormProps) => {
           data,
         }),
       });
-      console.log(fetched);
       setValue('');
       setFocus(false);
     },
@@ -74,10 +74,9 @@ const CommentForm = ({ isReply, id }: CommentFormProps) => {
         width="40"
         src={user.isLoggedIn ? user.thumbnails : defaultSrc}
       />
-      <Form onSubmit={onSubmit} id="form1">
+      <Form onSubmit={onSubmit}>
         <Input>
           <input
-            id="form1"
             onChange={onChange}
             onClick={() => setFocus(true)}
             placeholder={isReply ? '답글' : '댓글' + '추가...'}
@@ -89,7 +88,8 @@ const CommentForm = ({ isReply, id }: CommentFormProps) => {
         {focus && (
           <Submit draggable={false}>
             <CommentCancel
-              handleUp={() => {
+              onClick={(e: CustomMouseEvent) => {
+                e.preventDefault();
                 setFocus(false);
                 setValue('');
               }}

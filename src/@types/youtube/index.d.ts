@@ -38,6 +38,9 @@ export type YoutubeChannel = {
   snippet: {
     thumbnails: YoutubeCommonThumbnails;
     title: string;
+    resourceId?: {
+      channelId: string;
+    };
   };
   statistics: {
     subscriberCount: number;
@@ -88,7 +91,42 @@ export type YoutubeChannelsList = {
 };
 
 export type YoutubeCommentsList = {
-  items: YoutubeComments[];
+  items: CommentThread[];
 };
 
-export type YoutubeComments = {};
+export type CommentSnippet = {
+  videoId: string;
+  textDisplay: string;
+  textOriginal: string;
+  authorDisplayName: string;
+  authorProfileImageUrl: string;
+  authorChannelUrl: string;
+  authorChannelId: {
+    value: string;
+  };
+  canRate: boolean;
+  viewerRating: string;
+  likeCount: number;
+  publishedAt: string;
+  updatedAt: string;
+};
+
+export type CommentThreadSnippet = {
+  videoId: string;
+  topLevelComment: {
+    kind: string;
+    etag: string;
+    id: string;
+    snippet: CommentSnippet;
+  };
+  canReply: boolean;
+  totalReplyCount: number;
+  isPublic: boolean;
+};
+
+export type CommentThread = {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: CommentThreadSnippet;
+};

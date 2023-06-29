@@ -1,10 +1,8 @@
-import { useUserContext } from '@/context/UserContext';
-import { commentsKeys } from '@/utils/reactQueryKeys';
-import { useQuery } from 'react-query';
-import { fetchPost } from '@/utils';
-import { CommentCount, StyledComments } from './styles';
-import { YoutubeCommentsList } from '@/@types/youtube';
+import { CommentCount, StyledComments, CommentHeader } from './styles';
 import CommentForm from '@/components/CommentForm';
+import CommentList from '@/components/CommentList';
+import ErrorBoundarySuspense from '../ErrorBoundarySuspense';
+import Fallback from '../Fallback';
 
 type CommentsProps = {
   id: string;
@@ -12,24 +10,15 @@ type CommentsProps = {
 };
 
 const Comments = ({ id, count }: CommentsProps) => {
-  const {
-    user: { googleID },
-  } = useUserContext();
-  const { data: comments } = useQuery({
-    queryKey: [...commentsKeys.lists(), googleID, id],
-    queryFn: async () =>
-      await fetchPost<YoutubeCommentsList>('comments', {
-        googleID,
-        params: { videoId: [id] },
-      }),
-  });
-
   return (
     <StyledComments>
-      <CommentCount>
-        <div>댓글 {count}개</div>
-      </CommentCount>
-      <CommentForm isReply={false} id={id} />
+      <CommentHeader>
+        <CommentCount>댓글 {count}개</CommentCount>
+        <CommentForm isReply={false} id={id} />
+      </CommentHeader>
+      <ErrorBoundarySuspense Fallback={Fallback} Loading={<></>}>
+        <CommentList id={id} />
+      </ErrorBoundarySuspense>
     </StyledComments>
   );
 };
