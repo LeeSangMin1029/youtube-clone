@@ -1,6 +1,6 @@
 import { CustomMouseEvent } from '@/@types/global';
+import { StyledLink } from './styles';
 import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 type CustomLinkProps = {
   to: string;
@@ -12,9 +12,9 @@ const CustomLink = ({ to, children }: CustomLinkProps) => {
     e.stopPropagation();
   };
   return (
-    <Link onClick={onClick} to={to}>
+    <StyledLink onClick={onClick} to={to}>
       {children}
-    </Link>
+    </StyledLink>
   );
 };
 export default CustomLink;
