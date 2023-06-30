@@ -1,20 +1,16 @@
-import { useMouseHandler } from '@/hooks';
-import { StyledButton } from '@/styles/utils';
-import CoverInteract from '@/components/CoverInteract';
 import { CustomMouseEvent } from '@/@types/global';
+import { StyledExtendButton } from './styles';
+import AnimateElement from '@/components/AnimateElement';
 
 type CommentCancelProps = {
   onClick: (e: CustomMouseEvent) => void;
 };
 
 const CommentCancel = ({ onClick }: CommentCancelProps) => {
-  const { mouse, ...handler } = useMouseHandler();
-
   return (
-    <StyledButton {...handler} onClick={onClick}>
+    <AnimateElement Styled={StyledExtendButton} onClick={onClick}>
       <span>취소</span>
-      <CoverInteract mouse={mouse} interact="immediate" />
-    </StyledButton>
+    </AnimateElement>
   );
 };
 export default CommentCancel;

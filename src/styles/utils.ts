@@ -1,25 +1,6 @@
 import { CSSPropertiesKebab } from '@/@types/global';
 import styled, { css, keyframes } from 'styled-components';
 
-export const SVGBtn = styled.button`
-  border: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background-color: transparent;
-  border-radius: 50%;
-  > svg {
-    padding: 8px;
-    cursor: pointer;
-  }
-`;
-
-export const ExtendSVGBtn = styled(SVGBtn)`
-  margin-right: 8px;
-`;
-
 export const conditionalContent = (delimiters: boolean) => css`
   span {
     color: ${delimiters ? '#606060' : 'inherit'};
@@ -71,14 +52,23 @@ export const DisplayGrid = styled.div`
   grid-auto-rows: minmax(340px, auto);
 `;
 
-export const StyledButton = styled.button`
-  background-color: white;
+export const BaseButton = styled.button`
   position: relative;
-  height: 34px;
-  padding: 0 14px;
+  background-color: transparent;
   border: none;
-  border-radius: 18px;
+  padding: 0;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const CircularButton = styled(BaseButton)`
+  padding: 8px;
+`;
+
+export const RoundedButton = styled(BaseButton)`
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 18px;
 `;

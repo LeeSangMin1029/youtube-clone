@@ -17,7 +17,6 @@ const SubscriptionChannelLists = () => {
     queryFn: async () =>
       await fetchPost<YoutubeChannelsList>('subscriptions', { googleID }),
   });
-  console.log(channelLists);
 
   return (
     <MenuMoreDetail>

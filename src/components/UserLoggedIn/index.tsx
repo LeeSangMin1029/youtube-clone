@@ -1,15 +1,20 @@
 import { UserProfile } from './styles';
 import { memo } from 'react';
 import { useUserContext } from '@/context/UserContext';
-import Upload from '@/components/Upload';
-import Alarm from '@/components/Alarm';
+import { AlarmIcon, UploadIcon } from '@/assets';
+import AnimateElement from '@/components/AnimateElement';
+import { ExtendsButton } from './styles';
 
 const UserLoggedIn = memo(() => {
   const { user } = useUserContext();
   return (
     <>
-      <Upload />
-      <Alarm />
+      <AnimateElement Styled={ExtendsButton}>
+        <UploadIcon width="24px" height="24px" />
+      </AnimateElement>
+      <AnimateElement Styled={ExtendsButton}>
+        <AlarmIcon width="24px" height="24px" />
+      </AnimateElement>
       <UserProfile>
         <div>
           <img src={user?.thumbnails} width={32} height={32} />

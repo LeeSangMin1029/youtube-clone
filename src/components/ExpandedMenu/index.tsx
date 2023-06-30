@@ -6,7 +6,7 @@ import {
   WatchHistory,
   MyVideo,
   LaterWatchVideo,
-  VideoLike,
+  LikeThumb,
 } from '@/assets';
 import SliderItem from '@/components/SliderItem';
 import { StyledMenu, Section, StyledList } from './styles';
@@ -31,7 +31,7 @@ const secondList = [
 const onlyLoggedList = [
   { name: '내 동영상', Asset: <MyVideo /> },
   { name: '나중에 볼 동영상', Asset: <LaterWatchVideo /> },
-  { name: '좋아요 표시한 동영상', Asset: <VideoLike /> },
+  { name: '좋아요 표시한 동영상', Asset: <LikeThumb /> },
 ];
 
 const ExpandedMenu = () => {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { CircularButton } from '@/styles/utils';
 
 export const UserProfile = styled.div`
   > div {
@@ -10,4 +11,8 @@ export const UserProfile = styled.div`
     }
   }
   padding: 1px 6px;
+`;
+
+export const ExtendsButton = styled(CircularButton)`
+  margin-right: 8px;
 `;

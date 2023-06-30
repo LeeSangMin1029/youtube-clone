@@ -1,11 +1,15 @@
 import { memo } from 'react';
-import Setting from '@/components/Setting';
+import { SettingIcon } from '@/assets';
 import UserLoginButton from '@/components/UserLoginButton';
+import AnimateElement from '@/components/AnimateElement';
+import { CircularButton } from '@/styles/utils';
 
 const UserLoggedOut = memo(() => {
   return (
     <>
-      <Setting />
+      <AnimateElement Styled={CircularButton}>
+        <SettingIcon width="24px" height="24px" />
+      </AnimateElement>
       <UserLoginButton />
     </>
   );

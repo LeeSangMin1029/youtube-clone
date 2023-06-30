@@ -1,6 +1,6 @@
 import { useMouseHandler } from '@/hooks';
 import CoverInteract from '@/components/CoverInteract';
-import { StyledButton } from '@/styles/utils';
+import { BaseButton } from '@/styles/utils';
 import {
   ForwardedRef,
   forwardRef,
@@ -48,10 +48,10 @@ const CommentSubmit = (
   }));
 
   return (
-    <StyledButton {...handler} id="form1" type="submit" ref={ref}>
+    <BaseButton {...handler} id="form1" type="submit" ref={ref}>
       <span>{isReply ? '답글' : '댓글'}</span>
       {isPlay && <CoverInteract mouse={mouse} interact="immediate" />}
-    </StyledButton>
+    </BaseButton>
   );
 };
 export default memo(forwardRef<ColorHandle, CommentSubmitProps>(CommentSubmit));

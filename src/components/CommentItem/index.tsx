@@ -1,5 +1,6 @@
 import { CommentThread } from '@/@types/youtube';
 import { ReactNode } from 'react';
+import { DislikeThumb, LikeThumb } from '@/assets';
 import {
   StyledComment,
   Content,
@@ -7,11 +8,14 @@ import {
   Expander,
   UserHeader,
   UpdatedAt,
+  CommentInteract,
 } from './styles';
 import Thumbnails from '@/components/Thumbnails';
 import CustomLink from '@/components/CustomLink';
 import { useHeight } from '@/hooks/useHeight';
 import { renderDateSinceUpload } from '@/utils';
+import AnimateElement from '@/components/AnimateElement';
+import { BaseButton } from '@/styles/utils';
 
 type CommentItemProps = {
   children?: ReactNode;
@@ -47,6 +51,14 @@ const CommentItem = ({ data }: CommentItemProps) => {
           <span ref={ref}>{snippet.textOriginal}</span>
         </Description>
         {height > 78 && <Expander type="checkbox" />}
+        <CommentInteract>
+          <AnimateElement Styled={BaseButton}>
+            <DislikeThumb width="24px" height="24px" />
+          </AnimateElement>
+          <AnimateElement Styled={BaseButton}>
+            <LikeThumb width="24px" height="24px" />
+          </AnimateElement>
+        </CommentInteract>
       </Content>
     </StyledComment>
   );

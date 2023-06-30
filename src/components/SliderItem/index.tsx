@@ -11,7 +11,7 @@ type SliderItemProps = {
 
 const SliderItem = ({ asset, name, handleUp }: SliderItemProps) => {
   const { mouse, ...handler } = useMouseHandler({
-    handleUp: handleUp ? handleUp : () => {},
+    handleUp: () => handleUp && handleUp(),
   });
 
   return (
