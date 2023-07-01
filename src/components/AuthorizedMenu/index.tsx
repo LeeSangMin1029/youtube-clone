@@ -10,7 +10,6 @@ const AuthorizedMenu = () => {
 
   return (
     <>
-      <div className="divide" />
       {user.isLoggedIn ? (
         <>
           <ListTitle>구독</ListTitle>

@@ -65,6 +65,7 @@ const ExpandedMenu = () => {
       </Section>
       <Section>
         <StyledList>
+          <div className="divide" />
           <AuthorizedMenu />
         </StyledList>
       </Section>
