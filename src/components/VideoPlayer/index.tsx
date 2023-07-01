@@ -6,6 +6,7 @@ import {
   ChannelInfo,
   BetweenContent,
   WrapperPlayer,
+  Title,
 } from './styles';
 import { useFindVideo } from '@/hooks';
 import { getVideoInfo, renderViewFormat } from '@/utils';
@@ -40,7 +41,7 @@ const VideoPlayer = () => {
       </WrapperPlayer>
       {video && (
         <VideoDetail>
-          <h1>{title}</h1>
+          <Title>{title}</Title>
           <BetweenContent>
             <ChannelInfo>
               <Thumbnails
