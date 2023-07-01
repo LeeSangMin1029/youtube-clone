@@ -1,6 +1,6 @@
 import { MouseState, AnimationDelay } from '@/@types/global';
 import { Interact } from './styles';
-import { CSSProperties, memo, useEffect, useRef } from 'react';
+import { CSSProperties, memo } from 'react';
 
 type CoverInteractProps = {
   mouse: MouseState;
@@ -13,14 +13,8 @@ const CoverInteract = ({
   customCSS,
   ...props
 }: CoverInteractProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (ref.current?.parentElement) {
-      ref.current.parentElement.style.cursor = 'pointer';
-    }
-  }, []);
   return (
-    <Interact {...props} ref={ref}>
+    <Interact {...props}>
       <div
         className={`${interact ? 'stroke ' + interact : 'stroke'}`}
         style={customCSS}
