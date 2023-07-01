@@ -1,12 +1,12 @@
 import { useMouseHandler } from '@/hooks';
 import CoverInteract from '@/components/CoverInteract';
-import { ReactNode, cloneElement } from 'react';
+import { ElementType, ReactNode, cloneElement } from 'react';
 import { EmptyStyled } from './styles';
-import { ButtonProps, CustomMouseEvent } from '@/@types/global';
+import { CustomMouseEvent } from '@/@types/global';
 
 type AnimateElementProps = {
   children: ReactNode;
-  Styled: (props: ButtonProps) => JSX.Element;
+  StyledComp: ElementType;
   handleUp?: () => void;
   onClick?: (e: CustomMouseEvent) => void;
   isActivate?: boolean;
@@ -14,7 +14,7 @@ type AnimateElementProps = {
 
 const AnimateElement = ({
   children,
-  Styled,
+  StyledComp,
   handleUp,
   onClick,
   isActivate = true,
@@ -26,7 +26,7 @@ const AnimateElement = ({
   return (
     <>
       {cloneElement(
-        <EmptyStyled as={Styled} {...handler} onClick={onClick} />,
+        <EmptyStyled as={StyledComp} {...handler} onClick={onClick} />,
         {
           children: (
             <>

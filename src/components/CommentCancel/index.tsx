@@ -8,7 +8,7 @@ type CommentCancelProps = {
 
 const CommentCancel = ({ onClick }: CommentCancelProps) => {
   return (
-    <AnimateElement Styled={StyledExtendButton} onClick={onClick}>
+    <AnimateElement StyledComp={StyledExtendButton} onClick={onClick}>
       <span>취소</span>
     </AnimateElement>
   );

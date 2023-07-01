@@ -52,10 +52,10 @@ const CommentItem = ({ data }: CommentItemProps) => {
         </Description>
         {height > 78 && <Expander type="checkbox" />}
         <CommentInteract>
-          <AnimateElement Styled={BaseButton}>
+          <AnimateElement StyledComp={BaseButton}>
             <DislikeThumb width="24px" height="24px" />
           </AnimateElement>
-          <AnimateElement Styled={BaseButton}>
+          <AnimateElement StyledComp={BaseButton}>
             <LikeThumb width="24px" height="24px" />
           </AnimateElement>
         </CommentInteract>

@@ -9,10 +9,10 @@ const UserLoggedIn = memo(() => {
   const { user } = useUserContext();
   return (
     <>
-      <AnimateElement Styled={ExtendsButton}>
+      <AnimateElement StyledComp={ExtendsButton}>
         <UploadIcon width="24px" height="24px" />
       </AnimateElement>
-      <AnimateElement Styled={ExtendsButton}>
+      <AnimateElement StyledComp={ExtendsButton}>
         <AlarmIcon width="24px" height="24px" />
       </AnimateElement>
       <UserProfile>

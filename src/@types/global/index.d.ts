@@ -40,11 +40,3 @@ export type Kebab<
 export type CSSPropertiesKebab = Kebab<keyof CSSProperties>;
 
 export type AnimationDelay = 'immediate';
-
-export interface ButtonProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {}
-
-export type HTMLBaseProps = HTMLAttributes<DOMElement>;

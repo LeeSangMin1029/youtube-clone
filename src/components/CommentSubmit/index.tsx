@@ -1,6 +1,6 @@
 import { useMouseHandler } from '@/hooks';
 import CoverInteract from '@/components/CoverInteract';
-import { BaseButton, RoundedButton } from '@/styles/utils';
+import { RoundedButton } from '@/styles/utils';
 import {
   ForwardedRef,
   forwardRef,

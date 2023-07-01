@@ -8,7 +8,7 @@ const HamburgerButton = () => {
   const { open, setOpen } = useMenuContext();
 
   return (
-    <AnimateElement Styled={CircularButton} handleUp={() => setOpen(!open)}>
+    <AnimateElement StyledComp={CircularButton} handleUp={() => setOpen(!open)}>
       <Hamburger width={'24px'} height={'24px'} />
     </AnimateElement>
   );

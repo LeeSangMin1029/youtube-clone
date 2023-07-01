@@ -7,7 +7,7 @@ import { CircularButton } from '@/styles/utils';
 const UserLoggedOut = memo(() => {
   return (
     <>
-      <AnimateElement Styled={CircularButton}>
+      <AnimateElement StyledComp={CircularButton}>
         <SettingIcon width="24px" height="24px" />
       </AnimateElement>
       <UserLoginButton />
