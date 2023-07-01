@@ -84,7 +84,7 @@ export const useMouseHandler = (inject?: InjectHandlerOptions) => {
 
   const onMouseUp = useCallback(
     (event: CustomMouseEvent) => {
-      if (isLeftMouse(event.button)) {
+      if (isLeftMouse(event.button) && !mouse.enterBeforeDown) {
         dispatch({ type: MOUSE_ACTION.MOUSE_UP });
         !isOutside.current && inject?.handleUp();
         isOutside.current = false;
