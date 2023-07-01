@@ -73,4 +73,6 @@ export const CommentInteract = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 4px;
+  gap: 2px;
 `;

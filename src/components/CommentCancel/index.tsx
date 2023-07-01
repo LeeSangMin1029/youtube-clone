@@ -1,6 +1,6 @@
 import { CustomMouseEvent } from '@/@types/global';
-import { StyledExtendButton } from './styles';
 import AnimateElement from '@/components/AnimateElement';
+import { RoundedButton } from '@/styles/utils';
 
 type CommentCancelProps = {
   onClick: (e: CustomMouseEvent) => void;
@@ -8,7 +8,7 @@ type CommentCancelProps = {
 
 const CommentCancel = ({ onClick }: CommentCancelProps) => {
   return (
-    <AnimateElement StyledComp={StyledExtendButton} onClick={onClick}>
+    <AnimateElement StyledComp={RoundedButton} onClick={onClick}>
       <span>취소</span>
     </AnimateElement>
   );
