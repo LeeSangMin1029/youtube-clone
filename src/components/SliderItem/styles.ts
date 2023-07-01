@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const Item = styled.li`
-  position: relative;
-  border-radius: 8px;
-`;
-
 export const Content = styled.div`
   user-select: none;
   padding: ${({ theme }) => theme.menu.item.padding};
@@ -27,4 +22,9 @@ export const AssetTitle = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+export const ListItem = styled.li`
+  position: relative;
+  border-radius: 8px;
 `;

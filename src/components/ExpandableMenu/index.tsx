@@ -8,19 +8,19 @@ import { memo } from 'react';
 const expandableList = [
   {
     name: '홈',
-    Asset: <Home />,
+    Asset: Home,
   },
   {
     name: 'Shorts',
-    Asset: <Shorts />,
+    Asset: Shorts,
   },
   {
     name: '구독',
-    Asset: <Subscription />,
+    Asset: Subscription,
   },
   {
     name: '보관함',
-    Asset: <Library />,
+    Asset: Library,
   },
 ];
 
@@ -30,13 +30,13 @@ const ExpandableMenu = () => {
   return (
     <StyledList>
       {expandableList.map(({ name, Asset }) => (
-        <SliderItem key={randomKey()} asset={Asset} name={name} />
+        <SliderItem key={randomKey()} name={name} asset={<Asset />} />
       ))}
       {isLoaded && !user.isLoggedIn && (
         <SliderItem
           key={randomKey()}
           asset={<WatchHistory />}
-          name={'시청 기록'}
+          name="시청 기록"
         />
       )}
     </StyledList>

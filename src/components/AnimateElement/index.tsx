@@ -6,7 +6,7 @@ import { CustomMouseEvent } from '@/@types/global';
 
 type AnimateElementProps = {
   children: ReactNode;
-  StyledComp: ElementType;
+  StyledComp?: ElementType;
   handleUp?: () => void;
   onClick?: (e: CustomMouseEvent) => void;
   isActivate?: boolean;
