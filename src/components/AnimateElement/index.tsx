@@ -1,8 +1,8 @@
 import { useMouseHandler } from '@/hooks';
 import CoverInteract from '@/components/CoverInteract';
-import { ElementType, ReactNode, cloneElement } from 'react';
+import { ElementType, ReactNode } from 'react';
 import { EmptyStyled } from './styles';
-import { CustomMouseEvent } from '@/@types/global';
+import { AnimationDelay, CustomMouseEvent } from '@/@types/global';
 
 type AnimateElementProps = {
   children: ReactNode;
@@ -10,6 +10,7 @@ type AnimateElementProps = {
   handleUp?: () => void;
   onClick?: (e: CustomMouseEvent) => void;
   isActivate?: boolean;
+  interact?: AnimationDelay;
 };
 
 const AnimateElement = ({
@@ -18,27 +19,17 @@ const AnimateElement = ({
   handleUp,
   onClick,
   isActivate = true,
+  interact = 'immediate',
 }: AnimateElementProps) => {
   const { mouse, ...handler } = useMouseHandler({
     handleUp: () => handleUp && handleUp(),
   });
 
   return (
-    <>
-      {cloneElement(
-        <EmptyStyled as={StyledComp} {...handler} onClick={onClick} />,
-        {
-          children: (
-            <>
-              {isActivate && (
-                <CoverInteract mouse={mouse} interact="immediate" />
-              )}
-              {children}
-            </>
-          ),
-        },
-      )}
-    </>
+    <EmptyStyled as={StyledComp} {...handler} onClick={onClick}>
+      {isActivate && <CoverInteract mouse={mouse} interact={interact} />}
+      {children}
+    </EmptyStyled>
   );
 };
 

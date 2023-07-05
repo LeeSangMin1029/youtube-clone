@@ -1,6 +1,5 @@
 import { CommentThread } from '@/@types/youtube';
 import { ReactNode } from 'react';
-import { DislikeThumb, LikeThumb } from '@/assets';
 import {
   StyledComment,
   Content,
@@ -8,14 +7,16 @@ import {
   Expander,
   UserHeader,
   UpdatedAt,
-  CommentInteract,
+  StyledToolbarWithExpander,
 } from './styles';
 import Thumbnails from '@/components/Thumbnails';
 import CustomLink from '@/components/CustomLink';
+import CommentToolbar from '@/components/CommentToolbar';
 import { useHeight } from '@/hooks/useHeight';
 import { renderDateSinceUpload } from '@/utils';
 import AnimateElement from '@/components/AnimateElement';
-import { BaseButton } from '@/styles/utils';
+import { RoundedButton } from '@/styles/utils';
+import { MoreDetails } from '@/assets';
 
 type CommentItemProps = {
   children?: ReactNode;
@@ -25,12 +26,14 @@ const CommentItem = ({ data }: CommentItemProps) => {
   const {
     snippet: {
       topLevelComment: { snippet },
+      totalReplyCount,
     },
   } = data;
   const { height, ref } = useHeight();
   const modified = snippet?.publishedAt === snippet?.updatedAt;
   const resultUpdatedAt =
     renderDateSinceUpload(snippet.publishedAt) + (modified ? '' : '(수정됨)');
+
   return (
     <StyledComment>
       <Thumbnails
@@ -51,14 +54,17 @@ const CommentItem = ({ data }: CommentItemProps) => {
           <span ref={ref}>{snippet.textOriginal}</span>
         </Description>
         {height > 78 && <Expander type="checkbox" />}
-        <CommentInteract>
-          <AnimateElement StyledComp={BaseButton}>
-            <DislikeThumb width="24px" height="24px" />
-          </AnimateElement>
-          <AnimateElement StyledComp={BaseButton}>
-            <LikeThumb width="24px" height="24px" />
-          </AnimateElement>
-        </CommentInteract>
+        <StyledToolbarWithExpander>
+          <CommentToolbar likeCount={snippet.likeCount} parentId={data.id} />
+          {!!totalReplyCount && (
+            <AnimateElement StyledComp={RoundedButton}>
+              <div>
+                <MoreDetails width="24px" height="24px" />
+                <span>답글 {totalReplyCount}개</span>
+              </div>
+            </AnimateElement>
+          )}
+        </StyledToolbarWithExpander>
       </Content>
     </StyledComment>
   );

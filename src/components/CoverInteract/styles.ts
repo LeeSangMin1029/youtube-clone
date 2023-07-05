@@ -45,7 +45,7 @@ export const Interact = styled.div<{
       `}
   }
 
-  .fill:not(.immediate) {
+  .fill.afterdown {
     ${({ mouse }) =>
       mouse.down &&
       css`
@@ -59,7 +59,7 @@ export const Interact = styled.div<{
       `}
   }
 
-  .stroke:not(.immediate) {
+  .stroke.afterdown {
     ${({ mouse }) =>
       !mouse.enterBeforeDown &&
       mouse.up &&

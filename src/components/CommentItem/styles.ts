@@ -12,6 +12,7 @@ export const StyledComment = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   a {
     width: fit-content;
     margin-right: 4px;
@@ -69,10 +70,8 @@ export const UpdatedAt = styled.span`
   text-align: center;
 `;
 
-export const CommentInteract = styled.div`
+export const StyledToolbarWithExpander = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 4px;
-  gap: 2px;
+  flex-direction: column;
+  width: fit-content;
 `;

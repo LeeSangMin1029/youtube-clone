@@ -23,7 +23,7 @@ const CommentForm = ({ isReply, id }: CommentFormProps) => {
       let resource;
       let data;
       if (isReply) {
-        resource = 'comments';
+        resource = 'comments/create';
         data = {
           textOriginal: value,
           parentId: id,
@@ -79,7 +79,7 @@ const CommentForm = ({ isReply, id }: CommentFormProps) => {
           <input
             onChange={onChange}
             onClick={() => setFocus(true)}
-            placeholder={isReply ? '답글' : '댓글' + '추가...'}
+            placeholder={(isReply ? '답글' : '댓글') + ' 추가...'}
             autoComplete="off"
             value={value}
           />
@@ -94,7 +94,7 @@ const CommentForm = ({ isReply, id }: CommentFormProps) => {
                 setValue('');
               }}
             />
-            <CommentSubmit ref={btnRef} isReply={false} />
+            <CommentSubmit ref={btnRef} isReply={isReply} />
           </Submit>
         )}
       </Form>

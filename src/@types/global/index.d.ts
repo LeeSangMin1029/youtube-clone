@@ -39,4 +39,4 @@ export type Kebab<
 
 export type CSSPropertiesKebab = Kebab<keyof CSSProperties>;
 
-export type AnimationDelay = 'immediate';
+export type AnimationDelay = 'immediate' | 'afterdown';

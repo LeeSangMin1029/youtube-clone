@@ -5,8 +5,8 @@ import { YoutubeVideo } from '@/@types/youtube';
 import ViewsWithDate from '@/components/ViewsWithDate';
 import VideoThumbnails from '@/components/VideoThumbnails';
 import ChannelThumbnails from '@/components/Thumbnails';
-import { useMouseHandler } from '@/hooks';
 import CustomLink from '@/components/CustomLink';
+import AnimateElement from '@/components/AnimateElement';
 
 type VideoItemProps = {
   data: YoutubeVideo;
@@ -24,15 +24,17 @@ const VideoItem = ({ data }: VideoItemProps) => {
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
   const channelThumbnails = channel?.snippet?.thumbnails;
   const targetLink = useNavigate();
-  const { mouse, ...handler } = useMouseHandler();
   const onClick = () => {
     targetLink(`/watch?id=${id}`);
   };
 
   return (
-    <StyledDiv {...handler} onClick={onClick}>
+    <AnimateElement
+      StyledComp={StyledDiv}
+      onClick={onClick}
+      interact={'afterdown'}
+    >
       <VideoThumbnails
-        mouse={mouse}
         id={id}
         thumbnails={thumbnails}
         duration={contentDetails.duration}
@@ -60,7 +62,7 @@ const VideoItem = ({ data }: VideoItemProps) => {
           </YoutuberData>
         </Description>
       </VideoDetails>
-    </StyledDiv>
+    </AnimateElement>
   );
 };
 

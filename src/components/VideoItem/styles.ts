@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Interact } from '../CoverInteract/styles';
 
 export const VideoDetails = styled.div`
   display: flex;
@@ -14,6 +15,10 @@ export const StyledDiv = styled.div`
   position: relative;
   margin: 0 8px 40px 8px;
   border-radius: 4px;
+  ${Interact} .fill,
+  ${Interact} .stroke {
+    margin: -4px;
+  }
 `;
 
 export const YoutuberData = styled.div`
