@@ -32,7 +32,7 @@ export default defineConfig({
     https: true,
     proxy: {
       '/api': {
-        target: 'https://localhost:5112/api',
+        target: 'https://34.230.38.155:5112/api',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
