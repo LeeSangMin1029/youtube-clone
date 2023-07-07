@@ -6,16 +6,31 @@ export const PlayerBoard = styled.div`
   padding-right: 24px;
   display: flex;
   flex-direction: column;
-  height: 1300px;
+  max-height: 100%;
+`;
+
+export const WrapperPlayer = styled.div`
+  position: relative;
+  padding-bottom: 56.25% /* 16:9 */;
+  padding-top: 25;
+  height: 0;
+`;
+export const Title = styled.h1`
+  word-break: break-word;
+  font-size: 20px;
+  font-weight: 600;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  line-height: 25px;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  white-space: normal;
 `;
 
 export const VideoDetail = styled.div`
   margin-top: 12px;
   margin-bottom: 24px;
-  h1 {
-    font-size: 20px;
-    font-weight: 600;
-  }
+  max-width: 1268px;
 `;
 
 export const PlayerStyled = styled.div<{ height: string; width: string }>`
@@ -29,10 +44,7 @@ export const ChannelInfo = styled.div`
   margin-top: 12px;
   display: flex;
   a img {
-    border-radius: 50%;
     margin-right: 12px;
-    width: 40px;
-    height: 40px;
   }
   > div {
     display: flex;
@@ -41,7 +53,7 @@ export const ChannelInfo = styled.div`
     a {
       line-height: 20px;
     }
-    p {
+    span {
       line-height: 18px;
       font-size: 12px;
     }

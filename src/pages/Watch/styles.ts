@@ -1,7 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledBoard = styled.div`
-  margin-top: 56px;
   display: flex;
   justify-content: center;
   iframe {
@@ -9,9 +8,14 @@ export const StyledBoard = styled.div`
   }
 `;
 
+export const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const RecommendVideoList = styled.div`
   width: 426px;
-  height: 2000px;
+  max-height: 100%;
   padding-top: 24px;
   padding-right: 24px;
 `;

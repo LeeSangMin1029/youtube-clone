@@ -1,60 +1,69 @@
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Thumbnails,
-  VideoDetails,
-  Description,
-  YoutuberData,
-  StyledDiv,
-  InteractStyled,
-} from './styles';
-import { displayedAt, getCountFormat } from '@/utils';
+import { useNavigate } from 'react-router-dom';
+import { VideoDetails, Description, YoutuberData, StyledDiv } from './styles';
 import { YoutubeVideo } from '@/@types/youtube';
+import ViewsWithDate from '@/components/ViewsWithDate';
+import VideoThumbnails from '@/components/VideoThumbnails';
+import ChannelThumbnails from '@/components/Thumbnails';
+import CustomLink from '@/components/CustomLink';
+import AnimateElement from '@/components/AnimateElement';
 
-const VideoItem = memo(({ data }: { data: YoutubeVideo }) => {
+type VideoItemProps = {
+  data: YoutubeVideo;
+};
+
+const VideoItem = ({ data }: VideoItemProps) => {
   const {
     id,
     snippet,
     statistics: { viewCount },
     channel,
+    contentDetails,
   } = data;
-  const {
-    channelId,
-    channelTitle,
-    title,
-    thumbnails: vThumb,
-    publishedAt,
-  } = snippet;
+  const { channelId, channelTitle, title, thumbnails, publishedAt } = snippet;
   const channelHref = `https://www.youtube.com/channel/${channelId}`;
-  const { url: channelThumb } = channel.snippet.thumbnails.default;
+  const channelThumbnails = channel?.snippet?.thumbnails;
+  const targetLink = useNavigate();
+  const onClick = () => {
+    targetLink(`/watch?id=${id}`);
+  };
 
   return (
-    <StyledDiv>
-      <InteractStyled />
-      <Thumbnails>
-        <Link to={`/watch?id=${id}`}>
-          <img src={vThumb?.maxres?.url} alt="thumbnails" />
-        </Link>
-      </Thumbnails>
+    <AnimateElement
+      StyledComp={StyledDiv}
+      onClick={onClick}
+      interact={'afterdown'}
+    >
+      <VideoThumbnails
+        id={id}
+        thumbnails={thumbnails}
+        duration={contentDetails.duration}
+      />
       <VideoDetails>
-        <Link to={channelHref}>
-          <img src={channelThumb} alt="testI" width="36px" height="36px" />
-        </Link>
+        <ChannelThumbnails
+          source={channelThumbnails.default.url || channelThumbnails.high.url}
+          alt={channelTitle}
+          width="36px"
+          height="36px"
+          to={channelHref}
+        />
         <Description>
           <h3>
-            <Link to={`/watch?id=${id}`}>{title}</Link>
+            <CustomLink to={`/watch?id=${id}`}>{title}</CustomLink>
           </h3>
           <YoutuberData>
-            <a href={channelHref}>{channelTitle}</a>
-            <div>
-              <span>조회수 {getCountFormat(viewCount, 0)}회</span>
-              <span>{displayedAt(new Date(publishedAt))}</span>
-            </div>
+            <CustomLink to={channelHref}>{channelTitle}</CustomLink>
+            <ViewsWithDate
+              view={viewCount}
+              publishedAt={publishedAt}
+              isExtend={false}
+              delimiters={true}
+            />
           </YoutuberData>
         </Description>
       </VideoDetails>
-    </StyledDiv>
+    </AnimateElement>
   );
-});
+};
 
-export default VideoItem;
+export default memo(VideoItem);

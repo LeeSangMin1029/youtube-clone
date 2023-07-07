@@ -1,11 +1,13 @@
 import { ReactNode, createContext, useContext, useState, useMemo } from 'react';
 import { UserData } from '@/@types/database';
 
-type UserContextType = {
-  user: UserData;
-  setUser: React.Dispatch<React.SetStateAction<UserData>>;
+type UserDataWithLoggedIn = UserData & {
   isLoggedIn: boolean;
-  setLogged: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+type UserContextType = {
+  user: UserDataWithLoggedIn;
+  setUser: React.Dispatch<React.SetStateAction<UserDataWithLoggedIn>>;
 };
 
 export const UserContext = createContext<UserContextType | null>(null);
@@ -28,15 +30,12 @@ const initUser = {
   email: '',
   thumbnails: '',
   userURL: '',
+  isLoggedIn: false,
 };
 
 const UserProvider = ({ children }: UserProviderProps) => {
-  const [user, setUser] = useState<UserData>(initUser);
-  const [isLoggedIn, setLogged] = useState(false);
-  const contextValue = useMemo(
-    () => ({ user, setUser, isLoggedIn, setLogged }),
-    [user, setUser, isLoggedIn, setLogged],
-  );
+  const [user, setUser] = useState<UserDataWithLoggedIn>(initUser);
+  const contextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

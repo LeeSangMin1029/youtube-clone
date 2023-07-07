@@ -1,10 +1,14 @@
-import { StyledBoard, RecommendVideoList } from "./styles";
-import VideoPlayer from "@/components/VideoPlayer";
+import { StyledBoard, RecommendVideoList, MainContent } from './styles';
+import { lazy } from 'react';
+
+const VideoPlayer = lazy(() => import('@/components/VideoPlayer'));
 
 const Watch = () => {
   return (
     <StyledBoard>
-      <VideoPlayer></VideoPlayer>
+      <MainContent>
+        <VideoPlayer />
+      </MainContent>
       <RecommendVideoList>추천 동영상 및 관련 동영상</RecommendVideoList>
     </StyledBoard>
   );

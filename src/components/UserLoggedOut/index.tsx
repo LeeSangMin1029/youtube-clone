@@ -1,23 +1,16 @@
 import { memo } from 'react';
-import { SVGWrapper, LoginButton } from './styles';
-import { openSignInWindow, googleAuthentication } from '@/utils';
-import { SettingIcon, LoginIcon } from '@/assets';
+import { SettingIcon } from '@/assets';
+import UserLoginButton from '@/components/UserLoginButton';
+import AnimateElement from '@/components/AnimateElement';
+import { CircularButton } from '@/styles/utils';
 
 const UserLoggedOut = memo(() => {
-  const displayLoginWindow = async () => {
-    const openPopupUrl = await googleAuthentication();
-    openSignInWindow(openPopupUrl, 'google Auth');
-  };
-
   return (
     <>
-      <SVGWrapper>
-        <SettingIcon />
-      </SVGWrapper>
-      <LoginButton onClick={displayLoginWindow}>
-        <LoginIcon fill="#065fd4" width="24px" height="24px" />
-        로그인
-      </LoginButton>
+      <AnimateElement StyledComp={CircularButton}>
+        <SettingIcon width="24px" height="24px" />
+      </AnimateElement>
+      <UserLoginButton />
     </>
   );
 });

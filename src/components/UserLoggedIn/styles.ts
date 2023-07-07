@@ -1,11 +1,5 @@
 import styled from 'styled-components';
-
-export const SVGWrapper = styled.div`
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  margin-right: 8px;
-`;
+import { CircularButton } from '@/styles/utils';
 
 export const UserProfile = styled.div`
   > div {
@@ -17,4 +11,8 @@ export const UserProfile = styled.div`
     }
   }
   padding: 1px 6px;
+`;
+
+export const ExtendsButton = styled(CircularButton)`
+  margin-right: 8px;
 `;

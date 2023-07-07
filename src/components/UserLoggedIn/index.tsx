@@ -1,21 +1,20 @@
-import { UserData } from '@/@types/database';
-import { SVGWrapper, UserProfile } from './styles';
-import { UploadIcon, AlarmIcon } from '@/assets';
+import { UserProfile } from './styles';
 import { memo } from 'react';
+import { useUserContext } from '@/context/UserContext';
+import { AlarmIcon, UploadIcon } from '@/assets';
+import AnimateElement from '@/components/AnimateElement';
+import { ExtendsButton } from './styles';
 
-type UserLoggedInProps = {
-  user: UserData;
-};
-
-const UserLoggedIn = memo(({ user }: UserLoggedInProps) => {
+const UserLoggedIn = memo(() => {
+  const { user } = useUserContext();
   return (
     <>
-      <SVGWrapper>
-        <UploadIcon />
-      </SVGWrapper>
-      <SVGWrapper>
-        <AlarmIcon />
-      </SVGWrapper>
+      <AnimateElement StyledComp={ExtendsButton}>
+        <UploadIcon width="24px" height="24px" />
+      </AnimateElement>
+      <AnimateElement StyledComp={ExtendsButton}>
+        <AlarmIcon width="24px" height="24px" />
+      </AnimateElement>
       <UserProfile>
         <div>
           <img src={user?.thumbnails} width={32} height={32} />

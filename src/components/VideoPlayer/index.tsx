@@ -1,65 +1,78 @@
-import { useSearchParams } from 'react-router-dom';
-import YTPlayer from 'react-youtube';
 import VideoManangement from '@/components/VideoManagement';
+import VideoDescription from '@/components/VideoDescription';
 import {
   PlayerBoard,
   VideoDetail,
   ChannelInfo,
   BetweenContent,
+  WrapperPlayer,
+  Title,
 } from './styles';
-import { useVideos } from '@/hooks';
-import { getVideoInfo } from '@/utils';
+import { useFindVideo } from '@/hooks';
+import { getVideoInfo, renderViewFormat } from '@/utils';
+import YoutubeVideoPlayer from '@/components/YoutubeVideoPlayer';
+import Thumbnails from '@/components/Thumbnails';
+import ErrorBoundarySuspense from '../ErrorBoundarySuspense';
+import Fallback from '../Fallback';
+import Comments from '../Comments';
+import CustomLink from '../CustomLink';
 
 const VideoPlayer = () => {
-  const [params] = useSearchParams();
-  const id = params.get('id');
-  const { videos } = useVideos({ id: [id!] });
-  const video = videos?.at(0);
+  const video = useFindVideo();
   const {
-    width,
-    height,
     videoId,
     title,
     channelId,
-    viewCount,
-    videoSrc,
+    thumbnails,
     channelTitle,
+    commentCount,
+    description,
     subscriberCount,
+    viewCount,
+    publishedAt,
+    width,
+    height,
   } = getVideoInfo(video!);
-  console.log(video);
+
   return (
     <PlayerBoard>
+      <WrapperPlayer>
+        <YoutubeVideoPlayer videoId={videoId} height={height} width={width} />
+      </WrapperPlayer>
       {video && (
-        <>
-          <YTPlayer
-            className="player"
-            videoId={videoId}
-            opts={{
-              height,
-              width,
-              playerVars: {
-                autoplay: 1,
-                mute: 1,
-              },
-            }}
+        <VideoDetail>
+          <Title>{title}</Title>
+          <BetweenContent>
+            <ChannelInfo>
+              <Thumbnails
+                source={thumbnails.default.url || thumbnails.high.url}
+                width="40px"
+                height="40px"
+                alt={channelTitle}
+                to={channelId}
+              />
+              <div>
+                <CustomLink to={channelId}>{channelTitle}</CustomLink>
+                <span>
+                  {renderViewFormat('subscription', {
+                    source: subscriberCount,
+                    digit: 1,
+                  })}
+                </span>
+              </div>
+            </ChannelInfo>
+            <VideoManangement />
+          </BetweenContent>
+          <VideoDescription
+            description={description}
+            viewCount={viewCount}
+            publishedAt={publishedAt}
           />
-          <VideoDetail>
-            <h1>{title}</h1>
-            <BetweenContent>
-              <ChannelInfo>
-                <a href={channelId}>
-                  <img src={videoSrc} />
-                </a>
-                <div>
-                  <a href={channelId}>{channelTitle}</a>
-                  <p>구독자 {subscriberCount}</p>
-                </div>
-              </ChannelInfo>
-              <VideoManangement />
-            </BetweenContent>
-          </VideoDetail>
-        </>
+        </VideoDetail>
       )}
+      <ErrorBoundarySuspense Fallback={Fallback} Loading={<></>}>
+        <Comments id={videoId} count={commentCount} />
+      </ErrorBoundarySuspense>
     </PlayerBoard>
   );
 };

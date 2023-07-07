@@ -1,23 +1,35 @@
 import { memo } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { DisplayGrid, MarginContent } from './styles';
-import { useVideos } from '@/hooks';
-import VideoItem from '../VideoItem';
+import { ReloadTarget } from './styles';
+import { DisplayGrid } from '@/styles/utils';
+import { useIntersect, useFetchVideo } from '@/hooks';
+import { Videos as Skeleton } from '@/components/Skeleton';
+import VideoItem from '@/components/VideoItem';
 import { randomKey } from '@/utils';
+import { useVideoContext } from '@/context/VideoContext';
 
-const VideoList = memo(() => {
-  const { videos } = useVideos({ maxResults: 5, chart: 'mostPopular' });
+const VideoList = () => {
+  const { viewVideoCount } = useVideoContext();
+  const { videos, isFetching, hasNextPage, fetchNextPage } = useFetchVideo({
+    maxResults: viewVideoCount,
+    chart: 'mostPopular',
+  });
+
+  const ref = useIntersect((entry, observer) => {
+    observer.unobserve(entry.target);
+    if (hasNextPage && !isFetching) fetchNextPage();
+  });
+
   return (
-    <MarginContent>
+    <div>
       <DisplayGrid>
-        <ErrorBoundary fallback={<div>...error</div>}>
-          {videos?.map((video) => (
-            <VideoItem data={video} key={randomKey()} />
-          ))}
-        </ErrorBoundary>
+        {videos?.map((video) => (
+          <VideoItem data={video} key={randomKey()} />
+        ))}
       </DisplayGrid>
-    </MarginContent>
+      {isFetching && <Skeleton />}
+      <ReloadTarget ref={ref} />
+    </div>
   );
-});
+};
 
-export default VideoList;
+export default memo(VideoList);
