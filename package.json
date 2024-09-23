@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.13.3",
-    "@types/jest": "^29.4.0",
-    "@types/node": "^18.14.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.7",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^18.19.48",
     "@types/react-youtube": "^7.10.0",
     "comlink": "^4.4.1",
     "cross-env": "^7.0.3",
